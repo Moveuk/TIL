@@ -16,6 +16,9 @@ CREATE TABLE IF NOT EXISTS courses (
 # 데이터 삽입
 INSERT INTO courses (title, tutor) VALUES
     ('제목1', '강사1'), ('제목2', '강사2');
+    
+# 데이터 조회
+SELECT * FROM courses;
 
 ```
 
