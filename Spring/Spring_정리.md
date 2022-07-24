@@ -8,15 +8,32 @@
 
 
 
-
-
-
-
-
-
-
-
 ## Spring
+
+![](https://i.imgur.com/STWEQ1C.png)
+
+
+
+### Controller 
+
+- Controller 는 제일 바깥 쪽에서 요청을 받고, 응답을 되돌려주는 역할을 한다.
+
+- api를 통해 DTO를 주로 받으며 DTO를 Service 단까지 보내준다.
+
+  
+
+### Service 
+
+- Service 는 중간에서 구체적인 작업 순서를 결정한다.
+- 받은 DTO를 통해 Entity를 변경하면 자바 영속성이 이를 저장해 두었다가 flush 해버린다.
+
+
+
+### Repository 
+
+- Repository 는 DB와 직접 소통함으로써 자료를 생성하고, 조회하고, 변경하고, 삭제한다.
+
+
 
 
 
