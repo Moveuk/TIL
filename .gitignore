@@ -1,6 +1,13 @@
 # Created by https://www.toptal.com/developers/gitignore/api/windows,python,intellij,pycharm,java,linux,eclipse,macos,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,python,intellij,pycharm,java,linux,eclipse,macos,visualstudiocode
 
+######## Common ########
+
+**/out/**
+**/.idea/**
+**/test/**
+
+
 
 ######## IDE ######## 
 
