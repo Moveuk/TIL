@@ -1,4 +1,4 @@
-package com.algorithm.leetcode.easy;
+package com.algorithm_proj.leetcode.easy;
 
 public class RomanToInt {
     public int romanToInt(String s) {
