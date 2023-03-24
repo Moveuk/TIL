@@ -40,10 +40,31 @@ public class NumberBuddy {
 
     // 테스트 11, 12, 13, 14, 15 - 시간초과로 인한 문제 풀이
     public String solution2(String X, String Y) {
-        String answer = "";
-        String buddies = "";
+        StringBuilder answer = new StringBuilder();
 
-        return answer;
+        int[] ArrX = new int[10];
+        int[] ArrY = new int[10];
+
+        for (int i = 0; i < X.length(); i++) {
+            ArrX[X.charAt(i)-48]++;
+        }
+        for (int i = 0; i < Y.length(); i++) {
+            ArrY[Y.charAt(i)-48]++;
+        }
+
+        for (int i = 9; i >= 0; i--) {
+            int index = Math.min(ArrX[i], ArrY[i]);
+            for (int j = 0; j < index; j++) {
+                answer.append(i);
+            }
+        }
+
+        if (answer.toString().equals("")) {
+            return "-1";
+        } else if (answer.toString().charAt(0) == 48) {
+            return "0";
+        }
+        return answer.toString();
     }
 
 }
