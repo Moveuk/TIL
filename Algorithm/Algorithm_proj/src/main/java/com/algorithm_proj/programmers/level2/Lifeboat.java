@@ -20,29 +20,17 @@ public class Lifeboat {
 
         people = Arrays.stream(people).sorted().toArray();
         boolean[] check = new boolean[people.length];
-        int mark = 0;
 
-        //혼자인 것 처리
+        int index = 0;
         for (int i = people.length - 1; i >= 0; i--) {
-            if (limit - people[0] >= people[i]) {
-                mark = i;
-                break;
-            }
-            check[i] = true;
-            answer++;
-        }
-
-        //2개 고르기
-        for (int i = mark; i >= 0; i--) {
-            if (!check[i]) {
+            if (!check[i] && !check[index] && limit < people[index] + people[i]) {
                 check[i] = true;
                 answer++;
-                for (int j = i - 1; j >= 0; j--) {
-                    if (!check[j] && limit - people[i] >= people[j]) {
-                        check[j] = true;
-                        break;
-                    }
-                }
+            } else if (!check[i] && !check[index] && limit >= people[index] + people[i]) {
+                check[i] = true;
+                check[index] = true;
+                index++;
+                answer++;
             }
         }
         return answer;
