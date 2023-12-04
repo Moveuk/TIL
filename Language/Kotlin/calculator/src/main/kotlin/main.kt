@@ -4,11 +4,11 @@ fun main() {
     var int2 = 2
     var calculator = Calculator()
 
-    println("int1과 int2의 덧셈은 ${calculator.add(int1, int2)} 입니다.")   // 6
-    println("int1과 int2의 뺄셈은 ${calculator.subtract(int1, int2)} 입니다.")  // 2
-    println("int1과 int2의 곱셈은 ${calculator.multiply(int1, int2)} 입니다.")  // 8
-    println("int1과 int2의 나눗셈은 ${calculator.divide(int1, int2)} 입니다.")   // 2
-    println("int1을 int2로 나눈 나머지는 ${calculator.remain(int1, int2)} 입니다.")   // 0
+    println("${int1}과 ${int2}의 덧셈은 ${calculator.add(int1, int2)} 입니다.")   // 6
+    println("${int1}과 ${int2}의 뺄셈은 ${calculator.subtract(int1, int2)} 입니다.")  // 2
+    println("${int1}과 ${int2}의 곱셈은 ${calculator.multiply(int1, int2)} 입니다.")  // 8
+    println("${int1}과 ${int2}의 나눗셈은 ${calculator.divide(int1, int2)} 입니다.")   // 2
+    println("${int1}을 ${int2}로 나눈 나머지는 ${calculator.remain(int1, int2)} 입니다.")   // 0
 }
 
 // Lv1 : 더하기, 빼기, 나누기, 곱하기 연산을 수행할 수 있는 Calculator 클래스를 만들고, 클래스를 이용하여 연산을 진행하고 출력하기
