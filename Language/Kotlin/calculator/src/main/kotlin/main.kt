@@ -8,6 +8,7 @@ fun main() {
     println("int1과 int2의 뺄셈은 ${calculator.subtract(int1, int2)} 입니다.")  // 2
     println("int1과 int2의 곱셈은 ${calculator.multiply(int1, int2)} 입니다.")  // 8
     println("int1과 int2의 나눗셈은 ${calculator.divide(int1, int2)} 입니다.")   // 2
+    println("int1을 int2로 나눈 나머지는 ${calculator.remain(int1, int2)} 입니다.")   // 0
 }
 
 // Lv1 : 더하기, 빼기, 나누기, 곱하기 연산을 수행할 수 있는 Calculator 클래스를 만들고, 클래스를 이용하여 연산을 진행하고 출력하기
@@ -23,5 +24,8 @@ class Calculator {
     }
     fun divide(int1: Int, int2: Int): Int {
         return int1 / int2;
+    }
+    fun remain(int1: Int, int2: Int): Int {
+        return int1 % int2;
     }
 }
