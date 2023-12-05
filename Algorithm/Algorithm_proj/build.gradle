@@ -1,5 +1,8 @@
+// For `KotlinCompile` task below
+
 plugins {
     id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.9.0'
 }
 
 group 'com.algorithm_proj'
@@ -18,4 +21,9 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+sourceSets {
+    main.kotlin.srcDirs += 'src/main/kotlin'
+    main.java.srcDirs += 'src/main/java'
 }
