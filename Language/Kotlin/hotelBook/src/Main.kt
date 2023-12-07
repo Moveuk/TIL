@@ -62,7 +62,22 @@ fun main() {
             }
 
             //금액 입금-출금 내역 목록 출력
-            "5" -> {}
+            "5" -> {
+                while (true) {
+                    println("조회하실 사용자 이름을 입력하세요.")
+
+                    val searchName = readLine()!!
+                    val filteredClient = hotelBookList.filter { client -> client.name == searchName }
+
+                    if (filteredClient.isNotEmpty()) printClientBalance(filteredClient.get(0))
+                    else {
+                        println("예약된 사용자를 찾을 수 없습니다.")
+                        break
+                    }
+                    break
+                }
+            }
+
 
             //예약 변경/취소
             "6" -> {}
