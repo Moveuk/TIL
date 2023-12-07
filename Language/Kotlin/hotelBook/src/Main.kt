@@ -2,8 +2,9 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 fun main() {
+    val hotelBookList = arrayListOf<Client>()
     while (true) {
-        val hotelBookList = arrayListOf<Client>()
+        println("호텔예약 프로그램 입니다.")
         println("[메뉴]")
         println("1. 방예약, 2. 예약목록 출력, 3. 예약목록 (정렬) 출력, 4. 시스템 종료, 5. 금액 입금-출금 내역 목록 출력 6. 예약 변경/취소")
         val selectedMenuNum = readLine()!!
@@ -15,30 +16,44 @@ fun main() {
                 val clientName = readLine()!!
 
                 //예약 방 선택하기
-                checkRoomNumber()
+                val roomNumber = checkRoomNumber()
 
+                //예약 방의 예약 일정 리스트
+                val alreadyBookedDate = hotelBookList.filter { it.roomNumber == roomNumber }.map { Pair(it.checkIn, it.checkOut)}
+
+                //체크인
+                val checkIn = selectBookDate(true, alreadyBookedDate, LocalDate.now())
                 //체크아웃
-                val checkIn = selectBookDate(true, LocalDate.now())
-                //체크아웃
-                val checkOut = selectBookDate(false, LocalDate.now())
+                val checkOut = selectBookDate(false, alreadyBookedDate, LocalDate.now())
 
                 //고객 명단 등록
-                val client = Client(clientName, checkIn, checkOut)
+                val client = Client(clientName, roomNumber, checkIn, checkOut)
                 hotelBookList.add(client)
 
-                println("1. 초기 금액으로 ${client.balance} 원 입금되었습니다.")
-
-                println("2. 예약금으로 ${client.deposit} 원 출금되었습니다.")
-                client.balance -= client.deposit
+                printClientBalance(client)
 
                 println("호텔 예약이 완료되었습니다.")
             }
 
             //예약 목록 출력
-            "2" -> {}
+            "2" -> {
+                println("호텔 예약자 목록입니다.")
+                hotelBookList.forEach {
+                    var count = 0
+                    println("${++count}. 사용자: ${it.name}, 방번호: ${it.roomNumber}호, 체크인: ${it.checkIn}, 체크아웃: ${it.checkOut}")
+                }
+            }
 
             //예약목록 (정렬) 출력
-            "3" -> {}
+            "3" -> {
+                val comparator : Comparator<Client> = compareBy{it.checkIn}
+                hotelBookList.sortWith(comparator)
+                println("호텔 예약자 목록입니다. (정렬완료)")
+                hotelBookList.forEach {
+                    var count = 0
+                    println("${++count}. 사용자: ${it.name}, 방번호: ${it.roomNumber}호, 체크인: ${it.checkIn}, 체크아웃: ${it.checkOut}")
+                }
+            }
 
             //시스템 종료
             "4" -> {
@@ -60,19 +75,24 @@ fun main() {
     }
 }
 
-private fun checkRoomNumber() {
+private fun printClientBalance(client: Client) {
+    println("1. 초기 금액으로 ${client.balance} 원 입금되었습니다.")
+    println("2. 예약금으로 ${client.deposit} 원 출금되었습니다.")
+}
+
+private fun checkRoomNumber(): Int {
     var roomNumber: String
     while (true) {
         println("예약할 방번호를 입력해 주세요.")
         roomNumber = readLine()!!
         if (roomNumber.toInt() in 100..999) {
-            break
+            return roomNumber.toInt()
         }
         println("\u001B[31m올바르지 않은 방번호 입니다. 방번호는 100~999 영역 이내입니다.\u001B[0m")
     }
 }
 
-private fun selectBookDate(isCheckIn: Boolean, since: LocalDate): LocalDate {
+private fun selectBookDate(isCheckIn: Boolean, alreadyBookedDate: List<Pair<LocalDate, LocalDate>>, since: LocalDate): LocalDate {
     while (true) {
         try {
             val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
@@ -95,7 +115,12 @@ private fun selectBookDate(isCheckIn: Boolean, since: LocalDate): LocalDate {
                 if (isCheckIn && checkDate < since) throw RuntimeException("Past Date than CheckIn")
                 if (!isCheckIn && checkDate <= since) throw RuntimeException("Past CheckOut Date than CheckIn")
 
-                return checkDate
+                //예약가능 여부 로직 사이이면
+                val isPossibleToBook = alreadyBookedDate.none { it.first <= checkDate && checkDate <= it.second }
+
+                return if (isPossibleToBook) checkDate
+                else throw RuntimeException("Already Booked")
+
             } else throw RuntimeException("Wrong Format")
 
         } catch (e: NumberFormatException) {
@@ -106,14 +131,16 @@ private fun selectBookDate(isCheckIn: Boolean, since: LocalDate): LocalDate {
             if (e.message?.contains("Past Date than CheckIn") == true) println("체크인은 지난 날은 선택할 수 없습니다.")
             if (e.message?.contains("Past CheckOut Date than CheckIn") == true) println("체크인 날짜보다 이전이거나 같을 수는 없습니다.")
             if (e.message?.contains("Wrong Format") == true) println("형식에 맞는 날짜를 입력해 주세요.")
+            if (e.message?.contains("Already Booked") == true) println("해당 날짜에 이미 방을 사용중입니다. 다른날짜를 입력해주세요.")
         }
     }
 }
 
-class Client(name: String, checkIn: LocalDate, checkOut: LocalDate) {
-    lateinit var name: String
-    lateinit var checkIn: LocalDate
-    lateinit var checkOut: LocalDate
+class Client(_name: String, _roomNumber: Int, _checkIn: LocalDate, _checkOut: LocalDate) {
+    var name: String = _name
+    var roomNumber: Int = _roomNumber
+    var checkIn: LocalDate = _checkIn
+    var checkOut: LocalDate = _checkOut
     var balance: Double = Math.floor(Math.random() * 100) * 100000
     var deposit: Double = Math.floor(Math.random() * 100) * 1000
 }
