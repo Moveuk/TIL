@@ -1,5 +1,6 @@
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import kotlin.properties.Delegates
 
 fun main() {
     val hotelBookList = arrayListOf<Client>()
@@ -19,15 +20,18 @@ fun main() {
                 val roomNumber = checkRoomNumber()
 
                 //예약 방의 예약 일정 리스트
-                val alreadyBookedDate = hotelBookList.filter { it.roomNumber == roomNumber }.map { Pair(it.checkIn, it.checkOut)}
+                val alreadyBookedDate =
+                    hotelBookList.filter { it.roomNumber == roomNumber }.map { Pair(it.checkIn, it.checkOut) }
 
                 //체크인
                 val checkIn = selectBookDate(true, alreadyBookedDate, LocalDate.now())
                 //체크아웃
-                val checkOut = selectBookDate(false, alreadyBookedDate, LocalDate.now())
+                val checkOut = selectBookDate(false, alreadyBookedDate, checkIn)
 
                 //고객 명단 등록
                 val client = Client(clientName, roomNumber, checkIn, checkOut)
+                client.id = if (hotelBookList.size ==0) 0
+                else hotelBookList.last().id+1
                 hotelBookList.add(client)
 
                 printClientBalance(client)
@@ -46,7 +50,7 @@ fun main() {
 
             //예약목록 (정렬) 출력
             "3" -> {
-                val comparator : Comparator<Client> = compareBy{it.checkIn}
+                val comparator: Comparator<Client> = compareBy { it.checkIn }
                 hotelBookList.sortWith(comparator)
                 println("호텔 예약자 목록입니다. (정렬완료)")
                 hotelBookList.forEach {
@@ -80,7 +84,93 @@ fun main() {
 
 
             //예약 변경/취소
-            "6" -> {}
+            "6" -> {
+                while (true) {
+                    println("예약을 변경할 사용자 이름을 입력하세요.")
+                    val searchName = readLine()!!
+                    val filteredClient = hotelBookList.filter { client -> client.name == searchName }
+
+                    if (filteredClient.isNotEmpty()) {
+                        while (true) {
+                            var count = 0
+                            println("${searchName} 님이 예약한 목록입니다. 변경하실 예약번호를 입력해주세요. (탈출은 exit 입력)")
+                            filteredClient.forEach {
+                                println("${++count}. 사용자: ${it.name}, 방번호: ${it.roomNumber}호, 체크인: ${it.checkIn}, 체크아웃: ${it.checkOut}")
+                            }
+
+                            try {
+                                var selectRow = readLine()!!
+                                if (selectRow == "exit") break
+                                if (selectRow.toInt() > count) throw RuntimeException("NoSelectRow")
+                                println("해당 예약을 어떻게 하시겠어요? 1. 변경 2. 취소 / 이외 번호. 메뉴로 돌아가기")
+                                var selectChangeOrCancel = readLine()!!
+                                if (selectChangeOrCancel == "1") {
+                                    println("${searchName} 님의 예약을 변경하겠습니다.")
+                                    println("방을 변경하시겠습니까? 1. 변경 / 2. 방 유지 / 이외 번호. 메뉴로 돌아가기")
+                                    val changeRoom = readLine()!!
+                                    // 방 변경 선택
+                                    var wantRoomNumber = filteredClient[selectRow.toInt() - 1].roomNumber
+                                    if (changeRoom == "1") {
+                                        wantRoomNumber = checkRoomNumber()
+                                    } else if (changeRoom == "2")
+                                    else break
+
+                                    //예약 방의 예약 일정 리스트
+                                    val alreadyBookedDate =
+                                        hotelBookList.filter { it.roomNumber == wantRoomNumber }
+                                            .filter { it.id != filteredClient[selectRow.toInt() - 1].id }
+                                            .map { Pair(it.checkIn, it.checkOut) }
+                                    val changedCheckIn = selectBookDate(true, alreadyBookedDate, LocalDate.now())
+                                    val changedCheckOut = selectBookDate(false, alreadyBookedDate, changedCheckIn)
+
+                                    val clientWhoWantChangeReserv = hotelBookList[filteredClient[selectRow.toInt() - 1].id]
+                                    clientWhoWantChangeReserv.checkIn = changedCheckIn
+                                    clientWhoWantChangeReserv.checkOut = changedCheckOut
+                                    clientWhoWantChangeReserv.roomNumber = wantRoomNumber
+                                    println("예약 변경이 다음과 같이 완료 되었습니다.")
+                                    println("사용자: ${clientWhoWantChangeReserv.name}, 방번호: ${clientWhoWantChangeReserv.roomNumber}호, 체크인: ${clientWhoWantChangeReserv.checkIn}, 체크아웃: ${clientWhoWantChangeReserv.checkOut}")
+                                } else if (selectChangeOrCancel == "2") {
+                                    println("[취소 유의사항]\n체크인 3일 이전 취소 예약금 환불 불가\n체크인 5일 이전 취소 예약금의 30% 환불\n체크인 7일 이전 취소 예약금의 50% 환불\n체크인 14일 이전 취소 예약금의 80% 환불\n체크인 30일 이전 취소 예약금의 100% 환불")
+                                    val clientWhoWantCancelBooking = hotelBookList[filteredClient[selectRow.toInt() - 1].id]
+
+                                    val remainDays = clientWhoWantCancelBooking.checkIn.compareTo(LocalDate.now())
+
+                                    var discountPercentage: Int
+                                    discountPercentage = if (remainDays <= 3) 0
+                                    else if (remainDays <= 5) 30
+                                    else if (remainDays <= 7) 50
+                                    else if (remainDays <= 14) 80
+                                    else 100
+
+                                    println("고객님께서는 체크인 날짜까지 ${remainDays}일 남으셨으므로 취소 예약금의 ${discountPercentage}%가 환불 가능하십니다.")
+
+                                    val refundMoney = clientWhoWantCancelBooking.deposit * discountPercentage / 100
+
+                                    println("고객님의 예약금 ${clientWhoWantCancelBooking.deposit} 원 중 ${refundMoney}원이 환불되었습니다.")
+
+                                    clientWhoWantCancelBooking.balance += refundMoney
+
+                                    println("고객님의 현재 잔고는 ${clientWhoWantCancelBooking.balance}원 입니다.")
+
+                                    hotelBookList.removeIf{it == clientWhoWantCancelBooking}
+
+                                    println("취소가 완료되었습니다.")
+                                    break
+                                } else {
+                                    break
+                                }
+                            } catch (e: RuntimeException) {
+                                if (e.message?.contains("NoSelectRow") == true) println("범위에 없는 예약번호 입니다.")
+                            }
+                        }
+                    } else {
+                        println("사용자 이름으로 예약된 목록을 찾을 수 없습니다.")
+                        break
+                    }
+                    break
+                }
+            }
+
             else -> {
                 println("해당 번호가 없습니다. 올바른 번호를 입력해 주세요.")
             }
@@ -107,7 +197,11 @@ private fun checkRoomNumber(): Int {
     }
 }
 
-private fun selectBookDate(isCheckIn: Boolean, alreadyBookedDate: List<Pair<LocalDate, LocalDate>>, since: LocalDate): LocalDate {
+private fun selectBookDate(
+    isCheckIn: Boolean,
+    alreadyBookedDate: List<Pair<LocalDate, LocalDate>>,
+    since: LocalDate
+): LocalDate {
     while (true) {
         try {
             val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
@@ -152,6 +246,7 @@ private fun selectBookDate(isCheckIn: Boolean, alreadyBookedDate: List<Pair<Loca
 }
 
 class Client(_name: String, _roomNumber: Int, _checkIn: LocalDate, _checkOut: LocalDate) {
+    var id by Delegates.notNull<Int>()
     var name: String = _name
     var roomNumber: Int = _roomNumber
     var checkIn: LocalDate = _checkIn
