@@ -8,7 +8,7 @@ class SolutionTest {
     @Test
     fun t1() {
         //given
-        val result = solution.solution(5, 3)
+        val result = solution.solution("5", "3")
 
         //when
 
