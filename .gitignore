@@ -6,7 +6,8 @@
 **/out/**
 **/.idea/**
 # **/test/** -> 알고리즘 Test 파일을 위하여 주석처리
-**/.gradle/**
+**/.gradle
+**/node_modules
 
 
 ######## IDE ######## 
