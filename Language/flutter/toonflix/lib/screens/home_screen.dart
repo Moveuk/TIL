@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,18 +11,27 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static const twentyFiveMinutes = 1500;
-  int totalSeconds = twentyFiveMinutes;
+  static const defaultMinutes = 25;
+  int chooseSeconds = defaultMinutes * 60;
+  int totalSeconds = defaultMinutes * 60;
   bool isRunning = false;
   int totalPomodoros = 0;
+  int goals = 0;
   late Timer timer;
+
+  void checkPomodoro() {}
 
   void onTick(Timer timer) {
     if (totalSeconds == 0) {
       setState(() {
-        totalPomodoros = totalPomodoros + 1;
+        if (totalPomodoros + 1 == 4) {
+          totalPomodoros = 0;
+          goals += 1;
+        } else {
+          totalPomodoros = totalPomodoros + 1;
+        }
         isRunning = false;
-        totalSeconds = twentyFiveMinutes;
+        totalSeconds = chooseSeconds;
       });
       timer.cancel();
     } else {
@@ -49,8 +59,17 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void onReset() {
-    totalSeconds = twentyFiveMinutes;
+    totalSeconds = chooseSeconds;
     setState(() {
+      timer.cancel();
+      isRunning = true;
+      onPausePressed();
+    });
+  }
+
+  void onSetTime() {
+    setState(() {
+      totalSeconds = chooseSeconds;
       timer.cancel();
       isRunning = true;
       onPausePressed();
@@ -71,6 +90,27 @@ class _HomeScreenState extends State<HomeScreen> {
           Flexible(
             flex: 1,
             child: Container(
+              alignment: Alignment.centerLeft,
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 30,
+                  ),
+                  Text(
+                    "POMOTIMER",
+                    style: TextStyle(
+                      color: Theme.of(context).cardColor,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 1,
+            child: Container(
               alignment: Alignment.bottomCenter,
               child: Text(
                 format(totalSeconds),
@@ -87,8 +127,43 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Center(
               child: Column(
                 children: [
+                  CarouselSlider(
+                    options: CarouselOptions(
+                      height: 40.0,
+                      initialPage: 2,
+                    ),
+                    items: [1, 15, 20, 25, 30, 35].map((i) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return Container(
+                              width: MediaQuery.of(context).size.width * 0.15,
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).cardColor),
+                              child: Center(
+                                child: IconButton(
+                                  onPressed: () => {
+                                    chooseSeconds = i,
+                                    onSetTime(),
+                                  },
+                                  icon: Text(
+                                    '$i',
+                                    style: TextStyle(
+                                        fontSize: 20.0,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .background,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ));
+                        },
+                      );
+                    }).toList(),
+                  ),
                   const SizedBox(
-                    height: 50,
+                    height: 20,
                   ),
                   IconButton(
                     iconSize: 120,
@@ -130,26 +205,62 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(50),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(
-                          'Pomodoros',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color:
-                                Theme.of(context).textTheme.displayLarge!.color,
-                          ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '$totalPomodoros / 4',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge!
+                                    .color,
+                              ),
+                            ),
+                            Text(
+                              'Round',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge!
+                                    .color,
+                              ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          '$totalPomodoros',
-                          style: TextStyle(
-                            fontSize: 58,
-                            fontWeight: FontWeight.w600,
-                            color:
-                                Theme.of(context).textTheme.displayLarge!.color,
-                          ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '$goals / 12',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge!
+                                    .color,
+                              ),
+                            ),
+                            Text(
+                              'Goals',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge!
+                                    .color,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
