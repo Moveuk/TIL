@@ -6,6 +6,7 @@ import com.moveuk.todoapp.domain.todocard.dto.CreateToDoCardRequest
 import com.moveuk.todoapp.domain.todocard.dto.ToDoCardResponse
 import com.moveuk.todoapp.domain.todocard.dto.UpdateToDoCardRequest
 import com.moveuk.todoapp.domain.todocard.service.ToDoCardService
+import jakarta.websocket.server.PathParam
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -58,6 +59,16 @@ class ToDoCardController(
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
             .build()
+    }
+
+    @PutMapping("/{toDoCardId}/completion")
+    fun changeCompletionState(
+        @PathVariable toDoCardId: Long,
+        @PathParam("state") completionState: Boolean
+    ): ResponseEntity<ToDoCardResponse> {
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(toDoCardService.changeCompletionState(toDoCardId, completionState))
     }
 
 }

@@ -69,4 +69,15 @@ class ToDoCardServiceImpl(
         toDoCardRepository.delete(toDoCard)
     }
 
+    override fun changeCompletionState(toDoCardId: Long, completionState: Boolean): ToDoCardResponse {
+        // 완료 상태 수정을 위해 조회시 해당 카드가 없을시 throw ModelNotFoundException
+        // 수정 성공 후 저장된 객체 dto로 변환하여 반환
+        val toDoCard =
+            toDoCardRepository.findByIdOrNull(toDoCardId) ?: throw ModelNotFoundException("ToDoCard", toDoCardId)
+
+        toDoCard.completion = completionState
+
+        return toDoCardRepository.save(toDoCard).toResponse()
+    }
+
 }

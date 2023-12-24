@@ -3,7 +3,7 @@
 ## 개발 계획
 1. MVP
     - [x] Sprint 1 : 할 일 카드에 대한 CRUD 기능
-    - [ ] Sprint 2 : 할 일 카드의 댓글 기능
+    - [ ] Sprint 2 : 할 일 카드의 완료 상태 수정 기능, 댓글 CRUD 기능
 2. 2차 기능
     - [ ] User 로그인 기능 추가
       - [ ] 할 일 카드 CRUD시 회원 정보 확인
@@ -49,3 +49,7 @@ Swagger를 사용하여 수동 테스트 진행.
    - 각 기능에 대해 잘못된 id 입력시 error response 출력
      - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/da7d74d6-4bb8-410f-8ed7-88de6dfe9eae)
      - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/eda9315e-9b61-4b04-beb4-ed2d6a2648bf)
+2. MVP : Sprint 2 - 할 일 카드의 완료 상태 수정 기능, 댓글 CRUD 기능
+   - 할 일 카드의 완료 상태 수정 기능(수정 전 후 사진)
+     - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/990676bd-e5e2-437a-88f9-e1d86963f35b)
+     - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/9159efcc-2f9b-4a80-b3f8-ff049c4c3654)
