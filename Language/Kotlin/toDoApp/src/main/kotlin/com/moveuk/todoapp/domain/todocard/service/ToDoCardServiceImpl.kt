@@ -10,6 +10,7 @@ import com.moveuk.todoapp.domain.todocard.repository.ToDoCardRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.LocalDateTime
 
 @Service
 class ToDoCardServiceImpl(
@@ -39,7 +40,8 @@ class ToDoCardServiceImpl(
             ToDoCard(
                 title = request.title,
                 description = request.description,
-//                user = findByIdOrNullUser
+                author = request.author,
+                createdDate = LocalDateTime.now()
             )
         ).toResponse()
     }
@@ -50,10 +52,11 @@ class ToDoCardServiceImpl(
         // 수정 성공 후 저장된 객체 dto로 변환하여 반환
         val toDoCard =
             toDoCardRepository.findByIdOrNull(toDoCardId) ?: throw ModelNotFoundException("ToDoCard", toDoCardId)
-        val (title, description) = request
+        val (title, description, author) = request
 
         toDoCard.title = title
         toDoCard.description = description
+        toDoCard.author = author
 
         return toDoCardRepository.save(toDoCard).toResponse()
     }

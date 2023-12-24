@@ -2,6 +2,7 @@ package com.moveuk.todoapp.domain.todocard.model
 
 import com.moveuk.todoapp.domain.todocard.dto.ToDoCardResponse
 import jakarta.persistence.*
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "to_do_card")
@@ -14,6 +15,12 @@ class ToDoCard(
 
     @Column(name = "completion", nullable = false)
     var completion: Boolean = false,
+
+    @Column(name = "author", nullable = false)
+    var author: String,
+
+    @Column(name = "created_date", nullable = false)
+    var createdDate: LocalDateTime,
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "app_user_id")
@@ -29,7 +36,8 @@ fun ToDoCard.toResponse(): ToDoCardResponse {
         id = id!!,
         title = title,
         description = description,
-//        user = user,
-        completion = completion
+        author = author,
+        completion = completion,
+        createdDate = createdDate,
     )
 }

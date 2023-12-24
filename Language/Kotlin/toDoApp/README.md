@@ -37,15 +37,15 @@
 Swagger를 사용하여 수동 테스트 진행.
 1. MVP : Sprint 1 - 할 일 카드에 대한 CRUD 기능
    - 할 일 카드 추가 기능
-     - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/40328ea8-458b-4feb-af11-c9cfc8fc58d4)
+     - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/9a9c9562-08f2-475f-b10b-133639d12169)
    - 특정 할 일 카드 상세 내역 불러오기
-     - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/e116cc6d-de37-41de-b645-8c841f7f2d43)
+     - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/9dd19ef4-ef97-459f-9754-fbcb54fc1aa8)
    - 할 일 카드 수정 기능
-     - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/78061bf9-2687-468a-bf90-e53e4658f14a)
+     - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/a4e00a0b-0bda-48fa-b12f-aa5dd3c87163)
    - 할 일 카드 삭제 기능
-     - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/5c066a51-b328-46c8-8fe9-2cde79290d83)
+     - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/fb3ea547-cb06-406b-8b9d-83db9036ae3d)
    - 전체 할 일 카드 목록 불러오기
-     - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/1f4df300-e128-4d87-bd70-6d90d3038928)
+     - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/cdab9048-fb5d-4baf-981c-6710746957ce)
    - 각 기능에 대해 잘못된 id 입력시 error response 출력
      - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/da7d74d6-4bb8-410f-8ed7-88de6dfe9eae)
      - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/eda9315e-9b61-4b04-beb4-ed2d6a2648bf)

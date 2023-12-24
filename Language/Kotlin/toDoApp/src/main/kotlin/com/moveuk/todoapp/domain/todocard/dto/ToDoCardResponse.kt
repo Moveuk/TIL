@@ -1,9 +1,12 @@
 package com.moveuk.todoapp.domain.todocard.dto
 
+import java.time.LocalDateTime
+
 data class ToDoCardResponse(
     val id: Long,
     val title: String,
     val description: String?,
-//    val user: User,
-    val completion: Boolean
+    val author: String,
+    val completion: Boolean,
+    val createdDate: LocalDateTime,
 )
