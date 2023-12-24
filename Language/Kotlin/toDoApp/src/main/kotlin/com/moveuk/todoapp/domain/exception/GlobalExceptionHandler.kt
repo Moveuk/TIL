@@ -13,5 +13,9 @@ class GlobalExceptionHandler {
     fun handleModelNotFoundException(e: ModelNotFoundException): ResponseEntity<ErrorResponse> {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse(e.message))
     }
+    @ExceptionHandler(WrongPasswordOrAuthorException::class)
+    fun handleModelNotFoundException(e: WrongPasswordOrAuthorException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponse(e.message))
+    }
 
 }

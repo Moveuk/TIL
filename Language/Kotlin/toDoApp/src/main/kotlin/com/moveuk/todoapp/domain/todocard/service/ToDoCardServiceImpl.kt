@@ -46,6 +46,7 @@ class ToDoCardServiceImpl(
         ).toResponse()
     }
 
+    @Transactional
     override fun updateToDoCard(toDoCardId: Long, request: UpdateToDoCardRequest): ToDoCardResponse {
         // request를 할 일 카드로 변환 후 수정
         // 수정을 위해 조회시 해당 카드가 없을시 throw ModelNotFoundException
@@ -61,6 +62,7 @@ class ToDoCardServiceImpl(
         return toDoCardRepository.save(toDoCard).toResponse()
     }
 
+    @Transactional
     override fun deleteToDoCard(toDoCardId: Long) {
         // 삭제를 위해 조회시 해당 카드가 없을시 throw ModelNotFoundException
         // TODO : DB에서 toDoCardId 해당하는 할 일 카드 삭제 후, 연관된 Reply도 모두 삭제
@@ -69,6 +71,7 @@ class ToDoCardServiceImpl(
         toDoCardRepository.delete(toDoCard)
     }
 
+    @Transactional
     override fun changeCompletionState(toDoCardId: Long, completionState: Boolean): ToDoCardResponse {
         // 완료 상태 수정을 위해 조회시 해당 카드가 없을시 throw ModelNotFoundException
         // 수정 성공 후 저장된 객체 dto로 변환하여 반환

@@ -1,5 +1,7 @@
 package com.moveuk.todoapp.domain.todocard.model
 
+import com.moveuk.todoapp.domain.reply.model.Reply
+import com.moveuk.todoapp.domain.reply.model.toResponse
 import com.moveuk.todoapp.domain.todocard.dto.ToDoCardResponse
 import jakarta.persistence.*
 import java.time.LocalDateTime
@@ -22,6 +24,9 @@ class ToDoCard(
     @Column(name = "created_date", nullable = false)
     var createdDate: LocalDateTime,
 
+    @OneToMany(mappedBy = "toDoCard", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
+    var replies: MutableList<Reply> = mutableListOf(),
+
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "app_user_id")
 //    var user: User,
@@ -39,5 +44,6 @@ fun ToDoCard.toResponse(): ToDoCardResponse {
         author = author,
         completion = completion,
         createdDate = createdDate,
+        replies = replies.map { reply: Reply -> reply.toResponse() },
     )
 }

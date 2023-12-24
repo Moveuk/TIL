@@ -1,5 +1,6 @@
 package com.moveuk.todoapp.domain.todocard.dto
 
+import com.moveuk.todoapp.domain.reply.dto.ReplyResponse
 import java.time.LocalDateTime
 
 data class ToDoCardResponse(
@@ -9,4 +10,5 @@ data class ToDoCardResponse(
     val author: String,
     val completion: Boolean,
     val createdDate: LocalDateTime,
+    val replies: List<ReplyResponse>,
 )

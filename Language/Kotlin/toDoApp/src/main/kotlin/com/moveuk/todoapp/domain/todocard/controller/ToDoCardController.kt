@@ -1,7 +1,5 @@
 package com.moveuk.todoapp.domain.todocard.controller
 
-import com.moveuk.todoapp.domain.exception.ModelNotFoundException
-import com.moveuk.todoapp.domain.exception.dto.ErrorResponse
 import com.moveuk.todoapp.domain.todocard.dto.CreateToDoCardRequest
 import com.moveuk.todoapp.domain.todocard.dto.ToDoCardResponse
 import com.moveuk.todoapp.domain.todocard.dto.UpdateToDoCardRequest
@@ -31,11 +29,6 @@ class ToDoCardController(
             .body(toDoCardService.getToDoCardByID(toDoCardId))
     }
 
-    @ExceptionHandler(ModelNotFoundException::class)
-    fun handleModelNotFoundException(e: ModelNotFoundException): ResponseEntity<ErrorResponse> {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse(e.message))
-    }
-
     @PostMapping
     fun createToDoCard(@RequestBody createToDoCardRequest: CreateToDoCardRequest): ResponseEntity<ToDoCardResponse> {
         return ResponseEntity
@@ -53,8 +46,8 @@ class ToDoCardController(
             .body(toDoCardService.updateToDoCard(toDoCardId, updateToDoCardRequest))
     }
 
-    @DeleteMapping("/{toDoCardId}")
-    fun deleteToDoCard(@PathVariable toDoCardId: Long): ResponseEntity<Unit> {
+    @DeleteMapping
+    fun deleteToDoCard(@PathParam("toDoCardId") toDoCardId: Long): ResponseEntity<Unit> {
         toDoCardService.deleteToDoCard(toDoCardId)
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
