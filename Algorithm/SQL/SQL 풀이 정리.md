@@ -10,3 +10,12 @@ https://school.programmers.co.kr/learn/courses/30/lessons/59407
 SELECT ANIMAL_ID FROM ANIMAL_INS WHERE NAME IS NOT NULL
 ```
 
+## 2. 역순 정렬하기 - SELECT
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/59035
+
+### 답
+```sql
+SELECT Name, datetime from ANIMAL_INS order by ANIMAL_ID DESC
+```
