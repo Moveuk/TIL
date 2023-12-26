@@ -19,3 +19,13 @@ https://school.programmers.co.kr/learn/courses/30/lessons/59035
 ```sql
 SELECT Name, datetime from ANIMAL_INS order by ANIMAL_ID DESC
 ```
+
+## 3. 중복 제거하기 - DISTINCT, COUNT
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/59408
+
+### 답
+```sql
+SELECT count(DISTINCT NAME) FROM ANIMAL_INS
+```
