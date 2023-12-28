@@ -22,7 +22,7 @@ SELECT Name, datetime from ANIMAL_INS order by ANIMAL_ID DESC
 
 ## 3. 중복 제거하기 - DISTINCT, COUNT
 
-### 링크
+### 링크ddd
 https://school.programmers.co.kr/learn/courses/30/lessons/59408
 
 ### 답
@@ -38,5 +38,15 @@ https://school.programmers.co.kr/learn/courses/30/lessons/59403
 ### 답
 ```sql
 SELECT ANIMAL_ID, NAME FROM ANIMAL_INS
+```
+
+## 5. 동물 수 구하기 - DISTINCT, COUNT
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/59406
+
+### 답
+```sql
+SELECT COUNT(DISTINCT ANIMAL_ID) FROM ANIMAL_INS
 ```
 
