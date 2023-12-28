@@ -1,9 +1,7 @@
 package com.moveuk.todoapp.domain.todocard.service
 
 import com.moveuk.todoapp.domain.exception.ModelNotFoundException
-import com.moveuk.todoapp.domain.todocard.dto.CreateToDoCardRequest
-import com.moveuk.todoapp.domain.todocard.dto.ToDoCardResponse
-import com.moveuk.todoapp.domain.todocard.dto.UpdateToDoCardRequest
+import com.moveuk.todoapp.domain.todocard.dto.*
 import com.moveuk.todoapp.domain.todocard.model.ToDoCard
 import com.moveuk.todoapp.domain.todocard.model.toResponse
 import com.moveuk.todoapp.domain.todocard.repository.ToDoCardRepository
@@ -16,9 +14,31 @@ import java.time.LocalDateTime
 class ToDoCardServiceImpl(
     private val toDoCardRepository: ToDoCardRepository
 ) : ToDoCardService {
-    override fun getAllToDoCardList(): List<ToDoCardResponse> {
+    override fun getAllToDoCardList(
+        sortProperty: SortProperty?,
+        sortOrder: SortOrder?,
+        author: String?
+    ): List<ToDoCardResponse> {
+        println("$sortProperty, $sortOrder, $author")
         // 할 일 카드 목록 조회
-        return toDoCardRepository.findAll().map { it.toResponse() }
+        val response: List<ToDoCardResponse> =
+            // sort X, filter X
+            if (sortProperty == null && author == null) toDoCardRepository.findAll().map { it.toResponse() }
+            // sort X, filter O
+            else if (sortProperty == null && author != null) toDoCardRepository.findAllByAuthor(author)
+                .map { it.toResponse() }
+            else if (author == null) {
+                // sort O, filter X
+                if (sortOrder == SortOrder.ASC) toDoCardRepository.findAllByOrderByCreatedDateAsc()
+                    .map { it.toResponse() }
+                else toDoCardRepository.findAllByOrderByCreatedDateDesc().map { it.toResponse() }
+            } else {
+                // sort O, filter O
+                if (sortOrder == SortOrder.ASC) toDoCardRepository.findAllByAuthorOrderByCreatedDateAsc(author)
+                    .map { it.toResponse() }
+                else toDoCardRepository.findAllByAuthorOrderByCreatedDateDesc(author).map { it.toResponse() }
+            }
+        return response
     }
 
     override fun getToDoCardByID(toDoCardId: Long): ToDoCardResponse {

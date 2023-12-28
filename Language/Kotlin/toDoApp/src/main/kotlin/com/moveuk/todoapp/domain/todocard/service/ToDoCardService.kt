@@ -1,11 +1,9 @@
 package com.moveuk.todoapp.domain.todocard.service
 
-import com.moveuk.todoapp.domain.todocard.dto.CreateToDoCardRequest
-import com.moveuk.todoapp.domain.todocard.dto.ToDoCardResponse
-import com.moveuk.todoapp.domain.todocard.dto.UpdateToDoCardRequest
+import com.moveuk.todoapp.domain.todocard.dto.*
 
 interface ToDoCardService {
-    fun getAllToDoCardList(): List<ToDoCardResponse>
+    fun getAllToDoCardList(sortProperty: SortProperty?, sortOrder: SortOrder?, author: String?): List<ToDoCardResponse>
 
     fun getToDoCardByID(toDoCardId: Long): ToDoCardResponse
 

@@ -74,7 +74,7 @@ Swagger를 사용하여 수동 테스트 진행.
        - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/46cbf82b-86b8-42d2-9f9a-48376dba2127)
      - 할 일 카드 조회시 댓글 리스트 조회
        - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/9a1eee38-d1ea-40dc-ac63-39a5f6aa54c7)
-       - n+1 문제 발견 후 수정
+       - Entity 자체를 반환하는 실수를 함.
        - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/7022efb3-2ece-4482-b865-ec4c8be2be3e)
        - Entity 자체를 반환하는 실수를 하였고 아래처럼 변경
        - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/bd76c858-dcb9-4b4e-bb9e-cfa4b7a6daaf)

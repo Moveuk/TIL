@@ -1,8 +1,6 @@
 package com.moveuk.todoapp.domain.todocard.controller
 
-import com.moveuk.todoapp.domain.todocard.dto.CreateToDoCardRequest
-import com.moveuk.todoapp.domain.todocard.dto.ToDoCardResponse
-import com.moveuk.todoapp.domain.todocard.dto.UpdateToDoCardRequest
+import com.moveuk.todoapp.domain.todocard.dto.*
 import com.moveuk.todoapp.domain.todocard.service.ToDoCardService
 import jakarta.websocket.server.PathParam
 import org.springframework.http.HttpStatus
@@ -16,10 +14,14 @@ class ToDoCardController(
 ) {
 
     @GetMapping
-    fun getToDoCardList(): ResponseEntity<List<ToDoCardResponse>> {
+    fun getToDoCardList(
+        @PathParam("sortProperty") sortProperty: SortProperty?,
+        @PathParam("sortOrder") sortOrder: SortOrder?,
+        @PathParam("author") author: String?
+    ): ResponseEntity<List<ToDoCardResponse>> {
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(toDoCardService.getAllToDoCardList())
+            .body(toDoCardService.getAllToDoCardList(sortProperty, sortOrder, author))
     }
 
     @GetMapping("/{toDoCardId}")
