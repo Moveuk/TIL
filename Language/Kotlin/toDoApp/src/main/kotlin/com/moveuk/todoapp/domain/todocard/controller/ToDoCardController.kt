@@ -2,11 +2,15 @@ package com.moveuk.todoapp.domain.todocard.controller
 
 import com.moveuk.todoapp.domain.todocard.dto.*
 import com.moveuk.todoapp.domain.todocard.service.ToDoCardService
+import jakarta.validation.Valid
+import jakarta.validation.constraints.NotBlank
 import jakarta.websocket.server.PathParam
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
+@Validated
 @RequestMapping("/to-do-cards")
 @RestController
 class ToDoCardController(
@@ -32,7 +36,7 @@ class ToDoCardController(
     }
 
     @PostMapping
-    fun createToDoCard(@RequestBody createToDoCardRequest: CreateToDoCardRequest): ResponseEntity<ToDoCardResponse> {
+    fun createToDoCard(@Valid @RequestBody createToDoCardRequest: CreateToDoCardRequest): ResponseEntity<ToDoCardResponse> {
         return ResponseEntity
             .status(HttpStatus.CREATED)
             .body(toDoCardService.createToDoCard(createToDoCardRequest))
@@ -40,8 +44,8 @@ class ToDoCardController(
 
     @PutMapping("/{toDoCardId}")
     fun updateToDoCard(
-        @PathVariable toDoCardId: Long,
-        @RequestBody updateToDoCardRequest: UpdateToDoCardRequest
+        @PathVariable @NotBlank toDoCardId: Long,
+        @Valid @RequestBody updateToDoCardRequest: UpdateToDoCardRequest
     ): ResponseEntity<ToDoCardResponse> {
         return ResponseEntity
             .status(HttpStatus.OK)
