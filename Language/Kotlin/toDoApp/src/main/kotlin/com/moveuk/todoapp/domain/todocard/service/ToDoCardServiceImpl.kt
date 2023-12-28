@@ -19,7 +19,6 @@ class ToDoCardServiceImpl(
         sortOrder: SortOrder?,
         author: String?
     ): List<ToDoCardResponse> {
-        println("$sortProperty, $sortOrder, $author")
         // 할 일 카드 목록 조회
         val response: List<ToDoCardResponse> =
             // sort X, filter X

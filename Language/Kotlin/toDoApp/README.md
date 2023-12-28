@@ -5,11 +5,12 @@
     - [x] Sprint 1 : 할 일 카드에 대한 CRUD 기능
     - [x] Sprint 2 : 할 일 카드의 완료 상태 수정 기능, 댓글 CRUD 기능
 2. 2차 기능
-    - [ ] 할 일 목록 api에 작성일을 기준으로 오름차순, 내림차순 정렬하는 기능을 추가
-    - [ ] 할 일 목록 api에 작성자를 기준으로 필터하는 기능을 추가
-    - [ ] 할 일 작성, 수정 api에 validation을 추가하기
-    - [ ] ResponseEntity를 사용하여 api의 응답으로 적절한 코드를 반환
+    - [x] 할 일 목록 api에 작성일을 기준으로 오름차순, 내림차순 정렬하는 기능을 추가
+    - [x] 할 일 목록 api에 작성자를 기준으로 필터하는 기능을 추가
+    - [x] 할 일 작성, 수정 api에 validation을 추가하기
+    - [x] ResponseEntity를 사용하여 api의 응답으로 적절한 코드를 반환
 3. 추가 기능
+    - [ ] 할 일 목록 받아올시 발생하는 n + 1 문제 해결
     - [ ] User 로그인 기능 추가
         - [ ] 할 일 카드 CRUD시 회원 정보 확인
     - [ ] OAuth 기능 추가
@@ -90,3 +91,28 @@ Swagger를 사용하여 수동 테스트 진행.
        - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/1a29ac49-740e-4b5a-b040-81d90ec1f2f5)
        - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/40e152d0-e3dd-466e-8738-45d700a65cf2)
        - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/42cd35eb-b927-4893-8fdc-a361f5563a17)
+3. 2차 기능
+   - 할 일 목록 api에 작성일을 기준으로 오름차순, 내림차순 정렬하는 기능을 추가
+     - dummydata
+       - ![image](https://github.com/Moveuk/TIL/assets/84966961/ae989f1e-0456-4173-9fd5-07dd5bbc801e)
+     - query parameter 옵션
+       - ![image](https://github.com/Moveuk/TIL/assets/84966961/6943b5d0-fb42-480a-9544-3d19e7358d22)
+     - 작성일 기준 오름차순 옵션
+       - ![image](https://github.com/Moveuk/TIL/assets/84966961/d5810188-822f-4ef7-8681-c5c4b486a60f)
+     - 작성일 기준 내림차순 옵션
+       - ![image](https://github.com/Moveuk/TIL/assets/84966961/ea62c0be-c71e-4c37-93b8-7eb5bc947854)
+   - 할 일 목록 api에 작성자를 기준으로 필터하는 기능을 추가 
+     - Author : 2 필터
+       - ![image](https://github.com/Moveuk/TIL/assets/84966961/2b818c58-8e9e-4db6-ba9d-e272090c4b96)
+   - sort, filter 동적 쿼리 -> 개선 필요
+     - Author : 1 필터와 작성일 기준 내림차순 총 3개의 할 일 카드
+       - ![image](https://github.com/Moveuk/TIL/assets/84966961/2ddb26ca-e44b-44fe-945d-63582b848783)
+   - 할 일 작성, 수정 api에 validation을 추가하기
+     - 제목과 본문 값을 아무것도 넣지 않았을 때 validation 작동. (조건: 제목 1~200자, 본문 1~1000자)
+       - ![image](https://github.com/Moveuk/TIL/assets/84966961/08aeb051-45ab-4934-9bcd-d17fa7e63a73)
+   - ResponseEntity를 사용하여 api의 응답으로 적절한 코드를 반환
+     - 기존에 실수로 Step1부터 작성해둠.
+4. 추가 기능
+   - 할 일 목록 받아올시 발생하는 n + 1 문제 해결
+     - n + 1 문제 발견 : toDoCard 목록 불러올시 목록 사이즈(n) 만큼 reply id 값으로 n 번 쿼리가 나감
+       - ![image](https://github.com/Moveuk/TIL/assets/84966961/2af2fd77-6e4d-4d71-bf8b-8298f67c5d84)
