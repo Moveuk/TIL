@@ -1,6 +1,7 @@
 # ToDo APP
 
 ## 개발 계획
+0. UseCase Diagram, API 명세, ERD 작성
 1. MVP
     - [x] Sprint 1 : 할 일 카드에 대한 CRUD 기능
     - [x] Sprint 2 : 할 일 카드의 완료 상태 수정 기능, 댓글 CRUD 기능
@@ -17,6 +18,10 @@
     - [ ] 카드 목록 Pagination 추가
     - [ ] 할 일 카드를 공통 관리 가능하도록 그룹 기능 추가
 
+## UseCase Diagram
+![image](https://github.com/Moveuk/Moveuk/assets/84966961/5f10009e-410b-4cc4-a6f2-04e22ac249d7)
+
+`옳게 그려진 것인지 모르겠다. 너무 문어발식 그림인 것 같아서 케이스별로 따로 그리는게 좋은지 확신이 서지 않는다.`
 
 ## API
 ### MVP API 문서
