@@ -4,6 +4,7 @@ import com.moveuk.todoapp.domain.reply.model.Reply
 import com.moveuk.todoapp.domain.reply.model.toResponse
 import com.moveuk.todoapp.domain.todocard.dto.ToDoCardResponse
 import jakarta.persistence.*
+import org.hibernate.annotations.BatchSize
 import java.time.LocalDateTime
 
 @Entity
@@ -24,6 +25,7 @@ class ToDoCard(
     @Column(name = "created_date", nullable = false)
     var createdDate: LocalDateTime,
 
+    @BatchSize(size = 100)
     @OneToMany(mappedBy = "toDoCard", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
     var replies: MutableList<Reply> = mutableListOf(),
 
