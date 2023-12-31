@@ -5,6 +5,8 @@ import com.moveuk.todoapp.domain.todocard.dto.*
 import com.moveuk.todoapp.domain.todocard.model.ToDoCard
 import com.moveuk.todoapp.domain.todocard.model.toResponse
 import com.moveuk.todoapp.domain.todocard.repository.ToDoCardRepository
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -17,25 +19,28 @@ class ToDoCardServiceImpl(
     override fun getAllToDoCardList(
         sortProperty: SortProperty?,
         sortOrder: SortOrder?,
-        author: String?
-    ): List<ToDoCardResponse> {
+        author: String?,
+        pageNumber: Int?
+    ): Page<ToDoCardResponse> {
+        //Pageable 객체
+        val pageable = PageRequest.of(pageNumber?: 0,10)
         // 할 일 카드 목록 조회
-        val response: List<ToDoCardResponse> =
+        val response: Page<ToDoCardResponse> =
             // sort X, filter X
-            if (sortProperty == null && author == null) toDoCardRepository.findAll().map { it.toResponse() }
+            if (sortProperty == null && author == null) toDoCardRepository.findAll(pageable).map { it.toResponse() }
             // sort X, filter O
-            else if (sortProperty == null && author != null) toDoCardRepository.findAllByAuthor(author)
+            else if (sortProperty == null && author != null) toDoCardRepository.findAllByAuthor(author, pageable)
                 .map { it.toResponse() }
             else if (author == null) {
                 // sort O, filter X
-                if (sortOrder == SortOrder.ASC) toDoCardRepository.findAllByOrderByCreatedDateAsc()
+                if (sortOrder == SortOrder.ASC) toDoCardRepository.findAllByOrderByCreatedDateAsc(pageable)
                     .map { it.toResponse() }
-                else toDoCardRepository.findAllByOrderByCreatedDateDesc().map { it.toResponse() }
+                else toDoCardRepository.findAllByOrderByCreatedDateDesc(pageable).map { it.toResponse() }
             } else {
                 // sort O, filter O
-                if (sortOrder == SortOrder.ASC) toDoCardRepository.findAllByAuthorOrderByCreatedDateAsc(author)
+                if (sortOrder == SortOrder.ASC) toDoCardRepository.findAllByAuthorOrderByCreatedDateAsc(author, pageable)
                     .map { it.toResponse() }
-                else toDoCardRepository.findAllByAuthorOrderByCreatedDateDesc(author).map { it.toResponse() }
+                else toDoCardRepository.findAllByAuthorOrderByCreatedDateDesc(author, pageable).map { it.toResponse() }
             }
         return response
     }

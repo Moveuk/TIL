@@ -5,6 +5,7 @@ import com.moveuk.todoapp.domain.todocard.service.ToDoCardService
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotBlank
 import jakarta.websocket.server.PathParam
+import org.springframework.data.domain.Page
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
@@ -21,11 +22,12 @@ class ToDoCardController(
     fun getToDoCardList(
         @PathParam("sortProperty") sortProperty: SortProperty?,
         @PathParam("sortOrder") sortOrder: SortOrder?,
-        @PathParam("author") author: String?
-    ): ResponseEntity<List<ToDoCardResponse>> {
+        @PathParam("author") author: String?,
+        @PathParam("pageNumber") pageNumber: Int?,
+    ): ResponseEntity<Page<ToDoCardResponse>> {
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(toDoCardService.getAllToDoCardList(sortProperty, sortOrder, author))
+            .body(toDoCardService.getAllToDoCardList(sortProperty, sortOrder, author, pageNumber))
     }
 
     @GetMapping("/{toDoCardId}")

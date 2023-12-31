@@ -15,7 +15,7 @@
     - [ ] User 로그인 기능 추가
         - [ ] 할 일 카드 CRUD시 회원 정보 확인
     - [ ] OAuth 기능 추가
-    - [ ] 카드 목록 Pagination 추가
+    - [x] 카드 목록 Pagination 기능
     - [ ] 할 일 카드를 공통 관리 가능하도록 그룹 기능 추가
 
 ## UseCase Diagram
@@ -136,3 +136,8 @@ Swagger를 사용하여 수동 테스트 진행.
        - 이로써 n+1문제를 해결하여 2개의 쿼리만으로 모든 데이터를 받을 수 있게 되었다.
          - 참고로 뱃치 사이즈를 사용하게 되면 hibernate의 preparedStatement에 대한 캐싱 최적화 전략을 사용하므로 데이터가 많을 때는 1개의 쿼리가 아닌 4~5번이 나갈 수 있다.
        - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/8f795c33-e359-4f79-aa1c-2d04a5b12f94)
+   - 카드 목록 Pagination 기능 추가
+     - offset 기반 쿼리
+       - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/0c8d9275-e659-455c-8c4e-5d4ae33a0d48)
+       - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/ac7c70ab-c319-404c-93f8-a3d679dd2401)
+     - 요즘 sns들처럼 최신글에 더보기 기능이 추가된다면 cursor 기반 pagination을 지원해야함.
