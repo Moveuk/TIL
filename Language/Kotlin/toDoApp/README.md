@@ -11,7 +11,7 @@
     - [x] 할 일 작성, 수정 api에 validation을 추가하기
     - [x] ResponseEntity를 사용하여 api의 응답으로 적절한 코드를 반환
 3. 추가 기능
-    - [ ] 할 일 목록 받아올시 발생하는 n + 1 문제 해결
+    - [x] 할 일 목록 받아올시 발생하는 n + 1 문제 해결
     - [ ] User 로그인 기능 추가
         - [ ] 할 일 카드 CRUD시 회원 정보 확인
     - [ ] OAuth 기능 추가
@@ -121,3 +121,18 @@ Swagger를 사용하여 수동 테스트 진행.
    - 할 일 목록 받아올시 발생하는 n + 1 문제 해결
      - n + 1 문제 발견 : toDoCard 목록 불러올시 목록 사이즈(n) 만큼 reply id 값으로 n 번 쿼리가 나감
        - ![image](https://github.com/Moveuk/TIL/assets/84966961/2af2fd77-6e4d-4d71-bf8b-8298f67c5d84)
+     - fetch Join을 사용하여 테스트시 1개의 쿼리만 나갔으나 댓글이 존재하지 않으면 목록 자체가 불러져오지 않았음
+       - ![image](https://github.com/Moveuk/TIL/assets/84966961/aea3a478-cfc3-4b9b-850b-c17436eaa628)
+       - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/92e2ddc8-1fdb-408a-b234-c8c62708c5bd)
+     - 댓글이 존재해야지만 들어옴.
+       - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/caede0d1-85c7-494e-87f7-71077d02799f)
+     - 이 문제를 해결하기 위해 구글링을 함.
+       - 보통 다대일, 일대일의 경우에는 fetch join을 사용하여 해결하고, 일대다의 경우에는 batchSize를 조절하여 쿼리를 한번에 날릴 수 있도록 도와준다고 한다.
+       - batchSize란 sql문에서 in절에 들어갈 수 있는 최대 갯수를 size에 담아준다고 한다.
+       - 보통 댓글의 경우 30개를 넘지 않는 경우가 많으니 넉넉히 잡아 100개로 설정해주었다.
+       - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/bd9b914b-21df-4a7c-8dcc-994b69a17d3a)
+       - 설정해준 후 테스트를 해보니 쿼리는 두 개가 나갔다. 한 개는 할 일 카드, 다른 한 개는 댓글이다.
+       - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/651cf312-f643-42a1-a65f-80b85275dca0)
+       - 이로써 n+1문제를 해결하여 2개의 쿼리만으로 모든 데이터를 받을 수 있게 되었다.
+         - 참고로 뱃치 사이즈를 사용하게 되면 hibernate의 preparedStatement에 대한 캐싱 최적화 전략을 사용하므로 데이터가 많을 때는 1개의 쿼리가 아닌 4~5번이 나갈 수 있다.
+       - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/8f795c33-e359-4f79-aa1c-2d04a5b12f94)
