@@ -82,3 +82,14 @@ https://school.programmers.co.kr/learn/courses/30/lessons/59405
 ```sql
 SELECT NAME FROM ANIMAL_INS ORDER BY DATETIME ASC LIMIT 1
 ```
+
+## 9. 최솟값 구하기 - MIN, SELECT, LIMIT, ORDER BY
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/59405
+
+### 답
+```sql
+SELECT DATETIME FROM ANIMAL_INS ORDER BY DATETIME ASC LIMIT 1
+SELECT MIN(DATETIME) 시간 FROM ANIMAL_INS;
+```
