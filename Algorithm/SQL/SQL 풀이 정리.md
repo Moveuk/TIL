@@ -103,3 +103,13 @@ https://school.programmers.co.kr/learn/courses/30/lessons/59037
 ```sql
 SELECT ANIMAL_ID, NAME FROM ANIMAL_INS WHERE INTAKE_CONDITION != "Aged"
 ```
+
+## 11. 여러 기준으로 정렬하기 - SELECT, 다중 ORDER BY
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/59404
+
+### 답
+```sql
+SELECT ANIMAL_ID, NAME, DATETIME FROM ANIMAL_INS ORDER BY NAME ASC, DATETIME DESC
+```
