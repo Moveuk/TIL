@@ -1,27 +1,27 @@
-package com.moveuk.todoapp.domain.reply.controller
+package com.moveuk.todoapp.domain.todo.controller
 
-import com.moveuk.todoapp.domain.reply.dto.CreateReplyRequest
-import com.moveuk.todoapp.domain.reply.dto.DeleteReplyRequest
-import com.moveuk.todoapp.domain.reply.dto.ReplyResponse
-import com.moveuk.todoapp.domain.reply.dto.UpdateReplyRequest
-import com.moveuk.todoapp.domain.reply.service.ReplyService
+import com.moveuk.todoapp.domain.todo.dto.reply.CreateReplyRequest
+import com.moveuk.todoapp.domain.todo.dto.reply.DeleteReplyRequest
+import com.moveuk.todoapp.domain.todo.dto.reply.ReplyResponse
+import com.moveuk.todoapp.domain.todo.dto.reply.UpdateReplyRequest
+import com.moveuk.todoapp.domain.todo.service.ReplyService
 import jakarta.websocket.server.PathParam
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
-@RequestMapping("/to-do-cards/{toDoCardId}/replies")
+@RequestMapping("/todos/{todoId}/replies")
 @RestController
 class ReplyController(
     private val replyService: ReplyService
 ) {
     @PostMapping
     fun createReply(
-        @PathVariable toDoCardId: Long, @RequestBody createReplyRequest: CreateReplyRequest
+        @PathVariable todoId: Long, @RequestBody createReplyRequest: CreateReplyRequest
     ): ResponseEntity<ReplyResponse> {
         return ResponseEntity
             .status(HttpStatus.CREATED)
-            .body(replyService.createReply(toDoCardId, createReplyRequest))
+            .body(replyService.createReply(todoId, createReplyRequest))
     }
 
     @PutMapping

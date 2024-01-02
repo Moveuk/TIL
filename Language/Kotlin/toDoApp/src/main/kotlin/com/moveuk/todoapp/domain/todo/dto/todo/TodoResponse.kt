@@ -1,9 +1,9 @@
-package com.moveuk.todoapp.domain.todocard.dto
+package com.moveuk.todoapp.domain.todo.dto.todo
 
-import com.moveuk.todoapp.domain.reply.dto.ReplyResponse
+import com.moveuk.todoapp.domain.todo.dto.reply.ReplyResponse
 import java.time.LocalDateTime
 
-data class ToDoCardResponse(
+data class TodoResponse(
     val id: Long,
     val title: String,
     val description: String?,
