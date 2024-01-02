@@ -1,4 +1,4 @@
-package com.moveuk.todoapp.domain.reply.dto
+package com.moveuk.todoapp.domain.todo.dto.reply
 
 data class UpdateReplyRequest(
     val content: String,

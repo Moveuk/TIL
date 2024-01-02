@@ -1,15 +1,13 @@
-package com.moveuk.todoapp.domain.todocard.model
+package com.moveuk.todoapp.domain.todo.model
 
-import com.moveuk.todoapp.domain.reply.model.Reply
-import com.moveuk.todoapp.domain.reply.model.toResponse
-import com.moveuk.todoapp.domain.todocard.dto.ToDoCardResponse
+import com.moveuk.todoapp.domain.todo.dto.todo.TodoResponse
 import jakarta.persistence.*
 import org.hibernate.annotations.BatchSize
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "to_do_card")
-class ToDoCard(
+@Table(name = "todo")
+class Todo(
     @Column(name = "title", nullable = false)
     var title: String,
 
@@ -26,7 +24,7 @@ class ToDoCard(
     var createdDate: LocalDateTime,
 
     @BatchSize(size = 100)
-    @OneToMany(mappedBy = "toDoCard", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "todo", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
     var replies: MutableList<Reply> = mutableListOf(),
 
 //    @ManyToOne(fetch = FetchType.LAZY)
@@ -38,8 +36,8 @@ class ToDoCard(
     var id: Long? = null
 }
 
-fun ToDoCard.toResponse(): ToDoCardResponse {
-    return ToDoCardResponse(
+fun Todo.toResponse(): TodoResponse {
+    return TodoResponse(
         id = id!!,
         title = title,
         description = description,

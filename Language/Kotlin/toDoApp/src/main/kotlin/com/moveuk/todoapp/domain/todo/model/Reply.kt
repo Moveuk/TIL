@@ -1,15 +1,14 @@
-package com.moveuk.todoapp.domain.reply.model
+package com.moveuk.todoapp.domain.todo.model
 
-import com.moveuk.todoapp.domain.reply.dto.ReplyResponse
-import com.moveuk.todoapp.domain.todocard.model.ToDoCard
+import com.moveuk.todoapp.domain.todo.dto.reply.ReplyResponse
 import jakarta.persistence.*
 
 @Entity
 @Table(name = "reply")
 class Reply(
     @ManyToOne
-    @JoinColumn(name = "to_do_card_id", nullable = false)
-    var toDoCard: ToDoCard,
+    @JoinColumn(name = "todo_id", nullable = false)
+    var todo: Todo,
 
     @Column(name = "content", nullable = false)
     var content: String,
