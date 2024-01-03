@@ -27,4 +27,10 @@ class GlobalExceptionHandler {
                 .reduce { acc, string -> "$acc $string" }))
     }
 
+    @ExceptionHandler(DuplicatedPropertyException::class)
+    fun handleDuplicatePropertyException(e: DuplicatedPropertyException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+            .body(ErrorResponse(e.message))
+    }
+
 }
