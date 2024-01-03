@@ -113,3 +113,13 @@ https://school.programmers.co.kr/learn/courses/30/lessons/59404
 ```sql
 SELECT ANIMAL_ID, NAME, DATETIME FROM ANIMAL_INS ORDER BY NAME ASC, DATETIME DESC
 ```
+
+## 12. 이름에 el이 들어가는 동물 찾기 - SELECT, ORDER BY
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/59047
+
+### 답
+```sql
+SELECT ANIMAL_ID, NAME FROM ANIMAL_INS WHERE ANIMAL_TYPE = 'Dog' AND NAME LIKE '%el%' ORDER BY NAME
+```
