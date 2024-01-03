@@ -123,3 +123,13 @@ https://school.programmers.co.kr/learn/courses/30/lessons/59047
 ```sql
 SELECT ANIMAL_ID, NAME FROM ANIMAL_INS WHERE ANIMAL_TYPE = 'Dog' AND NAME LIKE '%el%' ORDER BY NAME
 ```
+
+## 13. 나이 정보가 없는 회원 수 구하기 - IS NULL
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/131528
+
+### 답
+```sql
+SELECT count(*) USERS FROM USER_INFO WHERE AGE IS NULL
+```
