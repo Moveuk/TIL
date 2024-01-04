@@ -168,3 +168,8 @@ Swagger를 사용하여 수동 테스트 진행.
          - ![image](https://github.com/Moveuk/TIL/assets/84966961/27127090-347c-43a4-8300-8566365993f2)
        - 수정 권한 없을시 에러
          - ![image](https://github.com/Moveuk/TIL/assets/84966961/8a64e0ee-2e97-42f1-a291-557884d8d9d0)
+     - 할 일 카드 삭제 로그인 상태 확인
+       - 로그인 상태 아니면 에러
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/1a90c4b8-9707-4f17-a8f4-e93fcd2f4d43)
+       - 삭제 권한 없을시 에러
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/be624064-6624-4569-a74e-a502eb65a9fa)

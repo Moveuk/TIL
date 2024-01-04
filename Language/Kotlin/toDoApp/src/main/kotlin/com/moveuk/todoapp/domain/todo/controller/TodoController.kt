@@ -65,8 +65,10 @@ class TodoController(
     }
 
     @DeleteMapping
-    fun deleteTodo(@PathParam("todoId") todoId: Long): ResponseEntity<Unit> {
-        todoService.deleteTodo(todoId)
+    fun deleteTodo(@PathParam("todoId") todoId: Long, request: HttpServletRequest): ResponseEntity<Unit> {
+        //저장된 세션이라면 세션의 user 데이터 반환
+        val authenticatedUser = authService.checkAuthenticatedUser(request)
+        todoService.deleteTodo(todoId, authenticatedUser)
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
             .build()

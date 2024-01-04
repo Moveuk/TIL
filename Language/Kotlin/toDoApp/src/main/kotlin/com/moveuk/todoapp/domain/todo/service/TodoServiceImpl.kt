@@ -85,11 +85,12 @@ class TodoServiceImpl(
     }
 
     @Transactional
-    override fun deleteTodo(todoId: Long) {
+    override fun deleteTodo(todoId: Long, authenticatedUser: User) {
         // 삭제를 위해 조회시 해당 카드가 없을시 throw ModelNotFoundException
         // DB에서 todoId 해당하는 할 일 카드 삭제 후, 연관된 Reply도 모두 삭제
         val todo: Todo =
             todoRepository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo", todoId)
+        if (todo.author.id != authenticatedUser.id) throw AuthorizationException("삭제 권한이 없습니다.")
         todoRepository.delete(todo)
     }
 
