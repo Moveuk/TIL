@@ -144,7 +144,7 @@ Swagger를 사용하여 수동 테스트 진행.
    - User 회원가입, 로그인 기능 추가
      - 회원가입
        - 정상 가입시
-         - ![image](https://github.com/Moveuk/TIL/assets/84966961/b2d18d4d-c047-496d-b238-9ca7423f27ea)
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/404be41d-3a22-40d3-9f6f-7c6c97200c2e)
        - Email 형식 validation 실패시
          - ![image](https://github.com/Moveuk/TIL/assets/84966961/85585817-b663-4a48-8f2d-c0f191a66be2)
        - 같은 Email 사용시 : Http Status 409 - Conflict
