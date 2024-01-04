@@ -45,12 +45,18 @@ class ReplyController(
                 authService.checkAuthenticatedUser(request).let {
                     replyService.updateReply(replyId, updateReplyRequest, it)
                 }
-                )
+            )
     }
 
     @DeleteMapping
-    fun deleteReply(@PathParam("replyId") replyId: Long, deleteReplyRequest: DeleteReplyRequest): ResponseEntity<Unit> {
-        replyService.deleteReply(replyId, deleteReplyRequest)
+    fun deleteReply(
+        @PathParam("replyId") replyId: Long,
+        deleteReplyRequest: DeleteReplyRequest,
+        request: HttpServletRequest
+    ): ResponseEntity<Unit> {
+        authService.checkAuthenticatedUser(request).let {
+            replyService.deleteReply(replyId, deleteReplyRequest, it)
+        }
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
             .build()

@@ -41,7 +41,7 @@ class ReplyServiceImpl(
     override fun updateReply(replyId: Long, request: UpdateReplyRequest, authenticatedUser: User): ReplyResponse {
         // 수정을 위해 조회시 해당 댓글이 없을시 throw ModelNotFoundException
         // session 정보와 reply의 userId 불일치시 권한 없음으로 throw AuthorizationException
-        // password 불일치시 throw WrongPasswordOrAuthorException
+        // password 불일치시 throw WrongPasswordException
         // 수정 성공 후 저장된 객체 dto로 변환하여 반환
         val (content, password) = request
         // 존재여부 체크
@@ -56,15 +56,16 @@ class ReplyServiceImpl(
     }
 
     @Transactional
-    override fun deleteReply(replyId: Long, request: DeleteReplyRequest) {
+    override fun deleteReply(replyId: Long, request: DeleteReplyRequest, authenticatedUser: User) {
         // 삭제를 위해 조회시 해당 댓글이 없을시 throw ModelNotFoundException
-        // password, author 불일치시 throw WrongPasswordOrAuthorException
-        val (password, author) = request
+        // session 정보와 reply의 userId 불일치시 권한 없음으로 throw AuthorizationException
+        // password 불일치시 throw WrongPasswordException
+        val password = request.password
         // 존재여부 체크
         val reply =
             replyRepository.findByIdOrNull(replyId) ?: throw ModelNotFoundException("Reply", replyId)
-        // password, author 일치 여부 체크
-        if (password != reply.password/* || author != reply.author*/) throw WrongPasswordException("Reply", replyId)
+        if (reply.author.id != authenticatedUser.id) throw AuthorizationException("수정 권한이 없습니다.")
+        if (password != reply.password) throw WrongPasswordException("Reply", replyId)
 
         replyRepository.delete(reply)
     }
