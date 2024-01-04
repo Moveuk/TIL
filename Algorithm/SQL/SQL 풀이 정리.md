@@ -143,3 +143,14 @@ https://school.programmers.co.kr/learn/courses/30/lessons/131697
 ```sql
 SELECT MAX(PRICE) MAX_PRICE FROM PRODUCT
 ```
+
+## 15. NULL 처리하기 - IFNULL, COALESCE
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/59410
+
+### 답
+```sql
+SELECT ANIMAL_TYPE, COALESCE(NAME , 'No name') , SEX_UPON_INTAKE FROM ANIMAL_INS ORDER BY ANIMAL_ID
+SELECT ANIMAL_TYPE, IFNULL(NAME , 'No name') , SEX_UPON_INTAKE FROM ANIMAL_INS ORDER BY ANIMAL_ID	
+```
