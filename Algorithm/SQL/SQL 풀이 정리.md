@@ -133,3 +133,13 @@ https://school.programmers.co.kr/learn/courses/30/lessons/131528
 ```sql
 SELECT count(*) USERS FROM USER_INFO WHERE AGE IS NULL
 ```
+
+## 14. 가장 비싼 상품 구하기 - MAX
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/131697
+
+### 답
+```sql
+SELECT MAX(PRICE) MAX_PRICE FROM PRODUCT
+```
