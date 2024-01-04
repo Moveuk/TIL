@@ -160,5 +160,11 @@ Swagger를 사용하여 수동 테스트 진행.
        - 로그아웃 성공시
          - ![image](https://github.com/Moveuk/TIL/assets/84966961/1f665092-2161-481f-9e7b-49c11a590db9)
    - 할 일 카드 CUD시 회원 정보 확인
-     - 할 일 카드 생성시 로그인 상태 확인 - 로그인 상태 아니면 에러
-       - ![image](https://github.com/Moveuk/TIL/assets/84966961/dc5b1907-4bfa-4b76-b467-fb5c14545568)
+     - 할 일 카드 생성시 로그인 상태 확인 
+       - 로그인 상태 아니면 에러
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/dc5b1907-4bfa-4b76-b467-fb5c14545568)
+     - 할 일 카드 수정시 로그인 상태 확인
+       - 로그인 상태 아니면 에러
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/27127090-347c-43a4-8300-8566365993f2)
+       - 수정 권한 없을시 에러
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/8a64e0ee-2e97-42f1-a291-557884d8d9d0)

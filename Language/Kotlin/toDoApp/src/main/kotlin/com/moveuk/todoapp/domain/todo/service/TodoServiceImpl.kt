@@ -1,5 +1,6 @@
 package com.moveuk.todoapp.domain.todo.service
 
+import com.moveuk.todoapp.domain.exception.AuthorizationException
 import com.moveuk.todoapp.domain.exception.ModelNotFoundException
 import com.moveuk.todoapp.domain.todo.dto.todo.*
 import com.moveuk.todoapp.domain.todo.model.Todo
@@ -66,12 +67,15 @@ class TodoServiceImpl(
     }
 
     @Transactional
-    override fun updateTodo(todoId: Long, request: UpdateTodoRequest): TodoResponse {
+    override fun updateTodo(todoId: Long, request: UpdateTodoRequest, authenticatedUser: User): TodoResponse {
         // request를 할 일 카드로 변환 후 수정
         // 수정을 위해 조회시 해당 카드가 없을시 throw ModelNotFoundException
         // 수정 성공 후 저장된 객체 dto로 변환하여 반환
         val todo: Todo =
             todoRepository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo", todoId)
+
+        if (todo.author.id != authenticatedUser.id) throw AuthorizationException("수정 권한이 없습니다.")
+
         val (title, description) = request
 
         todo.title = title

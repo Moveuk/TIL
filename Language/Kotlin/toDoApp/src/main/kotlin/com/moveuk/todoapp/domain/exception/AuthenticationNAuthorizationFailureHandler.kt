@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
 @RestControllerAdvice
-class AuthenticationFailureHandler {
+class AuthenticationNAuthorizationFailureHandler {
 
     @ExceptionHandler(AuthenticationException::class)
     fun onAuthenticationFailure(e: AuthenticationException): ResponseEntity<ErrorResponse> {
@@ -23,5 +23,10 @@ class AuthenticationFailureHandler {
         }
 
         return ResponseEntity.status(httpStatus).body(ErrorResponse(message))
+    }
+
+    @ExceptionHandler(AuthorizationException::class)
+    fun onAuthorizationExceptionFailure(e: AuthorizationException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponse(e.message))
     }
 }
