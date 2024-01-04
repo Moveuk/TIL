@@ -1,6 +1,7 @@
 package com.moveuk.todoapp.domain.todo.model
 
 import com.moveuk.todoapp.domain.todo.dto.reply.ReplyResponse
+import com.moveuk.todoapp.domain.user.model.User
 import jakarta.persistence.*
 
 @Entity
@@ -16,8 +17,9 @@ class Reply(
     @Column(name = "password", nullable = false)
     var password: String,
 
-    @Column(name = "author", nullable = false)
-    var author: String,
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    var author: User,
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +30,6 @@ fun Reply.toResponse(): ReplyResponse {
     return ReplyResponse(
         id = id!!,
         content = content,
-        author = author,
+        author = author.profile,
     )
 }

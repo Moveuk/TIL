@@ -10,6 +10,7 @@ import com.moveuk.todoapp.domain.todo.model.Reply
 import com.moveuk.todoapp.domain.todo.model.toResponse
 import com.moveuk.todoapp.domain.todo.repository.ReplyRepository
 import com.moveuk.todoapp.domain.todo.repository.TodoRepository
+import com.moveuk.todoapp.domain.user.model.User
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -20,21 +21,17 @@ class ReplyServiceImpl(
     private val replyRepository: ReplyRepository
 ) : ReplyService {
     @Transactional
-    override fun createReply(todoId: Long, request: CreateReplyRequest): ReplyResponse {
+    override fun createReply(todoId: Long, request: CreateReplyRequest, authenticatedUser: User): ReplyResponse {
         // request를 댓글로 변환 후 저장
-        // TODO : 인증 기능 추가 후 유저가 없다면 회원 오류로 throw : 추후 author를 user로 대체시
+        // 세션에서 받아온 authenticatedUser를 author에 담아 reply 생성
         // 저장 성공 후 저장된 객체 dto로 변환하여 반환
-        val todo =
-            todoRepository.findByIdOrNull(todoId) ?: throw ModelNotFoundException(
-                "ToDoCard",
-                todoId
-            )
+        val todo = todoRepository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("ToDoCard", todoId)
         return replyRepository.save(
             Reply(
                 todo = todo,
                 content = request.content,
                 password = request.password,
-                author = request.author,
+                author = authenticatedUser,
             )
         ).toResponse()
     }
@@ -49,7 +46,7 @@ class ReplyServiceImpl(
         val reply =
             replyRepository.findByIdOrNull(replyId) ?: throw ModelNotFoundException("Reply", replyId)
         // password, author 일치 여부 체크
-        if (password != reply.password || author != reply.author) throw WrongPasswordOrAuthorException("Reply", replyId)
+        if (password != reply.password/* || author != reply.author.profile*/) throw WrongPasswordOrAuthorException("Reply", replyId)
 
         reply.content = content
 
@@ -65,7 +62,7 @@ class ReplyServiceImpl(
         val reply =
             replyRepository.findByIdOrNull(replyId) ?: throw ModelNotFoundException("Reply", replyId)
         // password, author 일치 여부 체크
-        if (password != reply.password || author != reply.author) throw WrongPasswordOrAuthorException("Reply", replyId)
+        if (password != reply.password/* || author != reply.author*/) throw WrongPasswordOrAuthorException("Reply", replyId)
 
         replyRepository.delete(reply)
     }
