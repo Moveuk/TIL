@@ -1,5 +1,6 @@
 package com.moveuk.todoapp.domain.user.service
 
+import com.moveuk.todoapp.domain.exception.AuthenticationException
 import com.moveuk.todoapp.domain.exception.BadCredentialsException
 import com.moveuk.todoapp.domain.exception.EmailNotFoundException
 import com.moveuk.todoapp.domain.todocard.repository.UserRepository
@@ -34,6 +35,14 @@ class AuthSessionServiceImpl(
     }
 
     override fun invalidateSession(request: HttpServletRequest) {
+        //false 옵션 - 세션이 있으면 있는 세션반환 , 없으면 null 반환
         request.getSession(false)?.invalidate()
+    }
+
+    override fun checkAuthenticatedUser(request: HttpServletRequest): User {
+        //저장된 세션이 없으면 로그인 필요
+        val session = request.getSession(false) ?: throw AuthenticationException("로그인을 먼저 진행해 주세요.")
+
+        return session.getAttribute("loginUser") as User
     }
 }

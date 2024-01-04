@@ -15,8 +15,8 @@ class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse(e.message))
     }
 
-    @ExceptionHandler(WrongPasswordOrAuthorException::class)
-    fun handleWrongPasswordOrAuthorException(e: WrongPasswordOrAuthorException): ResponseEntity<ErrorResponse> {
+    @ExceptionHandler(WrongPasswordException::class)
+    fun handleWrongPasswordOrAuthorException(e: WrongPasswordException): ResponseEntity<ErrorResponse> {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponse(e.message))
     }
 

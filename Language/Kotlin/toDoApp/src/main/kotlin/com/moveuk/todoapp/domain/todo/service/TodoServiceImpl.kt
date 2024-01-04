@@ -1,16 +1,17 @@
 package com.moveuk.todoapp.domain.todo.service
 
+import com.moveuk.todoapp.domain.exception.AuthorizationException
 import com.moveuk.todoapp.domain.exception.ModelNotFoundException
 import com.moveuk.todoapp.domain.todo.dto.todo.*
 import com.moveuk.todoapp.domain.todo.model.Todo
 import com.moveuk.todoapp.domain.todo.model.toResponse
 import com.moveuk.todoapp.domain.todo.repository.TodoRepository
+import com.moveuk.todoapp.domain.user.model.User
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.time.LocalDateTime
 
 @Service
 class TodoServiceImpl(
@@ -52,53 +53,58 @@ class TodoServiceImpl(
     }
 
     @Transactional
-    override fun createTodo(request: CreateTodoRequest): TodoResponse {
+    override fun createTodo(request: CreateTodoRequest, authenticatedUser: User): TodoResponse {
         // request를 할 일 카드로 변환 후 저장
-        // TODO : 기존 유저인지 확인 후 없으면(처음 카드를 작성하는 유저일 경우) 새로운 유저 생성 후 저장
-        // TODO : 인증 기능 추가 후 유저가 없다면 회원 오류로 throw
+        // 세션에서 받아온 authenticatedUser를 author에 담아 todocard 생성
         // 저장 성공 후 저장된 객체 dto로 변환하여 반환
-//        val findByIdOrNullUser = userRepository.findByIdOrNull(request.userId ?: -1L) ?: userRepository.save(User())
         return todoRepository.save(
             Todo(
                 title = request.title,
                 description = request.description,
-                author = request.author,
-                createdDate = LocalDateTime.now()
+                author = authenticatedUser
             )
         ).toResponse()
     }
 
     @Transactional
-    override fun updateTodo(todoId: Long, request: UpdateTodoRequest): TodoResponse {
+    override fun updateTodo(todoId: Long, request: UpdateTodoRequest, authenticatedUser: User): TodoResponse {
         // request를 할 일 카드로 변환 후 수정
         // 수정을 위해 조회시 해당 카드가 없을시 throw ModelNotFoundException
+        // 작성자가 아닐시 throw AuthorizationException
         // 수정 성공 후 저장된 객체 dto로 변환하여 반환
         val todo: Todo =
             todoRepository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo", todoId)
-        val (title, description, author) = request
+
+        if (todo.author.id != authenticatedUser.id) throw AuthorizationException("수정 권한이 없습니다.")
+
+        val (title, description) = request
 
         todo.title = title
         todo.description = description
-        todo.author = author
 
         return todoRepository.save(todo).toResponse()
     }
 
     @Transactional
-    override fun deleteTodo(todoId: Long) {
+    override fun deleteTodo(todoId: Long, authenticatedUser: User) {
         // 삭제를 위해 조회시 해당 카드가 없을시 throw ModelNotFoundException
+        // 작성자가 아닐시 throw AuthorizationException
         // DB에서 todoId 해당하는 할 일 카드 삭제 후, 연관된 Reply도 모두 삭제
         val todo: Todo =
             todoRepository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo", todoId)
+        if (todo.author.id != authenticatedUser.id) throw AuthorizationException("삭제 권한이 없습니다.")
         todoRepository.delete(todo)
     }
 
     @Transactional
-    override fun changeCompletionState(todoId: Long, completionState: Boolean): TodoResponse {
+    override fun changeCompletionState(todoId: Long, completionState: Boolean, authenticatedUser: User): TodoResponse {
         // 완료 상태 수정을 위해 조회시 해당 카드가 없을시 throw ModelNotFoundException
+        // 작성자가 아닐시 throw AuthorizationException
         // 수정 성공 후 저장된 객체 dto로 변환하여 반환
         val todo: Todo =
             todoRepository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo", todoId)
+
+        if (todo.author.id != authenticatedUser.id) throw AuthorizationException("수정 권한이 없습니다.")
 
         todo.completion = completionState
 
