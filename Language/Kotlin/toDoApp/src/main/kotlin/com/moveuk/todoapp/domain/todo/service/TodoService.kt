@@ -1,6 +1,7 @@
 package com.moveuk.todoapp.domain.todo.service
 
 import com.moveuk.todoapp.domain.todo.dto.todo.*
+import com.moveuk.todoapp.domain.user.model.User
 import org.springframework.data.domain.Page
 
 interface TodoService {
@@ -8,7 +9,7 @@ interface TodoService {
 
     fun getTodoByID(todoId: Long): TodoResponse
 
-    fun createTodo(request: CreateTodoRequest): TodoResponse
+    fun createTodo(request: CreateTodoRequest, authenticatedUser: User): TodoResponse
 
     fun updateTodo(todoId: Long, request: UpdateTodoRequest): TodoResponse
 

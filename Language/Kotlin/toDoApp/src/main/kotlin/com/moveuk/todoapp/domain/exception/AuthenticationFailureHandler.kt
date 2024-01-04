@@ -18,8 +18,8 @@ class AuthenticationFailureHandler {
             httpStatus = HttpStatus.BAD_REQUEST
             message = e.message
         } else {
-            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR
-            message = "인증 과정에서 에러가 발생했습니다 관리자에게 문의해주세요."
+            httpStatus = HttpStatus.BAD_REQUEST
+            message = e.message
         }
 
         return ResponseEntity.status(httpStatus).body(ErrorResponse(message))

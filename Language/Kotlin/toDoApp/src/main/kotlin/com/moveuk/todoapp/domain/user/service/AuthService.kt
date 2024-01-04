@@ -8,4 +8,5 @@ interface AuthService {
     fun authenticate(loginRequest: LoginRequest): User
     fun validateSession(authenticatedUser: User, request: HttpServletRequest)
     fun invalidateSession(request: HttpServletRequest)
+    fun checkAuthenticatedUser(request: HttpServletRequest): User
 }
