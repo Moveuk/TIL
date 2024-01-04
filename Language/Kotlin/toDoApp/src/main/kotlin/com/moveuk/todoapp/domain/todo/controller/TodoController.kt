@@ -55,7 +55,8 @@ class TodoController(
     @PutMapping("/{todoId}")
     fun updateTodo(
         @PathVariable todoId: Long,
-        @Valid @RequestBody updateTodoRequest: UpdateTodoRequest, request: HttpServletRequest
+        @Valid @RequestBody updateTodoRequest: UpdateTodoRequest,
+        request: HttpServletRequest
     ): ResponseEntity<TodoResponse> {
         //저장된 세션이라면 세션의 user 데이터 반환
         val authenticatedUser = authService.checkAuthenticatedUser(request)
@@ -65,7 +66,10 @@ class TodoController(
     }
 
     @DeleteMapping
-    fun deleteTodo(@PathParam("todoId") todoId: Long, request: HttpServletRequest): ResponseEntity<Unit> {
+    fun deleteTodo(
+        @PathParam("todoId") todoId: Long,
+        request: HttpServletRequest
+    ): ResponseEntity<Unit> {
         //저장된 세션이라면 세션의 user 데이터 반환
         val authenticatedUser = authService.checkAuthenticatedUser(request)
         todoService.deleteTodo(todoId, authenticatedUser)
@@ -77,11 +81,17 @@ class TodoController(
     @PutMapping("/{todoId}/completion")
     fun changeCompletionState(
         @PathVariable todoId: Long,
-        @PathParam("state") completionState: Boolean
+        @PathParam("state") completionState: Boolean,
+        request: HttpServletRequest
     ): ResponseEntity<TodoResponse> {
+        //저장된 세션이라면 세션의 user 데이터 반환
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(todoService.changeCompletionState(todoId, completionState))
+            .body(
+                authService.checkAuthenticatedUser(request).let {
+                    todoService.changeCompletionState(todoId, completionState, it)
+                }
+            )
     }
 
 }

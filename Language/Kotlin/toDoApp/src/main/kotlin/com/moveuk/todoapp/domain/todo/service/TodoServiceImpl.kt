@@ -70,6 +70,7 @@ class TodoServiceImpl(
     override fun updateTodo(todoId: Long, request: UpdateTodoRequest, authenticatedUser: User): TodoResponse {
         // request를 할 일 카드로 변환 후 수정
         // 수정을 위해 조회시 해당 카드가 없을시 throw ModelNotFoundException
+        // 작성자가 아닐시 throw AuthorizationException
         // 수정 성공 후 저장된 객체 dto로 변환하여 반환
         val todo: Todo =
             todoRepository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo", todoId)
@@ -87,6 +88,7 @@ class TodoServiceImpl(
     @Transactional
     override fun deleteTodo(todoId: Long, authenticatedUser: User) {
         // 삭제를 위해 조회시 해당 카드가 없을시 throw ModelNotFoundException
+        // 작성자가 아닐시 throw AuthorizationException
         // DB에서 todoId 해당하는 할 일 카드 삭제 후, 연관된 Reply도 모두 삭제
         val todo: Todo =
             todoRepository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo", todoId)
@@ -95,11 +97,14 @@ class TodoServiceImpl(
     }
 
     @Transactional
-    override fun changeCompletionState(todoId: Long, completionState: Boolean): TodoResponse {
+    override fun changeCompletionState(todoId: Long, completionState: Boolean, authenticatedUser: User): TodoResponse {
         // 완료 상태 수정을 위해 조회시 해당 카드가 없을시 throw ModelNotFoundException
+        // 작성자가 아닐시 throw AuthorizationException
         // 수정 성공 후 저장된 객체 dto로 변환하여 반환
         val todo: Todo =
             todoRepository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo", todoId)
+
+        if (todo.author.id != authenticatedUser.id) throw AuthorizationException("수정 권한이 없습니다.")
 
         todo.completion = completionState
 

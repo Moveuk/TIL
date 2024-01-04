@@ -20,5 +20,5 @@ interface TodoService {
 
     fun deleteTodo(todoId: Long, authenticatedUser: User)
 
-    fun changeCompletionState(todoId: Long, completionState: Boolean): TodoResponse
+    fun changeCompletionState(todoId: Long, completionState: Boolean, authenticatedUser: User): TodoResponse
 }
