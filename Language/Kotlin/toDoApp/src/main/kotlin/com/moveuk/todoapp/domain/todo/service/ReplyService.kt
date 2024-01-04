@@ -4,11 +4,12 @@ import com.moveuk.todoapp.domain.todo.dto.reply.CreateReplyRequest
 import com.moveuk.todoapp.domain.todo.dto.reply.DeleteReplyRequest
 import com.moveuk.todoapp.domain.todo.dto.reply.ReplyResponse
 import com.moveuk.todoapp.domain.todo.dto.reply.UpdateReplyRequest
+import com.moveuk.todoapp.domain.user.model.User
 
 interface ReplyService {
-    fun createReply(todoId: Long, request: CreateReplyRequest): ReplyResponse
+    fun createReply(todoId: Long, request: CreateReplyRequest, authenticatedUser: User): ReplyResponse
 
-    fun updateReply(replyId: Long, request: UpdateReplyRequest): ReplyResponse
+    fun updateReply(replyId: Long, request: UpdateReplyRequest, authenticatedUser: User): ReplyResponse
 
-    fun deleteReply(replyId: Long, request: DeleteReplyRequest)
+    fun deleteReply(replyId: Long, request: DeleteReplyRequest, authenticatedUser: User)
 }

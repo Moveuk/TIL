@@ -13,7 +13,7 @@
 3. 추가 기능
     - [x] 할 일 목록 받아올시 발생하는 n + 1 문제 해결
     - [x] User 회원가입, 로그인 기능 추가
-    - [ ] 할 일 카드 CRUD시 회원 정보 확인
+    - [ ] 할 일 카드 CUD시 회원 정보 확인
     - [ ] OAuth 기능 추가
     - [x] 카드 목록 Pagination 기능
     - [ ] 할 일 카드를 공통 관리 가능하도록 그룹 기능 추가
@@ -159,3 +159,42 @@ Swagger를 사용하여 수동 테스트 진행.
      - 로그아웃
        - 로그아웃 성공시
          - ![image](https://github.com/Moveuk/TIL/assets/84966961/1f665092-2161-481f-9e7b-49c11a590db9)
+   - 할 일 카드 C, U, D, 완료상태 변경시 회원 정보 확인
+     - 할 일 카드 생성시 로그인 상태 확인 
+       - 로그인 상태 아니면 에러
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/dc5b1907-4bfa-4b76-b467-fb5c14545568)
+     - 할 일 카드 수정 기능 에러 처리
+       - 로그인 상태 아니면 에러
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/27127090-347c-43a4-8300-8566365993f2)
+       - 수정 권한 없을시 에러
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/8a64e0ee-2e97-42f1-a291-557884d8d9d0)
+     - 할 일 카드 삭제 기능 에러 처리
+       - 로그인 상태 아니면 에러
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/1a90c4b8-9707-4f17-a8f4-e93fcd2f4d43)
+       - 삭제 권한 없을시 에러
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/be624064-6624-4569-a74e-a502eb65a9fa)
+     - 할 일 카드 완료 상태 변경 기능 에러 처리
+       - 로그인 상태 아니면 에러
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/86c5754f-7b75-4382-86a4-d902050b8b56)
+       -  권한 없을시 에러
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/fd4c78c7-1387-471a-9dbd-872a81ca3eec)
+   - 할 일 카드 댓글 C, U, D시 회원 정보 확인
+     - 할 일 카드 댓글 생성시 로그인 상태 확인
+       - 로그인 상태 아니면 에러
+         - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/07da6498-f19c-4709-a43e-8a4dafcc7d6e)
+       - 로그인 후 댓글 작성 성공
+         - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/7e9085ba-e0a8-4867-a3c8-3642a1d4874a)
+     - 할 일 카드 댓글 수정 기능 에러 처리
+       - 로그인 상태 아니면 에러
+         - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/bd01f24c-d2ac-48a2-b582-b5078b5fd2bd)
+       - 수정 권한 없을시 에러
+         - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/0cd46d08-7e8d-43e7-b5a7-ec31df6d0ba6)
+       - 로그인 후 댓글 수정 성공
+         - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/37fb7a90-62eb-433b-8d27-dffab6c6b442)
+     - 할 일 카드 댓글 삭제 기능 에러 처리
+       - 로그인 상태 아니면 에러
+         - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/b3b83426-2344-4ad1-9c4b-8e97bf36de69)
+       - 삭제 권한 없을시 에러
+         - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/3d8495ff-e6fe-4aca-afde-23cde480f720)
+       - 로그인 후 댓글 삭제 성공
+         - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/79a84e40-55e1-47a3-9455-99863e56e6ad)
