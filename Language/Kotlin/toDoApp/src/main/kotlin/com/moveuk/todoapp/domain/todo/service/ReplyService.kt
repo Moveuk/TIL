@@ -9,7 +9,7 @@ import com.moveuk.todoapp.domain.user.model.User
 interface ReplyService {
     fun createReply(todoId: Long, request: CreateReplyRequest, authenticatedUser: User): ReplyResponse
 
-    fun updateReply(replyId: Long, request: UpdateReplyRequest): ReplyResponse
+    fun updateReply(replyId: Long, request: UpdateReplyRequest, authenticatedUser: User): ReplyResponse
 
     fun deleteReply(replyId: Long, request: DeleteReplyRequest)
 }

@@ -36,11 +36,16 @@ class ReplyController(
     @PutMapping
     fun updateReply(
         @PathParam("replyId") replyId: Long,
-        @RequestBody updateReplyRequest: UpdateReplyRequest
+        @RequestBody updateReplyRequest: UpdateReplyRequest,
+        request: HttpServletRequest
     ): ResponseEntity<ReplyResponse> {
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(replyService.updateReply(replyId, updateReplyRequest))
+            .body(
+                authService.checkAuthenticatedUser(request).let {
+                    replyService.updateReply(replyId, updateReplyRequest, it)
+                }
+                )
     }
 
     @DeleteMapping

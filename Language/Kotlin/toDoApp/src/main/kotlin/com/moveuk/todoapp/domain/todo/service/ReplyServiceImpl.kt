@@ -1,7 +1,8 @@
 package com.moveuk.todoapp.domain.todo.service
 
+import com.moveuk.todoapp.domain.exception.AuthorizationException
 import com.moveuk.todoapp.domain.exception.ModelNotFoundException
-import com.moveuk.todoapp.domain.exception.WrongPasswordOrAuthorException
+import com.moveuk.todoapp.domain.exception.WrongPasswordException
 import com.moveuk.todoapp.domain.todo.dto.reply.CreateReplyRequest
 import com.moveuk.todoapp.domain.todo.dto.reply.DeleteReplyRequest
 import com.moveuk.todoapp.domain.todo.dto.reply.ReplyResponse
@@ -37,16 +38,17 @@ class ReplyServiceImpl(
     }
 
     @Transactional
-    override fun updateReply(replyId: Long, request: UpdateReplyRequest): ReplyResponse {
+    override fun updateReply(replyId: Long, request: UpdateReplyRequest, authenticatedUser: User): ReplyResponse {
         // 수정을 위해 조회시 해당 댓글이 없을시 throw ModelNotFoundException
-        // password, author 불일치시 throw WrongPasswordOrAuthorException
+        // session 정보와 reply의 userId 불일치시 권한 없음으로 throw AuthorizationException
+        // password 불일치시 throw WrongPasswordOrAuthorException
         // 수정 성공 후 저장된 객체 dto로 변환하여 반환
-        val (content, password, author) = request
+        val (content, password) = request
         // 존재여부 체크
         val reply =
             replyRepository.findByIdOrNull(replyId) ?: throw ModelNotFoundException("Reply", replyId)
-        // password, author 일치 여부 체크
-        if (password != reply.password/* || author != reply.author.profile*/) throw WrongPasswordOrAuthorException("Reply", replyId)
+        if (reply.author.id != authenticatedUser.id) throw AuthorizationException("수정 권한이 없습니다.")
+        if (password != reply.password) throw WrongPasswordException("Reply", replyId)
 
         reply.content = content
 
@@ -62,7 +64,7 @@ class ReplyServiceImpl(
         val reply =
             replyRepository.findByIdOrNull(replyId) ?: throw ModelNotFoundException("Reply", replyId)
         // password, author 일치 여부 체크
-        if (password != reply.password/* || author != reply.author*/) throw WrongPasswordOrAuthorException("Reply", replyId)
+        if (password != reply.password/* || author != reply.author*/) throw WrongPasswordException("Reply", replyId)
 
         replyRepository.delete(reply)
     }

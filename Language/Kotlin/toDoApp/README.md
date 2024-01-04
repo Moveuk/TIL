@@ -184,3 +184,10 @@ Swagger를 사용하여 수동 테스트 진행.
          - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/07da6498-f19c-4709-a43e-8a4dafcc7d6e)
        - 로그인 후 댓글 작성 성공
          - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/7e9085ba-e0a8-4867-a3c8-3642a1d4874a)
+   - 할 일 카드 수정 기능 에러 처리
+     - 로그인 상태 아니면 에러
+       - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/bd01f24c-d2ac-48a2-b582-b5078b5fd2bd)
+     - 수정 권한 없을시 에러
+       - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/0cd46d08-7e8d-43e7-b5a7-ec31df6d0ba6)
+     - 로그인 후 댓글 작성 성공
+       - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/37fb7a90-62eb-433b-8d27-dffab6c6b442)
