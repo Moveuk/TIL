@@ -12,8 +12,8 @@
     - [x] ResponseEntity를 사용하여 api의 응답으로 적절한 코드를 반환
 3. 추가 기능
     - [x] 할 일 목록 받아올시 발생하는 n + 1 문제 해결
-    - [ ] User 로그인 기능 추가
-        - [ ] 할 일 카드 CRUD시 회원 정보 확인
+    - [x] User 회원가입, 로그인 기능 추가
+    - [ ] 할 일 카드 CRUD시 회원 정보 확인
     - [ ] OAuth 기능 추가
     - [x] 카드 목록 Pagination 기능
     - [ ] 할 일 카드를 공통 관리 가능하도록 그룹 기능 추가
@@ -141,3 +141,21 @@ Swagger를 사용하여 수동 테스트 진행.
        - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/0c8d9275-e659-455c-8c4e-5d4ae33a0d48)
        - ![image](https://github.com/Moveuk/Moveuk/assets/84966961/ac7c70ab-c319-404c-93f8-a3d679dd2401)
      - 요즘 sns들처럼 최신글에 더보기 기능이 추가된다면 cursor 기반 pagination을 지원해야함.
+   - User 회원가입, 로그인 기능 추가
+     - 회원가입
+       - 정상 가입시
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/404be41d-3a22-40d3-9f6f-7c6c97200c2e)
+       - Email 형식 validation 실패시
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/85585817-b663-4a48-8f2d-c0f191a66be2)
+       - 같은 Email 사용시 : Http Status 409 - Conflict
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/510266c7-90fe-435b-8553-4423f5b9a6a4)
+     - 로그인
+       - 정상 로그인시
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/f6982f40-5448-4f66-bd24-43ae22884cd9)
+       - 이메일이 존재하지 않을시
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/46bc12b8-1bac-485e-824d-e38a1bda0f8a)
+       - 비밀번호가 일치하지 않을시
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/aab95bb4-a76d-41cf-a448-c2ae20450338)
+     - 로그아웃
+       - 로그아웃 성공시
+         - ![image](https://github.com/Moveuk/TIL/assets/84966961/1f665092-2161-481f-9e7b-49c11a590db9)
