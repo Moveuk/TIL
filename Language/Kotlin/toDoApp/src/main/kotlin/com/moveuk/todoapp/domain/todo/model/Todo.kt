@@ -1,6 +1,7 @@
 package com.moveuk.todoapp.domain.todo.model
 
 import com.moveuk.todoapp.domain.todo.dto.todo.TodoResponse
+import com.moveuk.todoapp.domain.user.model.User
 import jakarta.persistence.*
 import org.hibernate.annotations.BatchSize
 import java.time.LocalDateTime
@@ -17,11 +18,12 @@ class Todo(
     @Column(name = "completion", nullable = false)
     var completion: Boolean = false,
 
-    @Column(name = "author", nullable = false)
-    var author: String,
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    var author: User,
 
     @Column(name = "created_date", nullable = false)
-    var createdDate: LocalDateTime,
+    var createdDate: LocalDateTime = LocalDateTime.now(),
 
     @BatchSize(size = 100)
     @OneToMany(mappedBy = "todo", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
@@ -41,7 +43,7 @@ fun Todo.toResponse(): TodoResponse {
         id = id!!,
         title = title,
         description = description,
-        author = author,
+        author = author.profile,
         completion = completion,
         createdDate = createdDate,
         replies = replies.map { reply: Reply -> reply.toResponse() },

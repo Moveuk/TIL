@@ -8,8 +8,12 @@ import jakarta.persistence.*
 class User(
     @Column(name = "email", nullable = false)
     var email: String,
+
     @Column(name = "password", nullable = false)
     var password: String,
+
+    @Embedded
+    var profile: Profile,
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,5 +24,6 @@ fun User.toResponse(): UserResponse {
     return UserResponse(
         id = id!!,
         email = email,
+        profile = profile,
     )
 }
