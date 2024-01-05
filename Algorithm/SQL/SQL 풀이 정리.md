@@ -133,3 +133,44 @@ https://school.programmers.co.kr/learn/courses/30/lessons/131528
 ```sql
 SELECT count(*) USERS FROM USER_INFO WHERE AGE IS NULL
 ```
+
+## 14. 가장 비싼 상품 구하기 - MAX
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/131697
+
+### 답
+```sql
+SELECT MAX(PRICE) MAX_PRICE FROM PRODUCT
+```
+
+## 15. NULL 처리하기 - IFNULL, COALESCE
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/59410
+
+### 답
+```sql
+SELECT ANIMAL_TYPE, COALESCE(NAME , 'No name') , SEX_UPON_INTAKE FROM ANIMAL_INS ORDER BY ANIMAL_ID
+SELECT ANIMAL_TYPE, IFNULL(NAME , 'No name') , SEX_UPON_INTAKE FROM ANIMAL_INS ORDER BY ANIMAL_ID	
+```
+
+## 16. 경기도에 위치한 식품창고 목록 출력하기 - COALESCE, LIKE
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/131114
+
+### 답
+```sql
+SELECT WAREHOUSE_ID, WAREHOUSE_NAME, ADDRESS, COALESCE(FREEZER_YN, 'N') FREEZER_YN FROM FOOD_WAREHOUSE WHERE ADDRESS LIKE '%경기도%' ORDER BY WAREHOUSE_ID ASC
+```
+
+## 17. 강원도에 위치한 생산공장 목록 출력하기 - LIKE
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/131112
+
+### 답
+```sql
+SELECT FACTORY_ID, FACTORY_NAME, ADDRESS FROM FOOD_FACTORY WHERE ADDRESS LIKE '%강원도%' ORDER BY FACTORY_ID ASC
+```
