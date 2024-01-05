@@ -5,7 +5,6 @@ import com.moveuk.todoapp.domain.todo.service.TodoService
 import com.moveuk.todoapp.domain.user.service.AuthService
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.validation.Valid
-import jakarta.websocket.server.PathParam
 import org.springframework.data.domain.Page
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -22,10 +21,10 @@ class TodoController(
 
     @GetMapping
     fun getTodos(
-        @PathParam("sortProperty") sortProperty: SortProperty?,
-        @PathParam("sortOrder") sortOrder: SortOrder?,
-        @PathParam("author") author: String?,
-        @PathParam("pageNumber") pageNumber: Int?,
+        @RequestParam("sortProperty") sortProperty: SortProperty?,
+        @RequestParam("sortOrder") sortOrder: SortOrder?,
+        @RequestParam("author") author: String?,
+        @RequestParam("pageNumber") pageNumber: Int?,
     ): ResponseEntity<Page<TodoResponse>> {
         return ResponseEntity
             .status(HttpStatus.OK)
@@ -65,9 +64,9 @@ class TodoController(
             .body(todoService.updateTodo(todoId, updateTodoRequest, authenticatedUser))
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{todoId}")
     fun deleteTodo(
-        @PathParam("todoId") todoId: Long,
+        @PathVariable("todoId") todoId: Long,
         request: HttpServletRequest
     ): ResponseEntity<Unit> {
         //저장된 세션이라면 세션의 user 데이터 반환
@@ -81,7 +80,7 @@ class TodoController(
     @PutMapping("/{todoId}/completion")
     fun changeCompletionState(
         @PathVariable todoId: Long,
-        @PathParam("state") completionState: Boolean,
+        @RequestParam("state") completionState: Boolean,
         request: HttpServletRequest
     ): ResponseEntity<TodoResponse> {
         //저장된 세션이라면 세션의 user 데이터 반환
