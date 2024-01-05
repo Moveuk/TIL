@@ -164,3 +164,13 @@ https://school.programmers.co.kr/learn/courses/30/lessons/131114
 ```sql
 SELECT WAREHOUSE_ID, WAREHOUSE_NAME, ADDRESS, COALESCE(FREEZER_YN, 'N') FREEZER_YN FROM FOOD_WAREHOUSE WHERE ADDRESS LIKE '%경기도%' ORDER BY WAREHOUSE_ID ASC
 ```
+
+## 17. 강원도에 위치한 생산공장 목록 출력하기 - LIKE
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/131112
+
+### 답
+```sql
+SELECT FACTORY_ID, FACTORY_NAME, ADDRESS FROM FOOD_FACTORY WHERE ADDRESS LIKE '%강원도%' ORDER BY FACTORY_ID ASC
+```
