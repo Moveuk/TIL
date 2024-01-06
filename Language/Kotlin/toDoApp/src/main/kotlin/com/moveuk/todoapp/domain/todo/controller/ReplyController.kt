@@ -7,7 +7,6 @@ import com.moveuk.todoapp.domain.todo.dto.reply.UpdateReplyRequest
 import com.moveuk.todoapp.domain.todo.service.ReplyService
 import com.moveuk.todoapp.domain.user.service.AuthService
 import jakarta.servlet.http.HttpServletRequest
-import jakarta.websocket.server.PathParam
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -33,9 +32,9 @@ class ReplyController(
             )
     }
 
-    @PutMapping
+    @PutMapping("/{replyId}")
     fun updateReply(
-        @PathParam("replyId") replyId: Long,
+        @PathVariable replyId: Long,
         @RequestBody updateReplyRequest: UpdateReplyRequest,
         request: HttpServletRequest
     ): ResponseEntity<ReplyResponse> {
@@ -48,9 +47,9 @@ class ReplyController(
             )
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{replyId}")
     fun deleteReply(
-        @PathParam("replyId") replyId: Long,
+        @PathVariable replyId: Long,
         deleteReplyRequest: DeleteReplyRequest,
         request: HttpServletRequest
     ): ResponseEntity<Unit> {
