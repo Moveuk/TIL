@@ -174,3 +174,13 @@ https://school.programmers.co.kr/learn/courses/30/lessons/131112
 ```sql
 SELECT FACTORY_ID, FACTORY_NAME, ADDRESS FROM FOOD_FACTORY WHERE ADDRESS LIKE '%강원도%' ORDER BY FACTORY_ID ASC
 ```
+
+## 18. DATETIME에서 DATE로 형 변환 - DATE_FORMAT
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/59414
+
+### 답
+```sql
+SELECT ANIMAL_ID, NAME, DATE_FORMAT(DATETIME, '%Y-%m-%d') 날짜 FROM ANIMAL_INS ORDER BY ANIMAL_ID
+```
