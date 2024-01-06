@@ -1,19 +1,19 @@
 # ToDo APP
 
 ## 개발 계획
-0. UseCase Diagram, API 명세, ERD 작성
-1. MVP
+1. UseCase Diagram, API 명세, ERD 작성
+2. MVP
     - [x] Sprint 1 : 할 일 카드에 대한 CRUD 기능
     - [x] Sprint 2 : 할 일 카드의 완료 상태 수정 기능, 댓글 CRUD 기능
-2. 2차 기능
+3. 2차 기능
     - [x] 할 일 목록 api에 작성일을 기준으로 오름차순, 내림차순 정렬하는 기능을 추가
     - [x] 할 일 목록 api에 작성자를 기준으로 필터하는 기능을 추가
     - [x] 할 일 작성, 수정 api에 validation을 추가하기
     - [x] ResponseEntity를 사용하여 api의 응답으로 적절한 코드를 반환
-3. 추가 기능
+4. 추가 기능
     - [x] 할 일 목록 받아올시 발생하는 n + 1 문제 해결
     - [x] User 회원가입, 로그인 기능 추가
-    - [ ] 할 일 카드 CUD시 회원 정보 확인
+    - [x] 할 일 카드, 댓글 CUD시 회원 정보 확인(세션 기반)
     - [ ] OAuth 기능 추가
     - [x] 카드 목록 Pagination 기능
     - [ ] 할 일 카드를 공통 관리 가능하도록 그룹 기능 추가
@@ -25,11 +25,30 @@
 
 ## API
 ### MVP API 문서
-- query Param 고민중
-![image](https://github.com/Moveuk/TIL/assets/84966961/8f35f21f-60ee-4b36-b57e-1c618d14e864)
+![image](https://github.com/Moveuk/TIL/assets/84966961/3c327e8d-98da-4bdb-9055-93592d6558b6)
+
+<details>
+<summary>수정 전 API</summary>
+<div markdown="1">
+<img src="https://github.com/Moveuk/TIL/assets/84966961/8f35f21f-60ee-4b36-b57e-1c618d14e864"><br>
+- todo"card" 라는 ui에 한정될 필요가 없으므로 todoCard를 todo로 변경<Br>
+- delete의 경우에도 url상에서 id값을 받도록 수정<br>
+- user entity 생김에 따라 기존의 author 구조 변경에 따른 변경사항을 반영
+</div>
+</details>
+
+
 
 ## ERD
-![image](https://github.com/Moveuk/TIL/assets/84966961/6f35c93c-1809-4d44-95e2-504aedfbbcc4)
+![image](https://github.com/Moveuk/TIL/assets/84966961/6858f39a-f2be-4f7f-a163-4423cb4a0c01)
+
+<details>
+<summary>수정 전 ERD</summary>
+<div markdown="1">
+<img src="https://github.com/Moveuk/TIL/assets/84966961/6f35c93c-1809-4d44-95e2-504aedfbbcc4"><br>
+- API, Entity 수정에 따른 변경
+</div>
+</details>
 
 ### 고민중인 사항
 - ERD가 각 테이블이 서로 순환 구조로 묶여있어도 되는지 모르겠다.
@@ -39,13 +58,6 @@
   - https://okky.kr/questions/1086159
   - 읽어보니 납득이 되지만 Service까지 진입한 상황에서 반환 타입은 정해져 있는데 어떻게 다른 응답이 가능할 수 있는 것인지 모르겠다.
   - Response DTO를 반환하기 때문에 에러 데이터를 위한 반환 값이 없기 때문인데 다른 처리 방법이 있는지 찾아봐야 할 것 같다.
-
-<details>
-<summary>수정 과정 보러가기</summary>
-<div markdown="1">
-
-</div>
-</details>
 
 ### 단위 테스트 진행
 Swagger를 사용하여 수동 테스트 진행.
