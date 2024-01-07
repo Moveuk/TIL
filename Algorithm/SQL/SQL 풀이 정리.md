@@ -194,3 +194,13 @@ https://school.programmers.co.kr/learn/courses/30/lessons/132203
 ```sql
 SELECT DR_NAME, DR_ID, MCDP_CD, DATE_FORMAT(HIRE_YMD, '%Y-%m-%d') FROM DOCTOR WHERE MCDP_CD = 'CS' OR MCDP_CD = 'GS' ORDER BY HIRE_YMD DESC
 ```
+
+## 19. 가격이 제일 비싼 식품의 정보 출력하기 - LIMIT
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/131115
+
+### 답
+```sql
+SELECT PRODUCT_ID, PRODUCT_NAME, PRODUCT_CD, CATEGORY, PRICE FROM FOOD_PRODUCT ORDER BY PRICE DESC LIMIT 1
+```
