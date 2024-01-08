@@ -214,3 +214,14 @@ https://school.programmers.co.kr/learn/courses/30/lessons/131115
 ```sql
 SELECT ANIMAL_ID FROM ANIMAL_INS WHERE NAME IS NULL ORDER BY ANIMAL_ID
 ```
+
+
+## 22. 조건에 맞는 회원수 구하기 - BETWEEN
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/131535
+
+### 답
+```sql
+SELECT COUNT(USER_ID) USERS FROM USER_INFO WHERE JOINED BETWEEN '2021-01-01' AND '2021-12-31' AND 19 < AGE AND AGE < 30 
+```
