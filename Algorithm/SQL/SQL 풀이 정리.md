@@ -242,3 +242,18 @@ SELECT
         END AS 중성화
 FROM ANIMAL_INS
 ```
+
+## 24. 카테고리 별 상품 개수 구하기 - SUBSTR, COUNT, GROUP BY
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/131529
+
+### 답
+```sql
+SELECT
+    SUBSTR(PRODUCT_CODE,1,2) CATEGORY,
+    COUNT(PRODUCT_CODE) PRODUCTS
+FROM PRODUCT
+GROUP BY SUBSTR(PRODUCT_CODE,1,2)
+ORDER BY PRODUCT_CODE
+```
