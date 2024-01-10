@@ -315,3 +315,16 @@ FROM PATIENT
 WHERE AGE < 13 AND GEND_CD = 'W'
 ORDER BY AGE DESC, PT_NAME
 ```
+
+## 29. 인기있는 아이스크림 - ORDER BY
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/133024
+
+### 답
+```sql
+SELECT
+    FLAVOR
+FROM FIRST_HALF
+ORDER BY TOTAL_ORDER DESC, SHIPMENT_ID
+```
