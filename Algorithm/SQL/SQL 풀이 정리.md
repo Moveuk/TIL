@@ -297,3 +297,21 @@ WHERE SUBSTR(APNT_YMD,6,2) > 4 AND SUBSTR(APNT_YMD,6,2) < 6
 GROUP BY MCDP_CD
 ORDER BY COUNT(MCDP_CD), MCDP_CD
 ```
+
+## 28. 12세 이하인 여자 환자 목록 출력하기 - COALESCE, ORDER BY
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/132201
+
+### 답
+```sql
+SELECT
+    PT_NAME,
+    PT_NO,
+    GEND_CD,
+    AGE,
+    COALESCE(TLNO, 'NONE')
+FROM PATIENT
+WHERE AGE < 13 AND GEND_CD = 'W'
+ORDER BY AGE DESC, PT_NAME
+```
