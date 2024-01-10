@@ -267,3 +267,18 @@ https://school.programmers.co.kr/learn/courses/30/lessons/59040
 ```sql
 SELECT ANIMAL_TYPE, COUNT(ANIMAL_TYPE) 'count' FROM ANIMAL_INS GROUP BY ANIMAL_TYPE ORDER BY ANIMAL_TYPE
 ```
+
+## 26. 입양 시각 구하기(1) - SUBSTR, COUNT, GROUP BY, ORDER BY
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/59412
+
+### 답
+```sql
+SELECT
+    SUBSTR(DATETIME,11,3) HOUR, COUNT(DATETIME) 'COUNT'
+FROM ANIMAL_OUTS
+WHERE SUBSTR(DATETIME,11,3) > 8 AND SUBSTR(DATETIME,11,3) < 20
+GROUP BY SUBSTR(DATETIME,11,3)
+ORDER BY SUBSTR(DATETIME,11,3)
+```
