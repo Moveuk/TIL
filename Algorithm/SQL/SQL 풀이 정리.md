@@ -344,3 +344,19 @@ WHERE OPTIONS LIKE '%통풍시트%' OR OPTIONS LIKE '%열선시트%' OR OPTIONS 
 GROUP BY CAR_TYPE
 ORDER BY CAR_TYPE
 ```
+
+## 31. 오랜 기간 보호한 동물(1) - LEFT OUTER JOIN
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/59044
+
+### 답
+```sql
+SELECT A.NAME
+     ,A.DATETIME
+FROM ANIMAL_INS A
+         LEFT OUTER JOIN ANIMAL_OUTS AS B ON A.ANIMAL_ID = B.ANIMAL_ID
+WHERE B.ANIMAL_ID IS NULL
+ORDER BY A.DATETIME ASC
+    LIMIT 3
+```
