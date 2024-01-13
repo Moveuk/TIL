@@ -360,3 +360,19 @@ WHERE B.ANIMAL_ID IS NULL
 ORDER BY A.DATETIME ASC
     LIMIT 3
 ```
+
+## 32. 카테고리 별 도서 판매량 집계하기 - INNER JOIN, DATE_FORMAT, GROUP BY
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/59044
+
+### 답
+```sql
+SELECT A.CATEGORY
+     ,SUM(B.SALES) TOTAL_SALES
+FROM BOOK A
+         INNER JOIN BOOK_SALES AS B ON A.BOOK_ID = B.BOOK_ID
+WHERE DATE_FORMAT(B.SALES_DATE, '%Y-%m') = '2022-01'
+GROUP BY CATEGORY
+ORDER BY A.CATEGORY ASC
+```
