@@ -364,7 +364,7 @@ ORDER BY A.DATETIME ASC
 ## 32. 카테고리 별 도서 판매량 집계하기 - INNER JOIN, DATE_FORMAT, GROUP BY
 
 ### 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/59044
+https://school.programmers.co.kr/learn/courses/30/lessons/144855
 
 ### 답
 ```sql
@@ -375,4 +375,21 @@ FROM BOOK A
 WHERE DATE_FORMAT(B.SALES_DATE, '%Y-%m') = '2022-01'
 GROUP BY CATEGORY
 ORDER BY A.CATEGORY ASC
+```
+
+## 33. 상품 별 오프라인 매출 구하기 - INNER JOIN, GROUP BY
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/131533
+
+### 답
+```sql
+SELECT
+    A.PRODUCT_CODE,
+    SUM(A.PRICE * B.SALES_AMOUNT) SALES
+FROM PRODUCT A
+        INNER JOIN OFFLINE_SALE AS B
+        ON A.PRODUCT_ID = B.PRODUCT_ID
+GROUP BY A.PRODUCT_ID
+ORDER BY SUM(A.PRICE * B.SALES_AMOUNT) DESC, PRODUCT_CODE ASC
 ```
