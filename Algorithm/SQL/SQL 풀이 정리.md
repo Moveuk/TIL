@@ -393,3 +393,20 @@ FROM PRODUCT A
 GROUP BY A.PRODUCT_ID
 ORDER BY SUM(A.PRICE * B.SALES_AMOUNT) DESC, PRODUCT_CODE ASC
 ```
+
+## 34. 있었는데요 없었습니다 - INNER JOIN
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/59043
+
+### 답
+```sql
+SELECT
+    A.ANIMAL_ID,
+    A.NAME
+FROM ANIMAL_INS A
+        INNER JOIN ANIMAL_OUTS AS B
+        ON A.ANIMAL_ID = B.ANIMAL_ID
+WHERE A.DATETIME > B.DATETIME
+ORDER BY A.DATETIME
+```
