@@ -422,7 +422,25 @@ SELECT
     A.ANIMAL_ID,
     A.NAME
 FROM ANIMAL_INS A
-        INNER JOIN ANIMAL_OUTS AS B
-        ON A.ANIMAL_ID = B.ANIMAL_ID
+         INNER JOIN ANIMAL_OUTS AS B
+                    ON A.ANIMAL_ID = B.ANIMAL_ID
 ORDER BY (B.DATETIME - A.DATETIME) DESC LIMIT 2
+```
+
+## 35. 오랜 기간 보호한 동물(2) - INNER JOIN, WHERE
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/59045
+
+### 답
+```sql
+SELECT
+    A.ANIMAL_ID,
+    A.ANIMAL_TYPE,
+    A.NAME
+FROM ANIMAL_INS A
+         INNER JOIN ANIMAL_OUTS AS B
+                    ON A.ANIMAL_ID = B.ANIMAL_ID
+WHERE A.SEX_UPON_INTAKE LIKE 'Intact%' AND B.SEX_UPON_OUTCOME NOT LIKE 'Intact%'
+ORDER BY B.ANIMAL_ID
 ```
