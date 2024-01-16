@@ -499,3 +499,19 @@ FROM FIRST_HALF A
 GROUP BY B.INGREDIENT_TYPE
 ORDER BY SUM(A.TOTAL_ORDER) ASC
 ```
+
+## 40. 루시와 엘라 찾기 - SELECT, IN
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/59046
+
+### 답
+```sql
+SELECT
+    A.ANIMAL_ID,
+    A.NAME,
+    A.SEX_UPON_INTAKE
+FROM ANIMAL_INS A
+WHERE A.NAME IN ('Lucy', 'Ella', 'Pickle', 'Rogan', 'Sabrina', 'Mitty')
+ORDER BY ANIMAL_ID ASC
+```
