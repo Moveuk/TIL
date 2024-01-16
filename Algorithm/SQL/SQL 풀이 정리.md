@@ -427,7 +427,7 @@ FROM ANIMAL_INS A
 ORDER BY (B.DATETIME - A.DATETIME) DESC LIMIT 2
 ```
 
-## 35. 오랜 기간 보호한 동물(2) - INNER JOIN, WHERE
+## 36. 보호소에서 중성화한 동물 - INNER JOIN, WHERE
 
 ### 링크
 https://school.programmers.co.kr/learn/courses/30/lessons/59045
@@ -445,7 +445,7 @@ WHERE A.SEX_UPON_INTAKE LIKE 'Intact%' AND B.SEX_UPON_OUTCOME NOT LIKE 'Intact%'
 ORDER BY B.ANIMAL_ID
 ```
 
-## 36. 조건에 맞는 도서와 저자 리스트 출력하기 - DATE_FORMAT, INNER JOIN, WHERE
+## 37. 조건에 맞는 도서와 저자 리스트 출력하기 - DATE_FORMAT, INNER JOIN, WHERE
 
 ### 링크
 https://school.programmers.co.kr/learn/courses/30/lessons/144854
@@ -461,4 +461,24 @@ FROM BOOK A
                     ON A.AUTHOR_ID = B.AUTHOR_ID
 WHERE A.CATEGORY = '경제'
 ORDER BY A.PUBLISHED_DATE ASC
+```
+
+## 38. 조건별로 분류하여 주문상태 출력하기 - DATE_FORMAT, CASE
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/
+
+### 답
+```sql
+SELECT
+    ORDER_ID,
+    PRODUCT_ID,
+    DATE_FORMAT(OUT_DATE, '%Y-%m-%d'),
+    CASE
+        WHEN OUT_DATE IS NULL THEN '출고미정'
+        WHEN OUT_DATE < DATE('2022-05-02 00:00:00') THEN '출고완료'
+        ELSE '출고대기'
+END AS 출고여부
+FROM FOOD_ORDER A
+ORDER BY A.ORDER_ID ASC
 ```
