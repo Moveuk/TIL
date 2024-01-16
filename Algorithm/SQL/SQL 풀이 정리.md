@@ -466,7 +466,7 @@ ORDER BY A.PUBLISHED_DATE ASC
 ## 38. 조건별로 분류하여 주문상태 출력하기 - DATE_FORMAT, CASE
 
 ### 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/
+https://school.programmers.co.kr/learn/courses/30/lessons/131113
 
 ### 답
 ```sql
@@ -481,4 +481,21 @@ SELECT
 END AS 출고여부
 FROM FOOD_ORDER A
 ORDER BY A.ORDER_ID ASC
+```
+
+## 39. 성분으로 구분한 아이스크림 총 주문량 - SUM, INNER JOIN
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/133026
+
+### 답
+```sql
+SELECT
+    B.INGREDIENT_TYPE,
+    SUM(A.TOTAL_ORDER) TOTAL_ORDER
+FROM FIRST_HALF A
+         INNER JOIN ICECREAM_INFO AS B
+                    ON A.FLAVOR = B.FLAVOR
+GROUP BY B.INGREDIENT_TYPE
+ORDER BY SUM(A.TOTAL_ORDER) ASC
 ```
