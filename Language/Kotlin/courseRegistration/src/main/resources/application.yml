@@ -20,3 +20,9 @@ logging:
             bind: trace
       springframework:
         security: debug
+
+auth:
+  jwt:
+    issuer: kotlin.moveuk.xyz
+    secret: ThisIsRandomStringForJwtSecretKey
+    accessTokenExpirationHour: 168

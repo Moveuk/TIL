@@ -4,10 +4,9 @@ import com.moveuk.courseregistration.domain.course.dto.CourseResponse
 import com.moveuk.courseregistration.domain.course.dto.CreateCourseRequest
 import com.moveuk.courseregistration.domain.course.dto.UpdateCourseRequest
 import com.moveuk.courseregistration.domain.course.service.CourseService
-import com.moveuk.courseregistration.domain.exception.ModelNotFoundException
-import com.moveuk.courseregistration.domain.exception.dto.ErrorResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 
 @RequestMapping("/courses")
@@ -16,6 +15,7 @@ class CourseController(
     private val courseService: CourseService
 ) {
 
+    @PreAuthorize("hasRole('TUTOR') or hasRole('STUDENT')")
     @GetMapping()
     fun getCourseList(): ResponseEntity<List<CourseResponse>> {
         return ResponseEntity
@@ -23,6 +23,7 @@ class CourseController(
             .body(courseService.getAllCourseList())
     }
 
+    @PreAuthorize("hasRole('TUTOR') or hasRole('STUDENT')")
     @GetMapping("/{courseId}")
     fun getCourse(@PathVariable courseId: Long): ResponseEntity<CourseResponse> {
         return ResponseEntity
@@ -30,11 +31,7 @@ class CourseController(
             .body(courseService.getCourseById(courseId))
     }
 
-    @ExceptionHandler(ModelNotFoundException::class)
-    fun handleModelNotFoundException(e: ModelNotFoundException): ResponseEntity<ErrorResponse> {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse(e.message))
-    }
-
+    @PreAuthorize("hasRole('TUTOR')")
     @PostMapping
     fun createCourse(@RequestBody createCourseRequest: CreateCourseRequest): ResponseEntity<CourseResponse> {
         return ResponseEntity
@@ -42,6 +39,7 @@ class CourseController(
             .body(courseService.createCourse(createCourseRequest))
     }
 
+    @PreAuthorize("hasRole('TUTOR')")
     @PutMapping("/{courseId}")
     fun updateCourse(
         @PathVariable courseId: Long,
@@ -52,6 +50,7 @@ class CourseController(
             .body(courseService.updateCourse(courseId, updateCourseRequest))
     }
 
+    @PreAuthorize("hasRole('TUTOR')")
     @DeleteMapping("/{courseId}")
     fun deleteCourse(@PathVariable courseId: Long): ResponseEntity<Unit> {
         courseService.deleteCourse(courseId)

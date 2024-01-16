@@ -1,22 +1,40 @@
 package com.moveuk.courseregistration.domain.user.service
 
+import com.moveuk.courseregistration.domain.exception.InvalidCredentialException
 import com.moveuk.courseregistration.domain.exception.ModelNotFoundException
-import com.moveuk.courseregistration.domain.user.dto.SignUpRequest
-import com.moveuk.courseregistration.domain.user.dto.UpdateUserProfileRequest
-import com.moveuk.courseregistration.domain.user.dto.UserResponse
+import com.moveuk.courseregistration.domain.user.dto.*
 import com.moveuk.courseregistration.domain.user.model.Profile
 import com.moveuk.courseregistration.domain.user.model.User
 import com.moveuk.courseregistration.domain.user.model.UserRole
 import com.moveuk.courseregistration.domain.user.model.toResponse
 import com.moveuk.courseregistration.domain.user.repository.UserRepository
+import com.moveuk.courseregistration.infra.security.jwt.JwtPlugin
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 class UserServiceImpl(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val bCryptPasswordEncoder: PasswordEncoder,
+    private val jwtPlugin: JwtPlugin
 ) : UserService {
+
+    override fun login(loginRequest: LoginRequest): LoginResponse {
+        val user = userRepository.findByEmail(loginRequest.email) ?: throw ModelNotFoundException("User", null)
+
+        if (user.role.name != loginRequest.role || !bCryptPasswordEncoder.matches(loginRequest.password, user.password)) {
+            throw InvalidCredentialException()
+        }
+
+        return LoginResponse(
+            accessToken = jwtPlugin.generateAccessToken(
+                subject = user.id.toString(),
+                email = loginRequest.email,
+                role = loginRequest.role)
+        )
+    }
 
     @Transactional
     override fun signUp(request: SignUpRequest): UserResponse {
@@ -29,8 +47,7 @@ class UserServiceImpl(
         return userRepository.save(
             User(
                 email = request.email,
-                // TODO: 비밀번호 암호화
-                password = request.password,
+                password = bCryptPasswordEncoder.encode(request.password),
                 profile = Profile(
                     nickname = request.nickname
                 ),
