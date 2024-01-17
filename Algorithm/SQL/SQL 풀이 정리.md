@@ -515,3 +515,20 @@ FROM ANIMAL_INS A
 WHERE A.NAME IN ('Lucy', 'Ella', 'Pickle', 'Rogan', 'Sabrina', 'Mitty')
 ORDER BY ANIMAL_ID ASC
 ```
+
+## 41. 조건에 맞는 도서 리스트 출력하기 - SELECT, DATE_FORMAT, IN, SUBSTR
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/144853
+
+### 답
+```sql
+SELECT
+    A.BOOK_ID,
+    DATE_FORMAT(A.PUBLISHED_DATE, '%Y-%m-%d')
+FROM BOOK A
+WHERE A.BOOK_ID IN ('3', '4')
+  AND SUBSTR(A.PUBLISHED_DATE, 1,4) = 2021
+  AND CATEGORY = '인문'
+ORDER BY DATE_FORMAT(A.PUBLISHED_DATE, '%Y-%m-%d') ASC
+```
