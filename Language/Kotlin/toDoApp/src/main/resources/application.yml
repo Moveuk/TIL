@@ -12,6 +12,8 @@ spring:
       hibernate:
         format_sql: true
         highlight_sql: true
+#    hibernate:
+#      ddl-auto: create
 logging:
   level:
     org:
@@ -20,3 +22,9 @@ logging:
         orm:
           jdbc:
             bind: trace
+
+auth:
+  jwt:
+    issuer: kotlin.todoapp.com
+    secret: ThisIsRandomStringForJwtSecretKey
+    accessTokenExpirationHour: 168
