@@ -532,3 +532,16 @@ WHERE A.BOOK_ID IN ('3', '4')
   AND CATEGORY = '인문'
 ORDER BY DATE_FORMAT(A.PUBLISHED_DATE, '%Y-%m-%d') ASC
 ```
+
+## 42. 평균 일일 대여 요금 구하기 - SELECT, ROUND, AVG
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/151136
+
+### 답
+```sql
+SELECT
+    ROUND(AVG(A.DAILY_FEE)) AVERAGE_FEE
+FROM CAR_RENTAL_COMPANY_CAR A
+WHERE A.CAR_TYPE = 'SUV'
+```
