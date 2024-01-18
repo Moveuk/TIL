@@ -545,3 +545,22 @@ SELECT
 FROM CAR_RENTAL_COMPANY_CAR A
 WHERE A.CAR_TYPE = 'SUV'
 ```
+
+## 43. 조건에 맞는 사용자와 총 거래금액 조회하기 - SELECT, SUM, INNER JOIN, WHERE, GROUP BY, HAVING, ORDER BY
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/164668
+
+### 답
+```sql
+SELECT
+    B.USER_ID,
+    B.NICKNAME,
+    SUM(A.PRICE) TOTAL_SALES
+FROM USED_GOODS_BOARD A
+         INNER JOIN USED_GOODS_USER AS B
+                    ON A.WRITER_ID = B.USER_ID
+WHERE A.STATUS = 'DONE'
+GROUP BY B.USER_ID HAVING SUM(A.PRICE) >= 700000
+ORDER BY SUM(A.PRICE) ASC
+```
