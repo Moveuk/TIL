@@ -1,11 +1,15 @@
 package com.moveuk.todoapp.domain.todo.controller
 
-import com.moveuk.todoapp.domain.todo.dto.todo.*
+import com.moveuk.todoapp.domain.todo.dto.todo.CreateTodoRequest
+import com.moveuk.todoapp.domain.todo.dto.todo.TodoResponse
+import com.moveuk.todoapp.domain.todo.dto.todo.UpdateTodoRequest
 import com.moveuk.todoapp.domain.todo.service.TodoService
 import com.moveuk.todoapp.infra.security.UserPrincipal
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.validation.Valid
 import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
@@ -22,14 +26,12 @@ class TodoController(
 
     @GetMapping
     fun getTodos(
-        @RequestParam("sortProperty") sortProperty: SortProperty?,
-        @RequestParam("sortOrder") sortOrder: SortOrder?,
-        @RequestParam("author") author: String?,
-        @RequestParam("pageNumber") pageNumber: Int?,
+        @PageableDefault(size = 10, sort = ["id"]) pageable: Pageable,
+        @RequestParam("nickname") nickname: String?
     ): ResponseEntity<Page<TodoResponse>> {
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(todoService.getAllTodos(sortProperty, sortOrder, author, pageNumber))
+            .body(todoService.getAllTodos(pageable, nickname))
     }
 
     @GetMapping("/{todoId}")

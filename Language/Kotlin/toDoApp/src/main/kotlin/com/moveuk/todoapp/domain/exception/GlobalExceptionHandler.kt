@@ -33,4 +33,10 @@ class GlobalExceptionHandler {
             .body(ErrorResponse(e.message))
     }
 
+    @ExceptionHandler(IllegalArgumentException::class)
+    fun handleIllegalArgumentException(e: IllegalArgumentException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(ErrorResponse(e.message))
+    }
+
 }
