@@ -20,7 +20,7 @@ class Todo(
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    var author: User,
+    var user: User,
 
     @Column(name = "created_date", nullable = false)
     var createdDate: LocalDateTime = LocalDateTime.now(),
@@ -28,10 +28,6 @@ class Todo(
     @BatchSize(size = 100)
     @OneToMany(mappedBy = "todo", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
     var replies: MutableList<Reply> = mutableListOf(),
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "app_user_id")
-//    var user: User,
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +39,7 @@ fun Todo.toResponse(): TodoResponse {
         id = id!!,
         title = title,
         description = description,
-        author = author.profile,
+        author = user.profile,
         completion = completion,
         createdDate = createdDate,
         replies = replies.map { reply: Reply -> reply.toResponse() },
