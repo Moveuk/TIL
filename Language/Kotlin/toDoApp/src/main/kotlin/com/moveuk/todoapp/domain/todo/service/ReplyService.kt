@@ -29,7 +29,7 @@ class ReplyService(
                 todo = todo,
                 content = request.content,
                 password = request.password,
-                author = todo.author,
+                author = todo.user,
             )
         ).toResponse()
     }
