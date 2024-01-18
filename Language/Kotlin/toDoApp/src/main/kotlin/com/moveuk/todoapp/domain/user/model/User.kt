@@ -14,6 +14,10 @@ class User(
 
     @Embedded
     var profile: Profile,
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    val role: UserRole,
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,5 +29,6 @@ fun User.toResponse(): UserResponse {
         id = id!!,
         email = email,
         profile = profile,
+        role = role
     )
 }

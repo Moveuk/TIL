@@ -2,8 +2,7 @@ package com.moveuk.todoapp.domain.user.controller
 
 import com.moveuk.todoapp.domain.user.dto.JoinRequest
 import com.moveuk.todoapp.domain.user.dto.LoginRequest
-import com.moveuk.todoapp.domain.user.dto.UserResponse
-import com.moveuk.todoapp.domain.user.model.toResponse
+import com.moveuk.todoapp.domain.user.dto.LoginResponse
 import com.moveuk.todoapp.domain.user.service.AuthService
 import com.moveuk.todoapp.domain.user.service.UserService
 import jakarta.servlet.http.HttpServletRequest
@@ -35,19 +34,10 @@ class UserController(
         @Valid @RequestBody loginRequest: LoginRequest,
         request: HttpServletRequest,
         response: HttpServletResponse
-    ): ResponseEntity<UserResponse> {
-        //로그인 인증 절차
-        //1. 로그인 인증 - 유저 존재 확인, 유저 비밀번호 일치 확인
-        //2. 세션 추가 - 세션 존재하면 반환, 세션 없으면 새로 만든 후 세션 저장
-        //3. 로그인 후 유저 정보(패스워드 뺀) 반환
-        val userResponse: UserResponse
-        authService.authenticate(loginRequest).let {
-            authService.validateSession(it, request)
-            userResponse = it.toResponse()
-        }
+    ): ResponseEntity<LoginResponse> {
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(userResponse)
+            .body(userService.login(loginRequest))
     }
 
 

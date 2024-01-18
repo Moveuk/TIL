@@ -2,12 +2,14 @@ package com.moveuk.todoapp.domain.todo.controller
 
 import com.moveuk.todoapp.domain.todo.dto.todo.*
 import com.moveuk.todoapp.domain.todo.service.TodoService
-import com.moveuk.todoapp.domain.user.service.AuthService
+import com.moveuk.todoapp.infra.security.UserPrincipal
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.validation.Valid
 import org.springframework.data.domain.Page
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
@@ -15,8 +17,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/todos")
 @RestController
 class TodoController(
-    private val todoService: TodoService,
-    private val authService: AuthService
+    private val todoService: TodoService
 ) {
 
     @GetMapping
@@ -38,59 +39,78 @@ class TodoController(
             .body(todoService.getTodoByID(todoId))
     }
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @PostMapping
     fun createTodo(
         @Valid @RequestBody createTodoRequest: CreateTodoRequest,
         request: HttpServletRequest
     ): ResponseEntity<TodoResponse> {
-        //저장된 세션이라면 세션의 user 데이터 반환
-        val authenticatedUser = authService.checkAuthenticatedUser(request)
-        //로그인 상태면 작성 시작
-        return ResponseEntity
-            .status(HttpStatus.CREATED)
-            .body(todoService.createTodo(createTodoRequest, authenticatedUser))
+        return (SecurityContextHolder
+            .getContext()
+            .authentication
+            .principal as UserPrincipal).let { userPrincipal ->
+            todoService.createTodo(createTodoRequest, userPrincipal)
+        }.let {
+            ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(it)
+        }
     }
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @PutMapping("/{todoId}")
     fun updateTodo(
         @PathVariable todoId: Long,
         @Valid @RequestBody updateTodoRequest: UpdateTodoRequest,
         request: HttpServletRequest
     ): ResponseEntity<TodoResponse> {
-        //저장된 세션이라면 세션의 user 데이터 반환
-        val authenticatedUser = authService.checkAuthenticatedUser(request)
-        return ResponseEntity
-            .status(HttpStatus.OK)
-            .body(todoService.updateTodo(todoId, updateTodoRequest, authenticatedUser))
+        return (SecurityContextHolder
+            .getContext()
+            .authentication
+            .principal as UserPrincipal).let { userPrincipal ->
+            todoService.updateTodo(todoId, updateTodoRequest, userPrincipal)
+        }.let {
+            ResponseEntity
+                .status(HttpStatus.OK)
+                .body(it)
+        }
     }
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @DeleteMapping("/{todoId}")
     fun deleteTodo(
         @PathVariable("todoId") todoId: Long,
         request: HttpServletRequest
     ): ResponseEntity<Unit> {
-        //저장된 세션이라면 세션의 user 데이터 반환
-        val authenticatedUser = authService.checkAuthenticatedUser(request)
-        todoService.deleteTodo(todoId, authenticatedUser)
-        return ResponseEntity
-            .status(HttpStatus.NO_CONTENT)
-            .build()
+        return (SecurityContextHolder
+            .getContext()
+            .authentication
+            .principal as UserPrincipal).let { userPrincipal ->
+            todoService.deleteTodo(todoId, userPrincipal)
+        }.let {
+            ResponseEntity
+                .status(HttpStatus.NO_CONTENT)
+                .body(it)
+        }
     }
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @PutMapping("/{todoId}/completion")
     fun changeCompletionState(
         @PathVariable todoId: Long,
         @RequestParam("state") completionState: Boolean,
         request: HttpServletRequest
     ): ResponseEntity<TodoResponse> {
-        //저장된 세션이라면 세션의 user 데이터 반환
-        return ResponseEntity
-            .status(HttpStatus.OK)
-            .body(
-                authService.checkAuthenticatedUser(request).let {
-                    todoService.changeCompletionState(todoId, completionState, it)
-                }
-            )
+        return (SecurityContextHolder
+            .getContext()
+            .authentication
+            .principal as UserPrincipal).let { userPrincipal ->
+            todoService.changeCompletionState(todoId, completionState, userPrincipal)
+        }.let {
+            ResponseEntity
+                .status(HttpStatus.OK)
+                .body(it)
+        }
     }
 
 }
