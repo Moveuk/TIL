@@ -13,11 +13,11 @@ class StopWatchAspect {
     private val logger = LoggerFactory.getLogger("Execution Time Logger")
 
     @Around("@annotation(com.moveuk.courseregistration.infra.aop.StopWatch)")
-    fun run(joinPoint: ProceedingJoinPoint) {
+    fun run(joinPoint: ProceedingJoinPoint): Any {
         val stopWatch = StopWatch()
 
         stopWatch.start()
-        joinPoint.proceed()
+        val proceed = joinPoint.proceed()
         stopWatch.stop()
 
         val methodName = joinPoint.signature.name
@@ -25,5 +25,6 @@ class StopWatchAspect {
 
         val timeElapsedMs = stopWatch.totalTimeMillis
         logger.info("Method Name: $methodName | Arguments: ${methodArguments.joinToString(", ")} Execution Time: ${timeElapsedMs}ms")
+        return proceed
     }
 }
