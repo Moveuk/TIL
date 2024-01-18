@@ -9,8 +9,14 @@ import com.moveuk.courseregistration.domain.courseapplication.dto.UpdateApplicat
 import com.moveuk.courseregistration.domain.lecture.dto.AddLectureRequest
 import com.moveuk.courseregistration.domain.lecture.dto.LectureResponse
 import com.moveuk.courseregistration.domain.lecture.dto.UpdateLectureRequest
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 
 interface CourseService {
+
+    fun getPaginatedCourseList(pageable: Pageable, status: String?): Page<CourseResponse>
+
+    fun searchCourseListByTitle(title: String): List<CourseResponse>
 
     fun getAllCourseList(): List<CourseResponse>
 

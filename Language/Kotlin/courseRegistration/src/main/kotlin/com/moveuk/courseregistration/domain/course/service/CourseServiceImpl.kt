@@ -23,6 +23,8 @@ import com.moveuk.courseregistration.domain.lecture.model.toResponse
 import com.moveuk.courseregistration.domain.lecture.repository.LectureRepository
 import com.moveuk.courseregistration.domain.user.repository.UserRepository
 import com.moveuk.courseregistration.infra.aop.StopWatch
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -34,6 +36,22 @@ class CourseServiceImpl(
     private val courseApplicationRepository: CourseApplicationRepository,
     private val userRepository: UserRepository,
 ) : CourseService {
+
+    override fun getPaginatedCourseList(pageable: Pageable, status: String?): Page<CourseResponse> {
+        val courseStatus = when (status) {
+            "OPEN" -> CourseStatus.OPEN
+            "CLOSED" -> CourseStatus.CLOSED
+            null -> null
+            else -> throw IllegalArgumentException("The status is invalid");
+        }
+
+        return courseRepository.findByPageableAndStatus(pageable, courseStatus).map { it.toResponse() }
+    }
+
+    override fun searchCourseListByTitle(title: String): List<CourseResponse> {
+        return courseRepository.searchCourseListByTitle(title).map { it.toResponse() }
+    }
+
 
     override fun getAllCourseList(): List<CourseResponse> {
         // TODO: DB에서 모든 Course 목록을 조회하여 CourseResponse 목록으로 변환 후 반환

@@ -3,6 +3,7 @@ package com.moveuk.courseregistration.domain.course.model
 import com.moveuk.courseregistration.domain.course.dto.CourseResponse
 import com.moveuk.courseregistration.domain.courseapplication.model.CourseApplication
 import com.moveuk.courseregistration.domain.lecture.model.Lecture
+import com.moveuk.courseregistration.domain.lecture.model.toResponse
 import jakarta.persistence.*
 
 
@@ -25,9 +26,9 @@ class Course(
     @Column(name = "num_applicants", nullable = false)
     var numApplicants: Int = 0,
 
-//    @OneToMany(/*mappedBy = "course", */cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "course", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
 //    @JoinColumn(name = "course_id")
-//    var lectures: MutableList<Lecture> = mutableListOf(),
+    var lectures: MutableList<Lecture> = mutableListOf(),
 
     @OneToMany(mappedBy = "course", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
     var courseApplications: MutableList<CourseApplication> = mutableListOf()
@@ -74,6 +75,7 @@ fun Course.toResponse(): CourseResponse {
         description = description,
         status = status.name,
         maxApplicants = maxApplicants,
-        numApplicants = numApplicants
+        numApplicants = numApplicants,
+        lectures = lectures.map { it.toResponse() }
     )
 }
