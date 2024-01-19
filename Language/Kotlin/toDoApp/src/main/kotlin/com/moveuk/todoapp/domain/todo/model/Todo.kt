@@ -32,6 +32,11 @@ class Todo(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
+
+    fun toggleCompletion(status: Boolean): Boolean {
+        completion = status
+        return completion
+    }
 }
 
 fun Todo.toResponse(): TodoResponse {
