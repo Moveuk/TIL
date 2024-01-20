@@ -589,3 +589,20 @@ FROM  PRODUCT
 GROUP BY  PRICE_GROUP
 ORDER BY  PRICE_GROUP ASC
 ````
+
+## 45. 3월에 태어난 여성 회원 목록 출력하기 - DATE_FORMAT, IS NOT NULL
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/131120
+
+### 답
+```sql
+SELECT
+    A.MEMBER_ID,
+    A.MEMBER_NAME,
+    A.GENDER,
+    DATE_FORMAT(A.DATE_OF_BIRTH, '%Y-%m-%d') DATE_OF_BIRTH
+FROM MEMBER_PROFILE A
+WHERE A.GENDER = 'W' AND DATE_FORMAT(A.DATE_OF_BIRTH, '%m') = '03' AND A.TLNO IS NOT NULL
+ORDER BY A.MEMBER_ID ASC
+````
