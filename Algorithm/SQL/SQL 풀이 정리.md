@@ -635,3 +635,20 @@ SELECT
 FROM ANIMAL_INS A
 ORDER BY A.ANIMAL_ID
 ````
+
+## 48. 즐겨찾기가 가장 많은 식당 정보 출력하기 - IN, INNER JOIN, GROUP BY, MAX
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/131123
+
+### 답
+```sql
+SELECT
+    A.FOOD_TYPE,
+    A.REST_ID,
+    A.REST_NAME,
+    A.FAVORITES
+FROM REST_INFO A
+WHERE (FOOD_TYPE, FAVORITES) IN (SELECT FOOD_TYPE, max(FAVORITES) FROM REST_INFO GROUP BY FOOD_TYPE)
+ORDER BY A.FOOD_TYPE DESC
+````
