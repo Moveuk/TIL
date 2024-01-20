@@ -622,3 +622,16 @@ FROM CAR_RENTAL_COMPANY_CAR A
 WHERE A.CAR_TYPE = '세단' AND DATE_FORMAT(B.START_DATE, '%m') = '10'
 ORDER BY A.CAR_ID DESC
 ````
+
+## 47. 모든 레코드 조회하기 - SELECT
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/131120
+
+### 답
+```sql
+SELECT
+    *
+FROM ANIMAL_INS A
+ORDER BY A.ANIMAL_ID
+````
