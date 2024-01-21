@@ -739,3 +739,18 @@ FROM FIRST_HALF A
 WHERE A.TOTAL_ORDER >= 3000 AND B.INGREDIENT_TYPE = 'fruit_based'
 ORDER BY A.TOTAL_ORDER DESC
 ````
+
+## 52. 재구매가 일어난 상품과 회원 리스트 구하기 - GROUP BY, HAVING, COUNT
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/131536
+
+### 답
+```sql
+SELECT
+    A.USER_ID,
+    A.PRODUCT_ID
+FROM ONLINE_SALE A
+GROUP BY USER_ID, PRODUCT_ID HAVING COUNT(A.USER_ID) > 1
+ORDER BY A.USER_ID, A.PRODUCT_ID DESC
+````
