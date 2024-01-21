@@ -687,3 +687,39 @@ WHERE DATE_FORMAT(B.PRODUCE_DATE, '%Y-%m') = '2022-05'
 GROUP BY B.PRODUCT_ID
 ORDER BY TOTAL_SALES DESC, A.PRODUCT_ID
 ````
+
+## 50. 5월 식품들의 총매출 조회하기 - INNER JOIN, GROUP BY, SUM
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/131117
+
+### 답
+```sql
+SELECT
+    A.PRODUCT_ID,
+    A.PRODUCT_NAME,
+    SUM(A.PRICE * B.AMOUNT) TOTAL_SALES
+FROM FOOD_PRODUCT A
+         INNER JOIN FOOD_ORDER AS B
+                    ON A.PRODUCT_ID = B.PRODUCT_ID
+WHERE DATE_FORMAT(B.PRODUCE_DATE, '%Y-%m') = '2022-05'
+GROUP BY B.PRODUCT_ID
+ORDER BY TOTAL_SALES DESC, A.PRODUCT_ID
+````
+
+## 51. 없어진 기록 찾기 - RIGHT JOIN, NULL
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/59042
+
+### 답
+```sql
+SELECT
+    B.ANIMAL_ID,
+    B.NAME
+FROM ANIMAL_INS A
+         RIGHT JOIN ANIMAL_OUTS AS B
+                    ON A.ANIMAL_ID = B.ANIMAL_ID
+WHERE A.ANIMAL_ID IS NULL AND B.ANIMAL_ID IS NOT NULL
+ORDER BY A.ANIMAL_ID
+````
