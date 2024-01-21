@@ -563,7 +563,7 @@ FROM USED_GOODS_BOARD A
 WHERE A.STATUS = 'DONE'
 GROUP BY B.USER_ID HAVING SUM(A.PRICE) >= 700000
 ORDER BY SUM(A.PRICE) ASC
-````
+```
 
 ## 44. 가격대 별 상품 개수 구하기 - CASE, count
 
@@ -588,7 +588,7 @@ SELECT
 FROM  PRODUCT
 GROUP BY  PRICE_GROUP
 ORDER BY  PRICE_GROUP ASC
-````
+```
 
 ## 45. 3월에 태어난 여성 회원 목록 출력하기 - DATE_FORMAT, IS NOT NULL
 
@@ -605,7 +605,7 @@ SELECT
 FROM MEMBER_PROFILE A
 WHERE A.GENDER = 'W' AND DATE_FORMAT(A.DATE_OF_BIRTH, '%m') = '03' AND A.TLNO IS NOT NULL
 ORDER BY A.MEMBER_ID ASC
-````
+```
 
 ## 46. 대여 기록이 존재하는 자동차 리스트 구하기 - DISTINCT, INNER JOIN, DATE_FORMAT
 
@@ -621,7 +621,7 @@ FROM CAR_RENTAL_COMPANY_CAR A
                     ON A.CAR_ID = B.CAR_ID
 WHERE A.CAR_TYPE = '세단' AND DATE_FORMAT(B.START_DATE, '%m') = '10'
 ORDER BY A.CAR_ID DESC
-````
+```
 
 ## 47. 모든 레코드 조회하기 - SELECT
 
@@ -634,7 +634,7 @@ SELECT
     *
 FROM ANIMAL_INS A
 ORDER BY A.ANIMAL_ID
-````
+```
 
 ## 48. 즐겨찾기가 가장 많은 식당 정보 출력하기 - IN, INNER JOIN, GROUP BY, MAX
 
@@ -651,7 +651,7 @@ SELECT
 FROM REST_INFO A
 WHERE (FOOD_TYPE, FAVORITES) IN (SELECT FOOD_TYPE, max(FAVORITES) FROM REST_INFO GROUP BY FOOD_TYPE)
 ORDER BY A.FOOD_TYPE DESC
-````
+```
 
 ## 49. 식품분류별 가장 비싼 식품의 정보 조회하기 - IN, INNER JOIN, GROUP BY, MAX
 
@@ -667,7 +667,7 @@ SELECT
 FROM FOOD_PRODUCT A
 WHERE (CATEGORY, PRICE) IN (SELECT CATEGORY, max(PRICE) FROM FOOD_PRODUCT GROUP BY CATEGORY) AND CATEGORY IN ('과자', '국', '김치', '식용유')
 ORDER BY MAX_PRICE DESC
-````
+```
 
 ## 50. 5월 식품들의 총매출 조회하기 - INNER JOIN, GROUP BY, SUM
 
@@ -686,7 +686,7 @@ FROM FOOD_PRODUCT A
 WHERE DATE_FORMAT(B.PRODUCE_DATE, '%Y-%m') = '2022-05'
 GROUP BY B.PRODUCT_ID
 ORDER BY TOTAL_SALES DESC, A.PRODUCT_ID
-````
+```
 
 ## 50. 5월 식품들의 총매출 조회하기 - INNER JOIN, GROUP BY, SUM
 
@@ -705,7 +705,7 @@ FROM FOOD_PRODUCT A
 WHERE DATE_FORMAT(B.PRODUCE_DATE, '%Y-%m') = '2022-05'
 GROUP BY B.PRODUCT_ID
 ORDER BY TOTAL_SALES DESC, A.PRODUCT_ID
-````
+```
 
 ## 51. 없어진 기록 찾기 - RIGHT JOIN, NULL
 
@@ -722,7 +722,7 @@ FROM ANIMAL_INS A
                     ON A.ANIMAL_ID = B.ANIMAL_ID
 WHERE A.ANIMAL_ID IS NULL AND B.ANIMAL_ID IS NOT NULL
 ORDER BY A.ANIMAL_ID
-````
+```
 
 ## 52. 과일로 만든 아이스크림 고르기 - INNER JOIN
 
@@ -738,9 +738,9 @@ FROM FIRST_HALF A
                     ON A.FLAVOR = B.FLAVOR
 WHERE A.TOTAL_ORDER >= 3000 AND B.INGREDIENT_TYPE = 'fruit_based'
 ORDER BY A.TOTAL_ORDER DESC
-````
+```
 
-## 52. 재구매가 일어난 상품과 회원 리스트 구하기 - GROUP BY, HAVING, COUNT
+## 53. 재구매가 일어난 상품과 회원 리스트 구하기 - GROUP BY, HAVING, COUNT
 
 ### 링크
 https://school.programmers.co.kr/learn/courses/30/lessons/131536
@@ -753,4 +753,16 @@ SELECT
 FROM ONLINE_SALE A
 GROUP BY USER_ID, PRODUCT_ID HAVING COUNT(A.USER_ID) > 1
 ORDER BY A.USER_ID, A.PRODUCT_ID DESC
-````
+```
+
+## 54. 최댓값 구하기 - MAX
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/59415
+
+### 답
+```sql
+SELECT
+    MAX(A.DATETIME) 시간
+FROM ANIMAL_INS A
+```
