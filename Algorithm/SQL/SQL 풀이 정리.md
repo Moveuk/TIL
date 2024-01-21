@@ -740,6 +740,21 @@ WHERE A.TOTAL_ORDER >= 3000 AND B.INGREDIENT_TYPE = 'fruit_based'
 ORDER BY A.TOTAL_ORDER DESC
 ```
 
+## 52. 재구매가 일어난 상품과 회원 리스트 구하기 - GROUP BY, HAVING, COUNT
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/131536
+
+### 답
+```sql
+SELECT
+    A.USER_ID,
+    A.PRODUCT_ID
+FROM ONLINE_SALE A
+GROUP BY USER_ID, PRODUCT_ID HAVING COUNT(A.USER_ID) > 1
+ORDER BY A.USER_ID, A.PRODUCT_ID DESC
+```
+
 ## 53. 재구매가 일어난 상품과 회원 리스트 구하기 - GROUP BY, HAVING, COUNT
 
 ### 링크
@@ -765,4 +780,26 @@ https://school.programmers.co.kr/learn/courses/30/lessons/59415
 SELECT
     MAX(A.DATETIME) 시간
 FROM ANIMAL_INS A
+```
+
+## 55. 조건에 맞는 사용자 정보 조회하기 - CONCAT, CASE, INNER JOIN, COUNT
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/164670
+
+### 답
+```sql
+SELECT
+    B.USER_ID,
+    B.NICKNAME,
+    CONCAT(B.CITY, " ", B.STREET_ADDRESS1," ", B.STREET_ADDRESS2) 전체주소,
+    CASE LENGTH(B.TLNO)
+        WHEN 11 THEN CONCAT(LEFT(B.TLNO, 3), '-', MID(B.TLNO, 4, 4), '-', RIGHT(B.TLNO, 4))
+        WHEN 10 THEN CONCAT(LEFT(B.TLNO, 3), '-', MID(B.TLNO, 4, 3), '-', RIGHT(B.TLNO, 4))
+        END AS 전화번호
+FROM USED_GOODS_BOARD A
+         INNER JOIN USED_GOODS_USER AS B
+                    ON A.WRITER_ID = B.USER_ID
+GROUP BY A.WRITER_ID HAVING COUNT(A.WRITER_ID) >= 3
+ORDER BY B.USER_ID DESC
 ```
