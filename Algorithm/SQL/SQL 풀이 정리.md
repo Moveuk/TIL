@@ -723,3 +723,19 @@ FROM ANIMAL_INS A
 WHERE A.ANIMAL_ID IS NULL AND B.ANIMAL_ID IS NOT NULL
 ORDER BY A.ANIMAL_ID
 ````
+
+## 52. 과일로 만든 아이스크림 고르기 - INNER JOIN
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/133025
+
+### 답
+```sql
+SELECT
+    B.FLAVOR
+FROM FIRST_HALF A
+         INNER JOIN ICECREAM_INFO AS B
+                    ON A.FLAVOR = B.FLAVOR
+WHERE A.TOTAL_ORDER >= 3000 AND B.INGREDIENT_TYPE = 'fruit_based'
+ORDER BY A.TOTAL_ORDER DESC
+````
