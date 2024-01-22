@@ -820,3 +820,25 @@ FROM CAR_RENTAL_COMPANY_CAR A
 WHERE OPTIONS LIKE '%네비게이션%'
 ORDER BY A.CAR_ID DESC
 ```
+
+## 57. 조건에 부합하는 중고거래 상태 조회하기 - SELECT, CASE, DATE_FORMAT
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/164672
+
+### 답
+```sql
+SELECT
+    A.BOARD_ID,
+    A.WRITER_ID,
+    A.TITLE,
+    A.PRICE,
+    CASE (A.STATUS)
+        WHEN 'DONE' THEN '거래완료'
+        WHEN 'RESERVED' THEN '예약중'
+        WHEN 'SALE' THEN '판매중'
+        END
+FROM USED_GOODS_BOARD A
+WHERE DATE_FORMAT(A.CREATED_DATE,'%Y-%m-%d') = '2022-10-05'
+ORDER BY A.BOARD_ID DESC
+```
