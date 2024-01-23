@@ -922,3 +922,24 @@ FROM REST_REVIEW A
 GROUP BY A.REST_ID HAVING B.ADDRESS LIKE '서울%'
 ORDER BY SCORE DESC, B.FAVORITES DESC
 ```
+
+## 62. 자동차 대여 기록에서 장기/단기 대여 구분하기 - DATE_FORMAT, DATEDIFF, CASE
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/151138
+
+### 답
+```sql
+SELECT
+    A.HISTORY_ID,
+    A.CAR_ID,
+    DATE_FORMAT(A.START_DATE, '%Y-%m-%d') START_DATE,
+    DATE_FORMAT(A.END_DATE, '%Y-%m-%d') END_DATE,
+    CASE
+        WHEN DATEDIFF(END_DATE, START_DATE) < 29 THEN '단기 대여'
+        ELSE '장기 대여'
+        END AS RENT_TYPE
+FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY A
+WHERE START_DATE LIKE '2022-09%'
+ORDER BY HISTORY_ID DESC
+```
