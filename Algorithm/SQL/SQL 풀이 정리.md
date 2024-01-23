@@ -958,3 +958,25 @@ FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY A
 GROUP BY CAR_ID HAVING AVERAGE_DURATION >= 7
 ORDER BY AVERAGE_DURATION DESC, CAR_ID DESC
 ```
+
+## 64. 헤비 유저가 소유한 장소 - JOIN
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/77487
+
+### 답
+```sql
+SELECT
+    A.ID,
+    A.NAME,
+    B.HOST_ID
+FROM PLACES as A
+         JOIN (
+    select
+        HOST_ID,
+        count(HOST_ID) as counts
+    from PLACES
+    group by HOST_ID) as B
+              ON A.HOST_ID = B.HOST_ID
+WHERE B.counts > 1
+```
