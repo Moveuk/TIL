@@ -981,17 +981,31 @@ FROM PLACES as A
 WHERE B.counts > 1
 ```
 
-## 65. 우유와 요거트가 담긴 장바구니 - SELECT
+## 65. 우유와 요거트가 담긴 장바구니 - SELECT, IN, DISTINCT
 
 ### 링크
 https://school.programmers.co.kr/learn/courses/30/lessons/62284
 
 ### 답
 ```sql
-SELECT 
+SELECT
     CART_ID
 FROM CART_PRODUCTS
 WHERE NAME IN ('Milk', 'Yogurt')
 GROUP BY CART_ID HAVING COUNT(DISTINCT NAME) = 2
 ORDER BY CART_ID
+```
+
+## 66. 조회수가 가장 많은 중고거래 게시판의 첨부파일 조회하기 - CONCAT
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/164671
+
+### 답
+```sql
+SELECT
+    CONCAT("/home/grep/src/",BOARD_ID,"/",FILE_ID,FILE_NAME,FILE_EXT) FILE_PATH
+FROM USED_GOODS_FILE
+WHERE BOARD_ID = (SELECT BOARD_ID FROM USED_GOODS_BOARD ORDER BY VIEWS DESC LIMIT 1)
+ORDER BY FILE_ID DESC
 ```
