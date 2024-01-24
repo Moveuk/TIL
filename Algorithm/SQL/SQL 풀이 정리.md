@@ -1009,3 +1009,23 @@ FROM USED_GOODS_FILE
 WHERE BOARD_ID = (SELECT BOARD_ID FROM USED_GOODS_BOARD ORDER BY VIEWS DESC LIMIT 1)
 ORDER BY FILE_ID DESC
 ```
+
+## 67. 주문량이 많은 아이스크림들 조회하기 - JOIN
+
+### 링크
+https://school.programmers.co.kr/learn/courses/30/lessons/133027
+
+### 답
+```sql
+SELECT
+    A.FLAVOR
+FROM
+    FIRST_HALF A
+        INNER JOIN (
+            SELECT FLAVOR, SUM(TOTAL_ORDER) SUM_JLY
+            FROM JULY
+            GROUP BY FLAVOR) B
+        ON A.FLAVOR = B.FLAVOR
+GROUP BY B.FLAVOR
+ORDER BY A.TOTAL_ORDER + B.SUM_JLY DESC LIMIT 3
+```
