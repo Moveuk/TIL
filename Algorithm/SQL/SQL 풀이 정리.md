@@ -1177,3 +1177,16 @@ WHERE C.CAR_TYPE IN ('세단', 'SUV')
 HAVING FEE >= 500000 AND FEE < 2000000
 ORDER BY FEE DESC, CAR_TYPE ASC, CAR_ID DESC 
 ```
+
+## 77. [leetcode-1757]Recyclable and Low Fat Products - SELECT
+
+### 링크
+https://leetcode.com/problems/recyclable-and-low-fat-products/description/
+
+### 답
+```sql
+SELECT
+    product_id
+FROM Products
+WHERE low_fats = 'Y' AND recyclable = 'Y'``
+```
