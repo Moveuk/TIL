@@ -1215,3 +1215,17 @@ select
 from World
 where area >= 3000000 or population >= 25000000
 ```
+
+## 80. [leetcode-1148]Article Views I - where, order
+
+### 링크
+https://leetcode.com/problems/article-views-i/
+
+### 답
+```sql
+select
+    distinct viewer_id as id
+from Views
+where viewer_id = author_id
+order by id
+```
