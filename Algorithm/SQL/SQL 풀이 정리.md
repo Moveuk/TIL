@@ -1190,3 +1190,13 @@ SELECT
 FROM Products
 WHERE low_fats = 'Y' AND recyclable = 'Y'``
 ```
+
+## 78. [leetcode-584]Find Customer Referee - IFNULL
+
+### 링크
+https://leetcode.com/problems/find-customer-referee/
+
+### 답
+```sql
+select name from Customer where IFNULL(referee_id, 0) <> 2
+```
