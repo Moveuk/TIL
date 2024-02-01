@@ -1200,3 +1200,18 @@ https://leetcode.com/problems/find-customer-referee/
 ```sql
 select name from Customer where IFNULL(referee_id, 0) <> 2
 ```
+
+## 79. [leetcode-595]Big Countries - where
+
+### 링크
+https://leetcode.com/problems/big-countries/
+
+### 답
+```sql
+select
+    name,
+    population,
+    area
+from World
+where area >= 3000000 or population >= 25000000
+```
