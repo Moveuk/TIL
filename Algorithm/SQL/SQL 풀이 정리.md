@@ -1242,3 +1242,17 @@ select
 from Tweets
 where LENGTH(content) > 15
 ```
+
+## 82. [leetcode-1378]Replace Employee ID With The Unique Identifier - left join
+
+### 링크
+https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier/
+
+### 답
+```sql
+select
+    EU.unique_id,
+    E.name
+from Employees E
+         left join EmployeeUNI EU on E.id = EU.id
+```
