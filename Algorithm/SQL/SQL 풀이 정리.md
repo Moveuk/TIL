@@ -1229,3 +1229,16 @@ from Views
 where viewer_id = author_id
 order by id
 ```
+
+## 81. [leetcode-1683]Invalid Tweets - where
+
+### 링크
+https://leetcode.com/problems/invalid-tweets/
+
+### 답
+```sql
+select
+    tweet_id
+from Tweets
+where LENGTH(content) > 15
+```
