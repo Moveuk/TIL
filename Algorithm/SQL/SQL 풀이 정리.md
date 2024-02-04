@@ -1256,3 +1256,18 @@ select
 from Employees E
          left join EmployeeUNI EU on E.id = EU.id
 ```
+
+## 83. [leetcode-1068]Product Sales Analysis I - left join
+
+### 링크
+https://leetcode.com/problems/product-sales-analysis-i/description/
+
+### 답
+```sql
+select
+    P.product_name,
+    S.year,
+    S.price
+from Sales S
+         left join Product P on S.product_id = P.product_id
+```
