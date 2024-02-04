@@ -1271,3 +1271,19 @@ select
 from Sales S
          left join Product P on S.product_id = P.product_id
 ```
+
+## 84. [leetcode-1581]Customer Who Visited but Did Not Make Any Transactions - left join, COUNT
+
+### 링크
+https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/description/
+
+### 답
+```sql
+select
+    V.customer_id,
+    COUNT(v.visit_id) AS count_no_trans
+from Visits V
+         left join Transactions T on V.visit_id = T.visit_id
+WHERE t.transaction_id IS NULL
+GROUP BY v.customer_id; 
+```
