@@ -1287,3 +1287,18 @@ from Visits V
 WHERE t.transaction_id IS NULL
 GROUP BY v.customer_id; 
 ```
+
+## 85. [leetcode-197]Rising Temperature - left join, DATEDIFF
+
+### 링크
+https://leetcode.com/problems/rising-temperature/description/
+
+### 답
+```sql
+select
+    w2.id
+from Weather W1
+         join Weather w2
+              ON DATEDIFF (w1.recordDate ,w2.recordDate ) = -1
+                  AND w2.temperature>w1.temperature   
+```
