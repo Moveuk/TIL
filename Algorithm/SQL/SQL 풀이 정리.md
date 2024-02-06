@@ -1302,3 +1302,18 @@ from Weather W1
               ON DATEDIFF (w1.recordDate ,w2.recordDate ) = -1
                   AND w2.temperature>w1.temperature   
 ```
+
+## 86. [leetcode-1661]Average Time of Process per Machine - round
+
+### 링크
+https://leetcode.com/problems/average-time-of-process-per-machine/description/
+
+### 답
+```sql
+select a1.machine_id, round(avg(a2.timestamp-a1.timestamp), 3) as processing_time
+from Activity a1
+         join Activity a2
+              on a1.machine_id=a2.machine_id and a1.process_id=a2.process_id
+                  and a1.activity_type='start' and a2.activity_type='end'
+group by a1.machine_id
+```
