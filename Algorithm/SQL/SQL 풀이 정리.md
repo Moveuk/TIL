@@ -1317,3 +1317,19 @@ from Activity a1
                   and a1.activity_type='start' and a2.activity_type='end'
 group by a1.machine_id
 ```
+
+## 87. [leetcode-577]Employee Bonus - left join
+
+### 링크
+https://leetcode.com/problems/employee-bonus/submissions/1168292622/
+
+### 답
+```sql
+select
+    e.name,
+    b.bonus
+from Employee e
+         left join Bonus b
+                   on e.empId=b.empId
+where b.bonus < 1000 or b.bonus is null
+```
