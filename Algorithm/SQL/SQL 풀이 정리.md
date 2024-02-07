@@ -1321,7 +1321,7 @@ group by a1.machine_id
 ## 87. [leetcode-577]Employee Bonus - left join
 
 ### 링크
-https://leetcode.com/problems/employee-bonus/submissions/1168292622/
+https://leetcode.com/problems/employee-bonus/description/
 
 ### 답
 ```sql
@@ -1332,4 +1332,24 @@ from Employee e
          left join Bonus b
                    on e.empId=b.empId
 where b.bonus < 1000 or b.bonus is null
+```
+
+## 88. [leetcode-1280]Students and Examinations - left join, count
+
+### 링크
+https://leetcode.com/problems/students-and-examinations/description/
+
+### 답
+```sql
+SELECT
+    S.student_id,
+    S.student_name,
+    SUB.subject_name,
+    count(E.subject_name) AS attended_exams
+FROM Students S
+         JOIN Subjects SUB
+         LEFT OUTER JOIN Examinations E
+                         ON S.student_id = E.student_id AND SUB.subject_name = E.subject_name
+GROUP BY S.student_id, S.student_name, SUB.subject_name
+ORDER BY S.student_id, SUB.subject_name
 ```
