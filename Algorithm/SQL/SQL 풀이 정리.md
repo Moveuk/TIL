@@ -1353,3 +1353,24 @@ FROM Students S
 GROUP BY S.student_id, S.student_name, SUB.subject_name
 ORDER BY S.student_id, SUB.subject_name
 ```
+
+## 89. [leetcode-570]Managers with at Least 5 Direct Reports - join, GROUP BY
+
+### 링크
+https://leetcode.com/problems/managers-with-at-least-5-direct-reports/description/
+
+### 답
+```sql
+SELECT
+    e1.name
+FROM
+    Employee e1
+        JOIN
+    Employee e2
+    ON
+        e1.id = e2.managerId
+GROUP BY
+    e1.name,e1.id
+HAVING
+    COUNT(e2.id) >= 5;
+```
