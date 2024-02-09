@@ -1395,3 +1395,17 @@ FROM Signups s
      ON s.user_id = c.user_id
 GROUP BY s.user_id;
 ```
+
+## 90. [leetcode-620]Not Boring Movies - select
+
+### 링크
+https://leetcode.com/problems/not-boring-movies/description/
+
+### 답
+```sql
+SELECT
+    *
+FROM Cinema c
+WHERE c.id % 2 = 1 AND description != 'boring'
+ORDER BY rating DESC
+```
