@@ -1396,7 +1396,7 @@ FROM Signups s
 GROUP BY s.user_id;
 ```
 
-## 90. [leetcode-620]Not Boring Movies - select
+## 91. [leetcode-620]Not Boring Movies - select
 
 ### 링크
 https://leetcode.com/problems/not-boring-movies/description/
@@ -1408,4 +1408,20 @@ SELECT
 FROM Cinema c
 WHERE c.id % 2 = 1 AND description != 'boring'
 ORDER BY rating DESC
+```
+
+## 92. [leetcode-1251]Average Selling Price - select
+
+### 링크
+https://leetcode.com/problems/average-selling-price/description/
+
+### 답
+```sql
+SELECT
+    p.product_id,
+    IFNULL(ROUND(SUM(units*price)/SUM(units),2),0) AS average_price
+FROM Prices p LEFT JOIN UnitsSold u
+                        ON p.product_id = u.product_id AND
+                           u.purchase_date BETWEEN start_date AND end_date
+group by product_id
 ```
