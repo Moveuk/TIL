@@ -1425,3 +1425,17 @@ FROM Prices p LEFT JOIN UnitsSold u
                            u.purchase_date BETWEEN start_date AND end_date
 group by product_id
 ```
+
+## 92. [leetcode-1075]Project Employees I - select
+
+### 링크
+https://leetcode.com/problems/project-employees-i/description/
+
+### 답
+```sql
+SELECT p.project_id, ROUND(AVG(e.experience_years),2) AS average_years
+FROM Project p
+         LEFT JOIN Employee e
+                   ON p.employee_id = e.employee_id
+GROUP BY p.project_id
+```
