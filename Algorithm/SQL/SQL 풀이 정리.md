@@ -1426,7 +1426,7 @@ FROM Prices p LEFT JOIN UnitsSold u
 group by product_id
 ```
 
-## 92. [leetcode-1075]Project Employees I - select
+## 93. [leetcode-1075]Project Employees I - select
 
 ### 링크
 https://leetcode.com/problems/project-employees-i/description/
@@ -1438,4 +1438,19 @@ FROM Project p
          LEFT JOIN Employee e
                    ON p.employee_id = e.employee_id
 GROUP BY p.project_id
+```
+
+## 94. [leetcode-1633]Percentage of Users Attended a Contest - select, subquery
+
+### 링크
+https://leetcode.com/problems/percentage-of-users-attended-a-contest/description/
+
+### 답
+```sql
+select
+    contest_id,
+    round(count(distinct user_id) * 100 /(select count(user_id) from Users) ,2) as percentage
+from  Register
+group by contest_id
+order by percentage desc,contest_id
 ```
