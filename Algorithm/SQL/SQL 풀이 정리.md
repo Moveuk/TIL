@@ -1462,10 +1462,29 @@ https://leetcode.com/problems/queries-quality-and-percentage/description/
 
 ### 답
 ```sql
-select
-    query_name,
-    round(avg(cast(rating as decimal) / position), 2) as quality,
-    round(sum(case when rating < 3 then 1 else 0 end) * 100 / count(*), 2) as poor_query_percentage
-from queries
-group by query_name;
+SELECT
+    QUERY_NAME,
+    ROUND(AVG(RATING/POSITION), 2) AS QUALITY,
+    ROUND(AVG(IF(RATING<3,1,0))*100, 2) AS POOR_QUERY_PERCENTAGE
+FROM QUERIES
+WHERE query_name IS NOT NULL
+GROUP BY QUERY_NAME
+```
+
+## 96. [leetcode-1193]Monthly Transactions I - select, SUBSTR
+
+### 링크
+https://leetcode.com/problems/monthly-transactions-i/description/
+
+### 답
+```sql
+SELECT 
+    SUBSTR(trans_date,1,7) as month, 
+    country, 
+    count(id) as trans_count, 
+    SUM(CASE WHEN state = 'approved' then 1 else 0 END) as approved_count, 
+    SUM(amount) as trans_total_amount, 
+    SUM(CASE WHEN state = 'approved' then amount else 0 END) as approved_total_amount
+FROM Transactions
+GROUP BY month, country
 ```
