@@ -1478,7 +1478,7 @@ https://leetcode.com/problems/monthly-transactions-i/description/
 
 ### 답
 ```sql
-SELECT 
+SELECT
     SUBSTR(trans_date,1,7) as month, 
     country, 
     count(id) as trans_count, 
@@ -1487,4 +1487,21 @@ SELECT
     SUM(CASE WHEN state = 'approved' then amount else 0 END) as approved_total_amount
 FROM Transactions
 GROUP BY month, country
+```
+
+## 97. [leetcode-1174]Immediate Food Delivery II - select, round
+
+### 링크
+https://leetcode.com/problems/immediate-food-delivery-ii/description/
+
+### 답
+```sql
+SELECT
+    round(avg(order_date = customer_pref_delivery_date)*100, 2) AS immediate_percentage
+FROM Delivery
+WHERE (customer_id, order_date) IN (
+    SELECT customer_id, min(order_date)
+    FROM Delivery
+    GROUP BY customer_id
+);
 ```
