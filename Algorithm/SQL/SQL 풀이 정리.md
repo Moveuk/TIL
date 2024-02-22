@@ -1518,3 +1518,17 @@ FROM Activity
 WHERE (player_id, DATE_SUB(event_date, INTERVAL 1 DAY))
           IN (SELECT player_id, MIN(event_date) AS first_login FROM ACTIVITY GROUP BY player_id)
 ```
+
+## 99. [leetcode-2356]Number of Unique Subjects Taught by Each Teacher - select, DISTINCT
+
+### 링크
+https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/description/
+
+### 답
+```sql
+SELECT
+    DISTINCT teacher_id,
+             COUNT(DISTINCT subject_id) AS cnt
+FROM Teacher
+GROUP BY teacher_id; 
+```
