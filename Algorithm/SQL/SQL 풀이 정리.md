@@ -1547,3 +1547,30 @@ FROM activity
 WHERE activity_date BETWEEN '2019-06-28' AND '2019-07-27'
 GROUP BY activity_date;
 ```
+
+## 101. [leetcode-1070]Product Sales Analysis III - JOIN, MIN
+
+### 링크
+https://leetcode.com/problems/product-sales-analysis-iii/description/
+
+### 답
+```sql
+SELECT
+    S.product_id,
+    MinYear.first_year,
+    S.quantity,
+    S.price
+FROM
+    Sales S
+        JOIN
+    (
+        SELECT
+            product_id,
+            MIN(year) AS first_year
+        FROM
+            Sales
+        GROUP BY
+            product_id
+    ) AS MinYear ON S.product_id = MinYear.product_id AND S.year = MinYear.first_year;
+
+```
