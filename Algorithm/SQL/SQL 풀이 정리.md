@@ -1574,3 +1574,16 @@ FROM
     ) AS MinYear ON S.product_id = MinYear.product_id AND S.year = MinYear.first_year;
 
 ```
+
+## 102. [leetcode-596]Classes More Than 5 Students - COUNT
+
+### 링크
+https://leetcode.com/problems/classes-more-than-5-students/description/
+
+### 답
+```sql
+SELECT class
+FROM Courses
+GROUP BY class
+HAVING COUNT(student) >= 5;
+```
