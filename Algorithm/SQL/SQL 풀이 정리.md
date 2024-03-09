@@ -1587,3 +1587,16 @@ FROM Courses
 GROUP BY class
 HAVING COUNT(student) >= 5;
 ```
+
+## 103. [leetcode-1729]Find Followers Count - COUNT
+
+### 링크
+https://leetcode.com/problems/find-followers-count/description/
+
+### 답
+```sql
+select user_id , count(user_id) as followers_count
+from followers
+group by user_id
+order by user_id asc , followers_count asc;
+```
