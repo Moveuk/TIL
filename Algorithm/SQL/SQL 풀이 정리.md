@@ -1600,3 +1600,19 @@ from followers
 group by user_id
 order by user_id asc , followers_count asc;
 ```
+
+## 104. [leetcode-619]Biggest Single Number - MAX
+
+### 링크
+https://leetcode.com/problems/biggest-single-number/description/
+
+### 답
+```sql
+SELECT MAX(num) AS num
+FROM (
+         SELECT num
+         FROM MyNumbers
+         GROUP BY num
+         HAVING COUNT(num) = 1
+     ) AS unique_numbers;
+```
