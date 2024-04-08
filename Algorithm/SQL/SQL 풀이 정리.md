@@ -1617,7 +1617,7 @@ FROM (
      ) AS unique_numbers;
 ```
 
-## 104. [leetcode-1045]Customers Who Bought All Products
+## 105. [leetcode-1045]Customers Who Bought All Products
 
 ### 링크
 https://leetcode.com/problems/customers-who-bought-all-products/description/
@@ -1641,4 +1641,19 @@ SELECT customer_id
 FROM Customer
 GROUP BY customer_id
 HAVING COUNT(distinct product_key) = (SELECT COUNT(product_key) FROM Product);
+```
+
+## 106. [leetcode-1731]The Number of Employees Which Report to Each Employee
+
+### 링크
+https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/description/
+
+### 답
+```sql
+select m.employee_id ,m.name,COUNT(e.employee_id ) as reports_count,ROUND(AVG(e.age*1.0),0) as average_age
+from Employees e
+         join Employees m
+              on e.reports_to =m.employee_id
+group by m.employee_id ,m.name
+ORDER BY employee_id
 ```
