@@ -1657,3 +1657,20 @@ from Employees e
 group by m.employee_id ,m.name
 ORDER BY employee_id
 ```
+
+## 107. [leetcode-1789]Primary Department for Each Employee
+
+### 링크
+https://leetcode.com/problems/primary-department-for-each-employee/description/
+
+### 답
+```sql
+select employee_id, department_id
+from Employee
+Where primary_flag = 'Y'
+UNION
+select employee_id, department_id
+from Employee
+group by employee_id
+having count(employee_id) = 1
+```
