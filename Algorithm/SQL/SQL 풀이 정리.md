@@ -1674,3 +1674,15 @@ from Employee
 group by employee_id
 having count(employee_id) = 1
 ```
+
+## 108. [leetcode-610]Triangle Judgement
+
+### 링크
+https://leetcode.com/problems/triangle-judgement/description/
+
+### 답
+```sql
+SELECT x,y,z,
+       case WHEN (x+y) > z AND (x+z) > y AND (y+z) > x THEN 'Yes' ELSE 'No' end AS triangle
+FROM Triangle 
+```
