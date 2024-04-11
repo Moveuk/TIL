@@ -1686,3 +1686,23 @@ SELECT x,y,z,
        case WHEN (x+y) > z AND (x+z) > y AND (y+z) > x THEN 'Yes' ELSE 'No' end AS triangle
 FROM Triangle 
 ```
+
+## 109. [leetcode-180]Consecutive Numbers
+
+### 링크
+https://leetcode.com/problems/consecutive-numbers/description/
+
+### 답
+```sql
+SELECT distinct
+    i1.num as ConsecutiveNums
+FROM
+    logs i1,
+    logs i2,
+    logs i3
+WHERE
+    i1.id=i2.id+1 AND
+    i2.id=i3.id+1 AND
+    i1.num=i2.num AND
+    i2.num=i3.num
+```
