@@ -1729,3 +1729,15 @@ WHERE (product_id, change_date)
        WHERE change_date <= '2019-08-16'
        GROUP BY product_id)
 ```
+
+## 111. [leetcode-1204]Last Person to Fit in the Bus
+
+### 링크
+https://leetcode.com/problems/last-person-to-fit-in-the-bus/description/
+
+### 답
+```sql
+SELECT person_name from (SELECT person_name,turn,
+                                sum(weight) over (order by turn) AS cum FROM queue) p1
+where cum<=1000 order by turn DESC limit 1;
+```
