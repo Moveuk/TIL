@@ -1755,3 +1755,17 @@ UNION
 UNION
 (SELECT "High Salary" AS category, COUNT(*) AS accounts_count FROM accounts WHERE income > 50000)
 ```
+
+## 113. [leetcode-1978]Employees Whose Manager Left the Company
+
+### 링크
+https://leetcode.com/problems/employees-whose-manager-left-the-company/description/
+
+### 답
+```sql
+SELECT DISTINCT e2.EMPLOYEE_ID 
+FROM EMPLOYEES e1,EMPLOYEES e2 
+WHERE e2.SALARY<30000 AND
+    e2.MANAGER_ID NOT IN(SELECT EMPLOYEE_ID FROM EMPLOYEES) 
+ORDER BY EMPLOYEE_ID;
+```
