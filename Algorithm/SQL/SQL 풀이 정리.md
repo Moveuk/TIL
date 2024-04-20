@@ -1763,9 +1763,26 @@ https://leetcode.com/problems/employees-whose-manager-left-the-company/descripti
 
 ### 답
 ```sql
-SELECT DISTINCT e2.EMPLOYEE_ID 
-FROM EMPLOYEES e1,EMPLOYEES e2 
+SELECT DISTINCT e2.EMPLOYEE_ID
+FROM EMPLOYEES e1,EMPLOYEES e2
 WHERE e2.SALARY<30000 AND
-    e2.MANAGER_ID NOT IN(SELECT EMPLOYEE_ID FROM EMPLOYEES) 
+    e2.MANAGER_ID NOT IN(SELECT EMPLOYEE_ID FROM EMPLOYEES)
 ORDER BY EMPLOYEE_ID;
+```
+
+## 114. [leetcode-626]Exchange Seats
+
+### 링크
+https://leetcode.com/problems/exchange-seats/description/
+
+### 답
+```sql
+select
+    case
+        when id=(select max(id) from seat) and id%2 <> 0 then id
+        when id%2 = 0 then id-1
+        when id%2 <> 0 then id+1
+        end as id, student
+from seat
+order by id
 ```
