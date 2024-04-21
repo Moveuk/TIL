@@ -1786,3 +1786,22 @@ select
 from seat
 order by id
 ```
+
+## 115. [leetcode-1341]Movie Rating
+
+### 링크
+https://leetcode.com/problems/movie-rating/description/
+
+### 답
+```sql
+(SELECT U.name as results
+ FROM Users U LEFT JOIN MovieRating R using(user_id)
+ GROUP BY U.name
+ ORDER BY COUNT(R.movie_id) DESC, U.name LIMIT 1)
+UNION ALL
+(SELECT M.title as results
+ FROM MovieRating R LEFT JOIN Movies M using(movie_id)
+ WHERE R.created_at like "2020-02-%"
+ GROUP BY M.title
+ ORDER BY AVG(R.rating) DESC, M.title LIMIT 1)
+```
