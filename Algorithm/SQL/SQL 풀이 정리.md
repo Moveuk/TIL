@@ -1805,3 +1805,13 @@ UNION ALL
  GROUP BY M.title
  ORDER BY AVG(R.rating) DESC, M.title LIMIT 1)
 ```
+
+## 127. [hackerrank]Revising the Select Query I
+
+### 링크
+https://www.hackerrank.com/challenges/revising-the-select-query/problem?isFullScreen=true
+
+### 답
+```sql
+Select * From CITY WHERE population > 100000 AND CountryCode = 'USA'
+```
