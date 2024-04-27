@@ -1825,3 +1825,13 @@ https://www.hackerrank.com/challenges/revising-the-select-query-2/problem?isFull
 ```sql
 Select NAME From CITY WHERE population > 120000 AND CountryCode = 'USA'
 ```
+
+## 129. [hackerrank]Select All
+
+### 링크
+https://www.hackerrank.com/challenges/select-all-sql/problem?isFullScreen=true
+
+### 답
+```sql
+select * from CITY
+```
