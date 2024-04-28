@@ -1835,3 +1835,13 @@ https://www.hackerrank.com/challenges/select-all-sql/problem?isFullScreen=true
 ```sql
 select * from CITY
 ```
+
+## 130. [hackerrank]Select By ID
+
+### 링크
+https://www.hackerrank.com/challenges/select-by-id/problem?isFullScreen=true
+
+### 답
+```sql
+select * from CITY where ID = 1661
+```
