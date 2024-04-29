@@ -1845,3 +1845,13 @@ https://www.hackerrank.com/challenges/select-by-id/problem?isFullScreen=true
 ```sql
 select * from CITY where ID = 1661
 ```
+
+## 131. [hackerrank]Japanese Cities' Attributes
+
+### 링크
+https://www.hackerrank.com/challenges/japanese-cities-attributes/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT * FROM CITY WHERE COUNTRYCODE ='JPN'
+```
