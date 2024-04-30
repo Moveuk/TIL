@@ -1855,3 +1855,13 @@ https://www.hackerrank.com/challenges/japanese-cities-attributes/problem?isFullS
 ```sql
 SELECT * FROM CITY WHERE COUNTRYCODE ='JPN'
 ```
+
+## 132. [hackerrank]Japanese Cities' Names
+
+### 링크
+https://www.hackerrank.com/challenges/japanese-cities-name/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT NAME FROM CITY WHERE COUNTRYCODE ='JPN'
+```
