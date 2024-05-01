@@ -1865,3 +1865,13 @@ https://www.hackerrank.com/challenges/japanese-cities-name/problem?isFullScreen=
 ```sql
 SELECT NAME FROM CITY WHERE COUNTRYCODE ='JPN'
 ```
+
+## 133. [hackerrank]Weather Observation Station 1
+
+### 링크
+https://www.hackerrank.com/challenges/weather-observation-station-1/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT CITY, STATE FROM STATION
+```
