@@ -1875,3 +1875,13 @@ https://www.hackerrank.com/challenges/weather-observation-station-1/problem?isFu
 ```sql
 SELECT CITY, STATE FROM STATION
 ```
+
+## 134. [hackerrank]Weather Observation Station 2
+
+### 링크
+https://www.hackerrank.com/challenges/weather-observation-station-2/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT ROUND(SUM(LAT_N),2), ROUND(SUM(LONG_W),2) FROM STATION
+```
