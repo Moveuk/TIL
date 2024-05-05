@@ -1889,9 +1889,19 @@ SELECT ROUND(SUM(LAT_N),2), ROUND(SUM(LONG_W),2) FROM STATION
 ## 135. [hackerrank]Weather Observation Station 3
 
 ### 링크
-https://www.hackerrank.com/challenges/weather-observation-station-2/problem?isFullScreen=true
+https://www.hackerrank.com/challenges/weather-observation-station-3/problem?isFullScreen=true
 
 ### 답
 ```sql
 SELECT DISTINCT CITY FROM STATION WHERE ID % 2 = 0
+```
+
+## 136. [hackerrank]Weather Observation Station 4
+
+### 링크
+https://www.hackerrank.com/challenges/weather-observation-station-4/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT COUNT(CITY) - COUNT(DISTINCT CITY) FROM STATION
 ```
