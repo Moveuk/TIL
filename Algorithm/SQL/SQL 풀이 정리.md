@@ -1905,3 +1905,14 @@ https://www.hackerrank.com/challenges/weather-observation-station-4/problem?isFu
 ```sql
 SELECT COUNT(CITY) - COUNT(DISTINCT CITY) FROM STATION
 ```
+
+## 137. [hackerrank]Weather Observation Station 5
+
+### 링크
+https://www.hackerrank.com/challenges/weather-observation-station-5/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT CITY, length(CITY) AS LEN FROM STATION ORDER BY LEN,CITY LIMIT 1;
+SELECT CITY, length(CITY) AS LEN FROM STATION ORDER BY LEN DESC ,CITY DESC LIMIT 1;
+```
