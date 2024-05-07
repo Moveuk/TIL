@@ -1916,3 +1916,13 @@ https://www.hackerrank.com/challenges/weather-observation-station-5/problem?isFu
 SELECT CITY, length(CITY) AS LEN FROM STATION ORDER BY LEN,CITY LIMIT 1;
 SELECT CITY, length(CITY) AS LEN FROM STATION ORDER BY LEN DESC ,CITY DESC LIMIT 1;
 ```
+
+## 138. [hackerrank]Weather Observation Station 6
+
+### 링크
+https://www.hackerrank.com/challenges/weather-observation-station-6/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT DISTINCT CITY from STATION where LOWER(LEFT(city, 1)) in ('a','e','i','o','u');
+```
