@@ -1946,3 +1946,13 @@ https://www.hackerrank.com/challenges/weather-observation-station-8/problem?isFu
 ```sql
 SELECT DISTINCT CITY from STATION where LOWER(RIGHT(city, 1)) in ('a','e','i','o','u') AND LOWER(LEFT(city, 1)) in ('a','e','i','o','u');
 ```
+
+## 141. [hackerrank]Weather Observation Station 9
+
+### 링크
+https://www.hackerrank.com/challenges/weather-observation-station-9/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT DISTINCT CITY FROM STATION WHERE NOT LEFT(CITY,1) IN ('A','E','I','O','U')
+```
