@@ -1976,3 +1976,13 @@ https://www.hackerrank.com/challenges/weather-observation-station-11/problem?isF
 ```sql
 SELECT DISTINCT CITY FROM STATION WHERE CITY NOT REGEXP '^[aeiouAEIOU]' or CITY NOT REGEXP '[aeiouAEIOU]$'
 ```
+
+## 143. [hackerrank]Weather Observation Station 12
+
+### 링크
+https://www.hackerrank.com/challenges/weather-observation-station-12/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT DISTINCT city FROM station WHERE city REGEXP '^[^aeiouAEIOU]' and city REGEXP '[^aeiouAEIOU]$';
+```
