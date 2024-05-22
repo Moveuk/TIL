@@ -1967,7 +1967,7 @@ https://www.hackerrank.com/challenges/weather-observation-station-10/problem?isF
 SELECT DISTINCT CITY FROM STATION WHERE NOT CITY REGEXP '[A, E, I, O, U, a, e, i, o, u]$'
 ```
 
-## 142. [hackerrank]Weather Observation Station 11
+## 143. [hackerrank]Weather Observation Station 11
 
 ### 링크
 https://www.hackerrank.com/challenges/weather-observation-station-11/problem?isFullScreen=true
@@ -1977,7 +1977,7 @@ https://www.hackerrank.com/challenges/weather-observation-station-11/problem?isF
 SELECT DISTINCT CITY FROM STATION WHERE CITY NOT REGEXP '^[aeiouAEIOU]' or CITY NOT REGEXP '[aeiouAEIOU]$'
 ```
 
-## 143. [hackerrank]Weather Observation Station 12
+## 144. [hackerrank]Weather Observation Station 12
 
 ### 링크
 https://www.hackerrank.com/challenges/weather-observation-station-12/problem?isFullScreen=true
@@ -1985,4 +1985,14 @@ https://www.hackerrank.com/challenges/weather-observation-station-12/problem?isF
 ### 답
 ```sql
 SELECT DISTINCT city FROM station WHERE city REGEXP '^[^aeiouAEIOU]' and city REGEXP '[^aeiouAEIOU]$';
+```
+
+## 145. [hackerrank]Higher Than 75 Marks
+
+### 링크
+https://www.hackerrank.com/challenges/more-than-75-marks?isFullScreen=true
+
+### 답
+```sql
+SELECT NAME FROM STUDENTS WHERE MARKS >75 ORDER BY SUBSTR(NAME,-3,3 ), ID ASC;
 ```
