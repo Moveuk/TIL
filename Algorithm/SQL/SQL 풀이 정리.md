@@ -1996,3 +1996,14 @@ https://www.hackerrank.com/challenges/more-than-75-marks?isFullScreen=true
 ```sql
 SELECT NAME FROM STUDENTS WHERE MARKS >75 ORDER BY SUBSTR(NAME,-3,3 ), ID ASC;
 ```
+
+## 146. [hackerrank]Employee Names
+
+### 링크
+https://www.hackerrank.com/challenges/name-of-employees/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT NAME FROM EMPLOYEE ORDER BY NAME ASC
+
+```
