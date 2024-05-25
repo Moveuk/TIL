@@ -2005,5 +2005,14 @@ https://www.hackerrank.com/challenges/name-of-employees/problem?isFullScreen=tru
 ### 답
 ```sql
 SELECT NAME FROM EMPLOYEE ORDER BY NAME ASC
+```
 
+## 147. [hackerrank]Employee Salaries
+
+### 링크
+https://www.hackerrank.com/challenges/salary-of-employees/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT NAME FROM EMPLOYEE WHERE months < 10 AND salary >= 2000 ORDER BY employee_id ASC
 ```
