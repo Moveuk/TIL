@@ -2016,3 +2016,20 @@ https://www.hackerrank.com/challenges/salary-of-employees/problem?isFullScreen=t
 ```sql
 SELECT NAME FROM EMPLOYEE WHERE months < 10 AND salary >= 2000 ORDER BY employee_id ASC
 ```
+
+## 148. [hackerrank]Type of Triangle
+
+### 링크
+https://www.hackerrank.com/challenges/what-type-of-triangle/problem?isFullScreen=true
+
+### 답
+```sql
+Select
+    Case
+        When A + B <= C or A + C <= B or B + C <= A Then 'Not A Triangle'
+        When A = B and B = C Then 'Equilateral'
+        When A = B or A = C or B = C Then 'Isosceles'
+        Else 'Scalene'
+        End as type_of_triangle
+From Triangles;
+```
