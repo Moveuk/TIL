@@ -2033,3 +2033,15 @@ Select
         End as type_of_triangle
 From Triangles;
 ```
+
+## 148. [hackerrank]The PADS
+
+### 링크
+https://www.hackerrank.com/challenges/the-pads/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT CONCAT(Name, '(', SUBSTRING(Occupation, 1, 1), ')') FROM OCCUPATIONS ORDER BY Name;
+
+SELECT CONCAT('There are a total of ', COUNT(Occupation), ' ', LOWER(Occupation),"s",'.') FROM OCCUPATIONS GROUP BY Occupation ORDER BY COUNT(Occupation), Occupation;
+```
