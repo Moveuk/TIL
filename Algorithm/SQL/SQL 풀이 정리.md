@@ -2034,7 +2034,7 @@ Select
 From Triangles;
 ```
 
-## 148. [hackerrank]The PADS
+## 149. [hackerrank]The PADS
 
 ### 링크
 https://www.hackerrank.com/challenges/the-pads/problem?isFullScreen=true
@@ -2044,4 +2044,14 @@ https://www.hackerrank.com/challenges/the-pads/problem?isFullScreen=true
 SELECT CONCAT(Name, '(', SUBSTRING(Occupation, 1, 1), ')') FROM OCCUPATIONS ORDER BY Name;
 
 SELECT CONCAT('There are a total of ', COUNT(Occupation), ' ', LOWER(Occupation),"s",'.') FROM OCCUPATIONS GROUP BY Occupation ORDER BY COUNT(Occupation), Occupation;
+```
+
+## 150. [hackerrank]Revising Aggregations - The Count Function
+
+### 링크
+https://www.hackerrank.com/challenges/revising-aggregations-the-count-function/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT COUNT(NAME) FROM CITY WHERE POPULATION > 100000;
 ```
