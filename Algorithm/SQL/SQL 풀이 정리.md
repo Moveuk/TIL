@@ -2055,3 +2055,13 @@ https://www.hackerrank.com/challenges/revising-aggregations-the-count-function/p
 ```sql
 SELECT COUNT(NAME) FROM CITY WHERE POPULATION > 100000;
 ```
+
+## 151. [hackerrank]Revising Aggregations - The Sum Function
+
+### 링크
+
+
+### 답
+```sql
+SELECT SUM(POPULATION) FROM CITY WHERE DISTRICT='California';
+```
