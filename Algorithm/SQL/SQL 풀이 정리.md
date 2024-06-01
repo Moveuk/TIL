@@ -2059,9 +2059,29 @@ SELECT COUNT(NAME) FROM CITY WHERE POPULATION > 100000;
 ## 151. [hackerrank]Revising Aggregations - The Sum Function
 
 ### 링크
-
+https://www.hackerrank.com/challenges/revising-aggregations-sum/problem?isFullScreen=true
 
 ### 답
 ```sql
 SELECT SUM(POPULATION) FROM CITY WHERE DISTRICT='California';
+```
+
+## 152. [hackerrank]Revising Aggregations - Averages
+
+### 링크
+
+
+### 답
+```sql
+
+```
+
+## 153. [hackerrank]Average Population
+
+### 링크
+https://www.hackerrank.com/challenges/average-population/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT FLOOR(AVG(POPULATION)) FROM CITY
 ```
