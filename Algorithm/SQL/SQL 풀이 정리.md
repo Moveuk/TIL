@@ -2069,11 +2069,11 @@ SELECT SUM(POPULATION) FROM CITY WHERE DISTRICT='California';
 ## 152. [hackerrank]Revising Aggregations - Averages
 
 ### 링크
-
+https://www.hackerrank.com/challenges/revising-aggregations-the-average-function/problem?isFullScreen=true
 
 ### 답
 ```sql
-
+SELECT AVG(POPULATION) FROM CITY WHERE DISTRICT = "CALIFORNIA";
 ```
 
 ## 153. [hackerrank]Average Population
