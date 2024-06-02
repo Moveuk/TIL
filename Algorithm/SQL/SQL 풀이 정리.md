@@ -2085,3 +2085,13 @@ https://www.hackerrank.com/challenges/average-population/problem?isFullScreen=tr
 ```sql
 SELECT FLOOR(AVG(POPULATION)) FROM CITY
 ```
+
+## 154. [hackerrank]Japan Population
+
+### 링크
+https://www.hackerrank.com/challenges/japan-population/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT SUM(POPULATION) FROM CITY WHERE COUNTRYCODE = 'JPN'
+```
