@@ -2095,3 +2095,13 @@ https://www.hackerrank.com/challenges/japan-population/problem?isFullScreen=true
 ```sql
 SELECT SUM(POPULATION) FROM CITY WHERE COUNTRYCODE = 'JPN'
 ```
+
+## 155. [hackerrank]Population Density Difference
+
+### 링크
+https://www.hackerrank.com/challenges/population-density-difference?isFullScreen=true
+
+### 답
+```sql
+SELECT MAX(POPULATION) - MIN(POPULATION) FROM CITY;
+```
