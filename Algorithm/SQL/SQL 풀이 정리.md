@@ -2105,3 +2105,13 @@ https://www.hackerrank.com/challenges/population-density-difference?isFullScreen
 ```sql
 SELECT MAX(POPULATION) - MIN(POPULATION) FROM CITY;
 ```
+
+## 156. [hackerrank]The Blunder
+
+### 링크
+https://www.hackerrank.com/challenges/the-blunder/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT CEIL((AVG(SALARY)) - (AVG(REPLACE(SALARY, '0', '')))) AS AVG_SALARY FROM EMPLOYEES;
+```
