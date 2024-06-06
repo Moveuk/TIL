@@ -2115,3 +2115,13 @@ https://www.hackerrank.com/challenges/the-blunder/problem?isFullScreen=true
 ```sql
 SELECT CEIL((AVG(SALARY)) - (AVG(REPLACE(SALARY, '0', '')))) AS AVG_SALARY FROM EMPLOYEES;
 ```
+
+## 157. [hackerrank]Top Earners
+
+### 링크
+https://www.hackerrank.com/challenges/earnings-of-employees?isFullScreen=true
+
+### 답
+```sql
+SELECT CONCAT(MAX(MONTHS*SALARY),' ', COUNT(*)) FROM EMPLOYEE GROUP BY MONTHS*SALARY DESC LIMIT 1;
+```
