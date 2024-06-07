@@ -2125,3 +2125,13 @@ https://www.hackerrank.com/challenges/earnings-of-employees?isFullScreen=true
 ```sql
 SELECT CONCAT(MAX(MONTHS*SALARY),' ', COUNT(*)) FROM EMPLOYEE GROUP BY MONTHS*SALARY DESC LIMIT 1;
 ```
+
+## 158. [hackerrank]Weather Observation Station 13
+
+### 링크
+https://www.hackerrank.com/challenges/weather-observation-station-13/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT ROUND((SELECT SUM(LAT_N) FROM station WHERE lat_n>38.7880 AND lat_n<137.2345),4);
+```
