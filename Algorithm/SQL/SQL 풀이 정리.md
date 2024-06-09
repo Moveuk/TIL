@@ -2135,3 +2135,13 @@ https://www.hackerrank.com/challenges/weather-observation-station-13/problem?isF
 ```sql
 SELECT ROUND((SELECT SUM(LAT_N) FROM station WHERE lat_n>38.7880 AND lat_n<137.2345),4);
 ```
+
+## 159. [hackerrank]Weather Observation Station 14
+
+### 링크
+https://www.hackerrank.com/challenges/weather-observation-station-14/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT ROUND(MAX(LAT_N),4) FROM STATION WHERE LAT_N < 137.2345;
+```
