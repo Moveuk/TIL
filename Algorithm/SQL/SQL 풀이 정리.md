@@ -2145,3 +2145,13 @@ https://www.hackerrank.com/challenges/weather-observation-station-14/problem?isF
 ```sql
 SELECT ROUND(MAX(LAT_N),4) FROM STATION WHERE LAT_N < 137.2345;
 ```
+
+## 160. [hackerrank]Weather Observation Station 15
+
+### 링크
+https://www.hackerrank.com/challenges/weather-observation-station-15/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT ROUND(LONG_W,4) FROM STATION WHERE LAT_N <137.2345 ORDER BY LAT_N DESC LIMIT 1
+```
