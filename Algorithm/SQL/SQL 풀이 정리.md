@@ -2165,3 +2165,13 @@ https://www.hackerrank.com/challenges/weather-observation-station-16/problem?isF
 ```sql
 SELECT ROUND(MIN(LAT_N),4) FROM STATION WHERE LAT_N>38.7780
 ```
+
+## 161. [hackerrank]Weather Observation Station 17
+
+### 링크
+https://www.hackerrank.com/challenges/weather-observation-station-17/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT CAST(ROUND(LONG_W,4) AS DECIMAL (10,4)) FROM STATION WHERE LAT_N=(SELECT MIN(LAT_N) FROM STATION WHERE LAT_N>38.7780);
+```
