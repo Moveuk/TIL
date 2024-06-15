@@ -2185,3 +2185,13 @@ https://www.hackerrank.com/challenges/weather-observation-station-18/problem?isF
 ```sql
 SELECT ROUND(MAX(LONG_W)- MIN(LONG_W),4)+ROUND(MAX(LAT_N)-MIN(LAT_N),4) FROM STATION
 ```
+
+## 162. [hackerrank]Weather Observation Station 19
+
+### 링크
+https://www.hackerrank.com/challenges/weather-observation-station-19/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT ROUND(SQRT(POW(MAX(LONG_W)-MIN(LONG_W),2) + POW(MAX(LAT_N)-MIN(LAT_N),2)),4) FROM STATION
+```
