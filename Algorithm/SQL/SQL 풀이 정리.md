@@ -2156,7 +2156,7 @@ https://www.hackerrank.com/challenges/weather-observation-station-15/problem?isF
 SELECT ROUND(LONG_W,4) FROM STATION WHERE LAT_N <137.2345 ORDER BY LAT_N DESC LIMIT 1
 ```
 
-## 160. [hackerrank]Weather Observation Station 16
+## 161. [hackerrank]Weather Observation Station 16
 
 ### 링크
 https://www.hackerrank.com/challenges/weather-observation-station-16/problem?isFullScreen=true
@@ -2166,7 +2166,7 @@ https://www.hackerrank.com/challenges/weather-observation-station-16/problem?isF
 SELECT ROUND(MIN(LAT_N),4) FROM STATION WHERE LAT_N>38.7780
 ```
 
-## 161. [hackerrank]Weather Observation Station 17
+## 162. [hackerrank]Weather Observation Station 17
 
 ### 링크
 https://www.hackerrank.com/challenges/weather-observation-station-17/problem?isFullScreen=true
@@ -2176,7 +2176,7 @@ https://www.hackerrank.com/challenges/weather-observation-station-17/problem?isF
 SELECT CAST(ROUND(LONG_W,4) AS DECIMAL (10,4)) FROM STATION WHERE LAT_N=(SELECT MIN(LAT_N) FROM STATION WHERE LAT_N>38.7780);
 ```
 
-## 162. [hackerrank]Weather Observation Station 18
+## 163. [hackerrank]Weather Observation Station 18
 
 ### 링크
 https://www.hackerrank.com/challenges/weather-observation-station-18/problem?isFullScreen=true
@@ -2186,7 +2186,7 @@ https://www.hackerrank.com/challenges/weather-observation-station-18/problem?isF
 SELECT ROUND(MAX(LONG_W)- MIN(LONG_W),4)+ROUND(MAX(LAT_N)-MIN(LAT_N),4) FROM STATION
 ```
 
-## 162. [hackerrank]Weather Observation Station 19
+## 164. [hackerrank]Weather Observation Station 19
 
 ### 링크
 https://www.hackerrank.com/challenges/weather-observation-station-19/problem?isFullScreen=true
@@ -2194,4 +2194,14 @@ https://www.hackerrank.com/challenges/weather-observation-station-19/problem?isF
 ### 답
 ```sql
 SELECT ROUND(SQRT(POW(MAX(LONG_W)-MIN(LONG_W),2) + POW(MAX(LAT_N)-MIN(LAT_N),2)),4) FROM STATION
+```
+
+## 165. [hackerrank]Population Census
+
+### 링크
+https://www.hackerrank.com/challenges/asian-population/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT SUM(CITY.POPULATION) FROM CITY INNER JOIN COUNTRY ON CITY.COUNTRYCODE = COUNTRY.CODE WHERE COUNTRY.CONTINENT = 'Asia'z   
 ```
