@@ -2205,3 +2205,13 @@ https://www.hackerrank.com/challenges/asian-population/problem?isFullScreen=true
 ```sql
 SELECT SUM(CITY.POPULATION) FROM CITY INNER JOIN COUNTRY ON CITY.COUNTRYCODE = COUNTRY.CODE WHERE COUNTRY.CONTINENT = 'Asia'z   
 ```
+
+## 166. [hackerrank]African Cities
+
+### 링크
+https://www.hackerrank.com/challenges/african-cities/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT CITY.NAME FROM CITY JOIN COUNTRY ON CITY.COUNTRYCODE = COUNTRY.CODE WHERE CONTINENT = 'Africa';
+```
