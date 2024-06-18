@@ -2215,3 +2215,13 @@ https://www.hackerrank.com/challenges/african-cities/problem?isFullScreen=true
 ```sql
 SELECT CITY.NAME FROM CITY JOIN COUNTRY ON CITY.COUNTRYCODE = COUNTRY.CODE WHERE CONTINENT = 'Africa';
 ```
+
+## 167. [hackerrank]Average Population of Each Continent
+
+### 링크
+https://www.hackerrank.com/challenges/average-population-of-each-continent/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT COUNTRY.CONTINENT , FLOOR(AVG(CITY.POPULATION)) FROM COUNTRY, CITY WHERE COUNTRY.CODE = CITY.COUNTRYCODE GROUP BY COUNTRY.CONTINENT;
+```
