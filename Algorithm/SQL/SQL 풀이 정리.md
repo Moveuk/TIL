@@ -1806,6 +1806,41 @@ UNION ALL
  ORDER BY AVG(R.rating) DESC, M.title LIMIT 1)
 ```
 
+## 115. [leetcode-1321]Restaurant Growth
+
+### 링크
+https://leetcode.com/problems/restaurant-growth/description/
+
+### 답
+```sql
+select 
+    t1.visited_on as visited_on, 
+    sum(t2.day_sum) as amount,
+    round(avg(t2.day_sum), 2) as average_amount
+from
+  ( select 
+        visited_on, 
+        sum(amount) as day_sum 
+    from 
+        Customer 
+    group by 
+        visited_on ) t1,
+
+   (select 
+        visited_on, 
+        sum(amount) as day_sum 
+    from 
+        Customer 
+    group by 
+        visited_on ) t2
+where 
+    DATEDIFF(t1.visited_on, t2.visited_on) between 0 and 6
+group by
+    t1.visited_on
+having 
+    count(t2.visited_on) = 7;
+```
+
 ## 127. [hackerrank]Revising the Select Query I
 
 ### 링크
@@ -2234,11 +2269,11 @@ https://www.hackerrank.com/challenges/binary-search-tree-1/problem?isFullScreen=
 ### 답
 ```sql
 SELECT
-CASE
-WHEN P IS NULL THEN CONCAT(N, " Root")
-WHEN N IN (SELECT P FROM BST) THEN CONCAT(N, " Inner")
-ELSE CONCAT(N, " Leaf")
-END
+    CASE
+        WHEN P IS NULL THEN CONCAT(N, " Root")
+        WHEN N IN (SELECT P FROM BST) THEN CONCAT(N, " Inner")
+        ELSE CONCAT(N, " Leaf")
+        END
 FROM BST
 ORDER BY N
 ```
