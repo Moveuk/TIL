@@ -1806,39 +1806,59 @@ UNION ALL
  ORDER BY AVG(R.rating) DESC, M.title LIMIT 1)
 ```
 
-## 115. [leetcode-1321]Restaurant Growth
+## 116. [leetcode-1321]Restaurant Growth
 
 ### 링크
 https://leetcode.com/problems/restaurant-growth/description/
 
 ### 답
 ```sql
-select 
-    t1.visited_on as visited_on, 
+select
+    t1.visited_on as visited_on,
     sum(t2.day_sum) as amount,
     round(avg(t2.day_sum), 2) as average_amount
 from
-  ( select 
-        visited_on, 
-        sum(amount) as day_sum 
-    from 
-        Customer 
-    group by 
-        visited_on ) t1,
+    ( select
+          visited_on,
+          sum(amount) as day_sum
+      from
+          Customer
+      group by
+          visited_on ) t1,
 
-   (select 
-        visited_on, 
-        sum(amount) as day_sum 
-    from 
-        Customer 
-    group by 
-        visited_on ) t2
-where 
+    (select
+         visited_on,
+         sum(amount) as day_sum
+     from
+         Customer
+     group by
+         visited_on ) t2
+where
     DATEDIFF(t1.visited_on, t2.visited_on) between 0 and 6
 group by
     t1.visited_on
-having 
+having
     count(t2.visited_on) = 7;
+```
+
+## 117. [leetcode-602]Friend Requests II: Who Has the Most Friends
+
+### 링크
+https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/description/
+
+### 답
+```sql
+with new as (
+    (select accepter_id as id, count(*) as num from RequestAccepted
+     group by 1)
+    union all
+    (select requester_id as id, count(*) as num from RequestAccepted
+     group by 1)
+)
+
+select id, sum(num) as num from new
+group by id
+order by 2 desc limit 1
 ```
 
 ## 127. [hackerrank]Revising the Select Query I
