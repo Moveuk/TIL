@@ -2334,3 +2334,18 @@ FROM Employee
 GROUP BY Employee.company_code, Company.founder
 ORDER BY Employee.company_code;
 ```
+
+## 170. [hackerrank]Weather Observation Station 20
+
+### 링크
+https://www.hackerrank.com/challenges/weather-observation-station-20/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT ROUND(lat_n, 4)
+FROM (
+         SELECT LAT_N, RANK() OVER(ORDER BY lat_n ASC) AS ranked
+         FROM station
+     ) AS station_temp
+WHERE ranked = (SELECT ROUND(COUNT(*) / 2) FROM station);
+```
