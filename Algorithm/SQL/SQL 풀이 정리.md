@@ -1876,12 +1876,36 @@ WHERE tiv_2015 IN (
     GROUP BY tiv_2015
     HAVING COUNT(*) > 1
 )
-AND (lat, lon) IN (
+  AND (lat, lon) IN (
     SELECT lat, lon
     FROM Insurance
     GROUP BY lat, lon
     HAVING COUNT(*) = 1
 )
+```
+
+## 119. [leetcode-185]Department Top Three Salaries
+
+### 링크
+https://leetcode.com/problems/department-top-three-salaries/
+
+### 답
+```sql
+SELECT
+    d.name AS Department,
+    e.name AS Employee,
+    e.salary AS Salary
+FROM
+    Employee e
+    JOIN Department d ON e.departmentId = d.id
+WHERE
+    (
+        SELECT COUNT(DISTINCT salary)
+        FROM Employee e2
+        WHERE e2.departmentId = e.departmentId AND e2.salary >= e.salary
+    ) <= 3
+ORDER BY
+    Department, Salary DESC;
 ```
 
 ## 127. [hackerrank]Revising the Select Query I
@@ -2359,16 +2383,16 @@ https://www.hackerrank.com/challenges/the-report/problem?isFullScreen=true
 ```sql
 SELECT sub.name, sub.grade, sub.marks
 FROM (
-    SELECT 
-            CASE WHEN grade>=8 THEN name  
-            WHEN grade <7 AND grade >1 THEN name= NULL
-           END AS name, 
-    grade, 
-    marks,
-    min_mark,
-    max_mark
-    FROM students, grades
-) AS sub
+         SELECT
+             CASE WHEN grade>=8 THEN name
+                  WHEN grade <7 AND grade >1 THEN name= NULL
+                 END AS name,
+             grade,
+             marks,
+             min_mark,
+             max_mark
+         FROM students, grades
+     ) AS sub
 WHERE sub.marks between sub.min_mark AND  sub.max_mark
 ORDER BY sub.grade DESC,  sub.name ASC, sub.marks ASC;
 ```
