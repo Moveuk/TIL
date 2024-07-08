@@ -14,5 +14,37 @@ public class App {
         System.out.print("사칙연산 기호를 입력하세요: "); // +, -, *, /
         char operator = sc.next().charAt(0);
 //        char operator = sc.nextLine().charAt(0);  // nextLine()은 개행문자(\n)을 포함하여 가져오기 때문에 charAt 메소드에서 StringIndexOutOfBoundsException이 터짐
+
+        int result = 0;
+        boolean errorFlag = false;
+        String message = "에러 메세지";
+
+        switch (operator) {
+            case '+':
+                result = int1 + int2;
+                break;
+            case '-':
+                result = int1 - int2;
+                break;
+            case '*':
+                result = int1 * int2;
+                break;
+            case '/':
+                if (int2 == 0) {
+                    message = "나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.";
+                    errorFlag = true;
+                    break;
+                }
+                result = int1 / int2;
+                break;
+            default:
+                break;
+        }
+
+        if (errorFlag) {
+            System.out.println(message);
+        } else {
+            System.out.println("결과: " + result);
+        }
     }
 }
