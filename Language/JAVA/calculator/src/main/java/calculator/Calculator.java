@@ -29,4 +29,8 @@ public class Calculator {
     public void setResults(Deque<Integer> results) {
         this.results = results;
     }
+
+    public void removeResult() {
+        this.results.pop();
+    }
 }
