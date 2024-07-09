@@ -4,7 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class Calculator {
-    Deque<Integer> results = new ArrayDeque<>();
+    private Deque<Integer> results = new ArrayDeque<>();
 
     public Integer calculate(int num1, int num2, char operator) throws IllegalArgumentException {
         int result = switch (operator) {
@@ -20,5 +20,13 @@ public class Calculator {
 
         results.addLast(result);
         return result;
+    }
+
+    public Deque<Integer> getResults() {
+        return results;
+    }
+
+    public void setResults(Deque<Integer> results) {
+        this.results = results;
     }
 }

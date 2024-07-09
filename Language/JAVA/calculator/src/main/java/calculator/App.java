@@ -27,13 +27,13 @@ public class App {
 
             System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
             if (sc.next().equals("remove")) {
-                calculator.results.pop();
+                calculator.getResults().pop();
             }
 
             System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
             if (sc.next().equals("inquiry")) {
                 StringJoiner stringJoiner = new StringJoiner(", ", "[ ", " ]");
-                for (int i : calculator.results) {
+                for (int i : calculator.getResults()) {
                     stringJoiner.add(Integer.toString(i));
                 }
                 System.out.println(stringJoiner);
