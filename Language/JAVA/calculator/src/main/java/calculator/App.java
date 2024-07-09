@@ -48,7 +48,14 @@ public class App {
                 System.out.println(message);
             } else {
                 System.out.println("결과: " + result);
-                resultArray[lastElementIndex++] = result;
+
+                if (lastElementIndex >= 10) {
+                    System.arraycopy(resultArray, 1, resultArray, 0,
+                            Math.min(resultArray.length - 1, 10 - 1));
+                    resultArray[resultArray.length - 1] = result;
+                } else {
+                    resultArray[lastElementIndex++] = result;
+                }
             }
 
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
