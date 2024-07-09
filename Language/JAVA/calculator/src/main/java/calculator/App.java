@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+        Integer[] resultArray = new Integer[10];
+        int lastElementIndex = 0;
         Scanner sc = new Scanner(System.in);
 
         do {
@@ -46,6 +48,7 @@ public class App {
                 System.out.println(message);
             } else {
                 System.out.println("결과: " + result);
+                resultArray[lastElementIndex++] = result;
             }
 
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
