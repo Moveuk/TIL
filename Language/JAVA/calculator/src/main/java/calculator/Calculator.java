@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.StringJoiner;
 
 public class Calculator {
     private Deque<Integer> results = new ArrayDeque<>();
@@ -32,5 +33,13 @@ public class Calculator {
 
     public void removeResult() {
         this.results.pop();
+    }
+
+    public void inquiryResults() {
+        StringJoiner stringJoiner = new StringJoiner(", ", "[ ", " ]");
+        for (int i : results) {
+            stringJoiner.add(Integer.toString(i));
+        }
+        System.out.println(stringJoiner);
     }
 }

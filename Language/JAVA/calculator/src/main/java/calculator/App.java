@@ -1,7 +1,6 @@
 package calculator;
 
 import java.util.Scanner;
-import java.util.StringJoiner;
 
 public class App {
     public static void main(String[] args) {
@@ -32,11 +31,7 @@ public class App {
 
             System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
             if (sc.next().equals("inquiry")) {
-                StringJoiner stringJoiner = new StringJoiner(", ", "[ ", " ]");
-                for (int i : calculator.getResults()) {
-                    stringJoiner.add(Integer.toString(i));
-                }
-                System.out.println(stringJoiner);
+                calculator.inquiryResults();
             }
 
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
