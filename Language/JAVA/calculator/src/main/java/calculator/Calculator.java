@@ -1,11 +1,14 @@
 package calculator;
 
-import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.StringJoiner;
 
 public class Calculator {
-    private Deque<Integer> results = new ArrayDeque<>();
+    private Deque<Integer> results;
+
+    public Calculator(Deque<Integer> results) {
+        this.results = results;
+    }
 
     public Integer calculate(int num1, int num2, char operator) throws IllegalArgumentException {
         int result = switch (operator) {
