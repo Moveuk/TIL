@@ -1,11 +1,12 @@
 package calculator;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        Integer[] resultArray = new Integer[10];
-        int lastElementIndex = 0;
+        Deque<Integer> resultsMemory = new ArrayDeque<>();
         Scanner sc = new Scanner(System.in);
 
         do {
@@ -49,12 +50,12 @@ public class App {
             } else {
                 System.out.println("결과: " + result);
 
-                if (lastElementIndex >= 10) {
-                    System.arraycopy(resultArray, 1, resultArray, 0,
-                            Math.min(resultArray.length - 1, 10 - 1));
-                    resultArray[resultArray.length - 1] = result;
-                } else {
-                    resultArray[lastElementIndex++] = result;
+                resultsMemory.addLast(result);
+
+                System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
+
+                if (sc.next().equals("remove")) {
+                    resultsMemory.pop();
                 }
             }
 
