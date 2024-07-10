@@ -1,69 +1,63 @@
 package calculator;
 
 import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.Scanner;
-import java.util.StringJoiner;
 
 public class App {
     public static void main(String[] args) {
-        Deque<Integer> resultsMemory = new ArrayDeque<>();
+        ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator(new ArrayDeque<>());
+        CircleCalculator circleCalculator = new CircleCalculator(new ArrayDeque<>());
+
         Scanner sc = new Scanner(System.in);
 
         do {
-            System.out.print("첫 번째 숫자를 입력하세요: ");
-            Integer int1 = sc.nextInt();
-            System.out.print("두 번째 숫자를 입력하세요: ");
-            Integer int2 = sc.nextInt();
+            System.out.print("사칙연산을 진행한다면 1을, 원의 너비를 구한다면 2를 입력해주세요: ");
+            int option = sc.nextInt();
 
-            System.out.print("사칙연산 기호를 입력하세요: "); // +, -, *, /
-            char operator = sc.next().charAt(0);
-//        char operator = sc.nextLine().charAt(0);  // nextLine()은 개행문자(\n)을 포함하여 가져오기 때문에 charAt 메소드에서 StringIndexOutOfBoundsException이 터짐
+            switch (option) {
+                case 1 -> {
+                    System.out.print("첫 번째 숫자를 입력하세요: ");
+                    int num1 = sc.nextInt();
+                    System.out.print("두 번째 숫자를 입력하세요: ");
+                    int num2 = sc.nextInt();
 
-            int result = 0;
-            boolean errorFlag = false;
-            String message = "에러 메세지";
+                    System.out.print("사칙연산 기호를 입력하세요: "); // +, -, *, /
+                    char operator = sc.next().charAt(0);
 
-            switch (operator) {
-                case '+':
-                    result = int1 + int2;
-                    break;
-                case '-':
-                    result = int1 - int2;
-                    break;
-                case '*':
-                    result = int1 * int2;
-                    break;
-                case '/':
-                    if (int2 == 0) {
-                        message = "나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.";
-                        errorFlag = true;
-                        break;
+                    try {
+                        double result = arithmeticCalculator.calculate(num1, num2, operator);
+                        System.out.println("결과: " + result);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                        break; // 연산이 실패하였으므로 연산 로직을 건너뜀.
                     }
-                    result = int1 / int2;
-                    break;
-                default:
-                    break;
-            }
 
-            if (errorFlag) {
-                System.out.println(message);
-            } else {
-                System.out.println("결과: " + result);
-                resultsMemory.addLast(result);
+                    System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
+                    if (sc.next().equals("remove")) {
+                        arithmeticCalculator.removeResult();
+                    }
 
-                System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
-                if (sc.next().equals("remove")) {
-                    resultsMemory.pop();
+                    System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
+                    if (sc.next().equals("inquiry")) {
+                        arithmeticCalculator.inquiryResults();
+                    }
                 }
+                case 2 -> {
+                    System.out.print("반지름 숫자를 입력하세요: ");
+                    int radius = sc.nextInt();
 
-                System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
-                if (sc.next().equals("inquiry")) {
-                    StringJoiner stringJoiner = new StringJoiner(", ", "[ ", " ]");
-                    for (int i : resultsMemory) {
-                        stringJoiner.add(Integer.toString(i));
+                    double result = circleCalculator.calculate(radius);
+                    System.out.println("결과: " + result);
+
+                    System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
+                    if (sc.next().equals("remove")) {
+                        circleCalculator.removeResult();
                     }
-                    System.out.println(stringJoiner);
+
+                    System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
+                    if (sc.next().equals("inquiry")) {
+                        circleCalculator.inquiryResults();
+                    }
                 }
             }
 
