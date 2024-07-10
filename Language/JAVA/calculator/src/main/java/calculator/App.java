@@ -29,6 +29,7 @@ public class App {
                         System.out.println("결과: " + result);
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
+                        break; // 연산이 실패하였으므로 연산 로직을 건너뜀.
                     }
 
                     System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
