@@ -41,6 +41,13 @@ public class App {
                     if (sc.next().equals("inquiry")) {
                         arithmeticCalculator.inquiryResults();
                     }
+
+                    System.out.println("입력받을 값보다 큰 결과 값들을 조회하시겠습니까? (filter 입력 시 조회)");
+                    if (sc.next().equals("filter")) {
+                        System.out.print("필터링할 숫자를 입력하세요: ");
+                        double num = sc.nextDouble();
+                        arithmeticCalculator.printResultsGreaterThan(num);
+                    }
                 }
                 case 2 -> {
                     System.out.print("반지름 숫자를 입력하세요: ");

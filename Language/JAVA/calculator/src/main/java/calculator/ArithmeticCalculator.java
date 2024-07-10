@@ -38,4 +38,12 @@ public class ArithmeticCalculator<T extends Number> extends Calculator {
         }
         System.out.println("기본 연산 결과 : " + stringJoiner);
     }
+
+    public void printResultsGreaterThan(double num) {
+        StringJoiner stringJoiner = new StringJoiner(", ", "[ ", " ]");
+        super.getResults().stream()
+                .filter(d -> d > num)
+                .forEach(d -> stringJoiner.add(String.valueOf(d)));
+        System.out.println(num + "보다 큰 결과 값들 : " + stringJoiner);
+    }
 }
