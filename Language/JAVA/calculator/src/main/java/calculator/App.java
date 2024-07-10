@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator(new ArrayDeque<>());
+        ArithmeticCalculator<Double> arithmeticCalculator = new ArithmeticCalculator<>(new ArrayDeque<>());
         CircleCalculator circleCalculator = new CircleCalculator(new ArrayDeque<>());
 
         Scanner sc = new Scanner(System.in);
@@ -17,9 +17,9 @@ public class App {
             switch (option) {
                 case 1 -> {
                     System.out.print("첫 번째 숫자를 입력하세요: ");
-                    int num1 = sc.nextInt();
+                    double num1 = sc.nextDouble();
                     System.out.print("두 번째 숫자를 입력하세요: ");
-                    int num2 = sc.nextInt();
+                    double num2 = sc.nextDouble();
 
                     System.out.print("사칙연산 기호를 입력하세요: "); // +, -, *, /
                     char operator = sc.next().charAt(0);
