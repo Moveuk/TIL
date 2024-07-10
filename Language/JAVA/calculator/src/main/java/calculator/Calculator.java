@@ -3,8 +3,7 @@ package calculator;
 import java.util.Deque;
 
 public abstract class Calculator {
-    private Deque<Double> results;
-
+    private final Deque<Double> results;
 
     public Calculator(Deque<Double> results) {
         this.results = results;
@@ -18,9 +17,5 @@ public abstract class Calculator {
 
     public Deque<Double> getResults() {
         return results;
-    }
-
-    public void setResults(Deque<Double> results) {
-        this.results = results;
     }
 }
