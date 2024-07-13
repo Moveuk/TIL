@@ -1897,7 +1897,7 @@ SELECT
     e.salary AS Salary
 FROM
     Employee e
-    JOIN Department d ON e.departmentId = d.id
+        JOIN Department d ON e.departmentId = d.id
 WHERE
     (
         SELECT COUNT(DISTINCT salary)
@@ -1906,6 +1906,17 @@ WHERE
     ) <= 3
 ORDER BY
     Department, Salary DESC;
+```
+
+## 120. [leetcode-1667]Fix Names in a Table
+
+### 링크
+https://leetcode.com/problems/fix-names-in-a-table/description/
+
+### 답
+```sql
+SELECT user_id,CONCAT(UPPER(SUBSTR(name,1,1)),LOWER(SUBSTR(name,2,length(name)))) AS name
+FROM Users ORDER BY user_id;
 ```
 
 ## 127. [hackerrank]Revising the Select Query I
