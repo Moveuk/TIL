@@ -1919,6 +1919,18 @@ SELECT user_id,CONCAT(UPPER(SUBSTR(name,1,1)),LOWER(SUBSTR(name,2,length(name)))
 FROM Users ORDER BY user_id;
 ```
 
+## 121. [leetcode-1527]Patients With a Condition
+
+### 링크
+https://leetcode.com/problems/patients-with-a-condition/description/
+
+### 답
+```sql
+select patient_id, patient_name, conditions 
+from Patients 
+where conditions like 'DIAB1%' or conditions like '% DIAB1%';
+```
+
 ## 127. [hackerrank]Revising the Select Query I
 
 ### 링크
