@@ -1931,6 +1931,17 @@ from Patients
 where conditions like 'DIAB1%' or conditions like '% DIAB1%';
 ```
 
+## 122. [leetcode-196] Delete Duplicate Emails
+
+### 링크
+https://leetcode.com/problems/delete-duplicate-emails/description/
+
+### 답
+```sql
+delete p1 from person p1,person p2 
+where p1.email=p2.email and p1.id>p2.id;
+```
+
 ## 127. [hackerrank]Revising the Select Query I
 
 ### 링크
