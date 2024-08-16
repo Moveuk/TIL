@@ -1942,6 +1942,18 @@ delete p1 from person p1,person p2
 where p1.email=p2.email and p1.id>p2.id;
 ```
 
+## 123. [leetcode-176] Second Highest Salary
+
+### 링크
+https://leetcode.com/problems/second-highest-salary/description/
+
+### 답
+```sql
+select max(salary) as SecondHighestSalary 
+from Employee 
+where salary < (select max(salary) from employee);
+```
+
 ## 127. [hackerrank]Revising the Select Query I
 
 ### 링크
