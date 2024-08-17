@@ -1970,6 +1970,24 @@ group by sell_date
 order by sell_date ASC;
 ```
 
+## 125. [leetcode-1327] List the Products Ordered in a Period
+
+### 링크
+https://leetcode.com/problems/second-highest-salary/description/
+
+### 답
+```sql
+select 
+    p.product_name, 
+    sum(o.unit) as unit 
+from Products p 
+    join Orders o on p.product_id=o.product_id 
+where o.order_date>='2020-02-01' 
+  and o.order_date<='2020-02-29'
+group by o.product_id 
+having unit>=100 
+```
+
 ## 127. [hackerrank]Revising the Select Query I
 
 ### 링크
