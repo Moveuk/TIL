@@ -1954,6 +1954,22 @@ from Employee
 where salary < (select max(salary) from employee);
 ```
 
+## 124. [leetcode-1484] Group Sold Products By The Date
+
+### 링크
+https://leetcode.com/problems/second-highest-salary/description/
+
+### 답
+```sql
+select
+    sell_date,
+    count(DISTINCT product) as num_sold,
+    GROUP_CONCAT(DISTINCT product order by product ASC separator ',') as products
+from Activities
+group by sell_date
+order by sell_date ASC;
+```
+
 ## 127. [hackerrank]Revising the Select Query I
 
 ### 링크
