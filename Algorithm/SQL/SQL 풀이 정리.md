@@ -1988,6 +1988,18 @@ group by o.product_id
 having unit>=100 
 ```
 
+## 126. [leetcode-1517] Find Users With Valid E-Mails
+
+### 링크
+https://leetcode.com/problems/find-users-with-valid-e-mails/description/
+
+### 답
+```sql
+SELECT *
+FROM Users
+WHERE mail REGEXP '^[A-Za-z][A-Za-z0-9_\.\-]*@leetcode(\\?com)?\\.com$';
+```
+
 ## 127. [hackerrank]Revising the Select Query I
 
 ### 링크
