@@ -2506,3 +2506,29 @@ GROUP BY h.hacker_id, h.name
 HAVING COUNT(*) > 1
 ORDER BY COUNT(*) DESC, h.hacker_id ASC;
 ```
+
+## 173. [hackerrank] Ollivander's Inventory
+
+### 링크
+https://www.hackerrank.com/challenges/harry-potter-and-wands/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT w.id,
+       wp.age,
+       w.coins_needed,
+       w.power
+FROM Wands w
+         JOIN Wands_Property wp
+              ON w.code = wp.code
+WHERE wp.is_evil = 0
+  AND coins_needed =
+      (SELECT MIN(coins_needed)
+       FROM Wands as w1
+                JOIN Wands_Property as wp1
+                     ON w1.code = wp1.code
+       WHERE w1.power = w.power
+         AND wp1.age = wp.age)
+ORDER BY w.power DESC,
+         wp.age DESC;
+```
