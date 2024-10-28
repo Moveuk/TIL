@@ -2532,3 +2532,32 @@ WHERE wp.is_evil = 0
 ORDER BY w.power DESC,
          wp.age DESC;
 ```
+
+## 174. [hackerrank] Challenges
+
+### 링크
+https://www.hackerrank.com/challenges/challenges/problem?isFullScreen=true
+
+### 답
+```sql
+With a as (
+    SELECT
+        c.hacker_id as hacker_id
+         , name
+         , count(challenge_id) as num_of_challenges
+    FROM Hackers h
+             JOIN Challenges c on h.hacker_id = c.hacker_id
+    GROUP BY c.hacker_id, name
+),
+     b as (
+         SELECT num_of_challenges FROM a
+         GROUP BY num_of_challenges HAVING COUNT(hacker_id) =1
+     )
+SELECT hacker_id, name, num_of_challenges FROM a
+WHERE
+    num_of_challenges = (SELECT max(num_of_challenges) FROM a )
+   OR
+    num_of_challenges IN (SELECT num_of_challenges from b)
+
+ORDER BY num_of_challenges desc, hacker_id
+```
