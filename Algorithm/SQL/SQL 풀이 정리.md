@@ -2561,3 +2561,18 @@ WHERE
 
 ORDER BY num_of_challenges desc, hacker_id
 ```
+
+## 175. [hackerrank] Contest Leaderboard
+
+### 링크
+https://www.hackerrank.com/challenges/contest-leaderboard/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT c.hacker_id, h.name, SUM(c.score) AS total_score
+FROM (SELECT hacker_id, MAX(score) AS score FROM submissions GROUP BY hacker_id, challenge_id) AS c
+         JOIN hackers h ON h.hacker_id = c.hacker_id
+GROUP BY c.hacker_id, h.name
+HAVING total_score > 0
+ORDER BY total_score DESC, c.hacker_id
+```
