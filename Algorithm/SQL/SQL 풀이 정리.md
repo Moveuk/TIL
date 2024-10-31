@@ -2576,3 +2576,23 @@ GROUP BY c.hacker_id, h.name
 HAVING total_score > 0
 ORDER BY total_score DESC, c.hacker_id
 ```
+
+## 176. [hackerrank] SQL Project Planning
+
+### 링크
+https://www.hackerrank.com/challenges/sql-projects/problem?isFullScreen=true
+
+### 답
+```sql
+with
+    possible_projects_starts as (
+        select p1.start_date, p2.end_date, datediff(p2.end_date, p1.start_date) project_length from projects p1
+                                                                                                        inner join projects p2 on datediff(p2.end_date, p1.start_date) = (select count(1) from projects where start_date >= p1.start_date and end_date <= p2.end_date)
+        where not exists(select end_date from projects where end_date = p1.start_date)
+    ),
+    projects_starts_and_lengths as (
+        select start_date, max(project_length) project_length from possible_projects_starts group by start_date order by start_date
+    )
+select start_date, date_add(start_date, interval project_length day) from projects_starts_and_lengths
+order by project_length, start_date;
+```
