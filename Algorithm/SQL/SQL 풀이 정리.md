@@ -2596,3 +2596,28 @@ with
 select start_date, date_add(start_date, interval project_length day) from projects_starts_and_lengths
 order by project_length, start_date;
 ```
+
+## 177. [hackerrank] Placements
+
+### 링크
+https://www.hackerrank.com/challenges/placements/problem?isFullScreen=true
+
+### 답
+```sql
+WITH cte AS (
+    SELECT
+        s.id AS student_id,
+        s.name AS student_name,
+        f.friend_id AS best_friend_id,
+        p.salary AS student_salary,
+        ps.salary AS best_friend_salary
+    FROM Students s
+             JOIN Friends f ON s.id = f.id
+             JOIN Packages p ON s.id = p.id
+             JOIN Packages ps ON f.friend_id = ps.id
+)
+SELECT student_name
+FROM cte
+WHERE student_salary < best_friend_salary
+ORDER BY best_friend_salary;
+```
