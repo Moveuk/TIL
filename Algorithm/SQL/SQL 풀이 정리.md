@@ -2621,3 +2621,17 @@ FROM cte
 WHERE student_salary < best_friend_salary
 ORDER BY best_friend_salary;
 ```
+
+## 178. [hackerrank] Symmetric Pairs
+
+### 링크
+https://www.hackerrank.com/challenges/symmetric-pairs/problem?isFullScreen=true
+
+### 답
+```sql
+select distinct f.x, f.y
+from functions f
+where f.x < f.y and exists(select x, y from functions where f.x = y and f.y = x)
+   or f.x = f.y and (select count(x) from functions where x = f.x and x = y) > 1
+order by f.x;
+```
