@@ -2635,3 +2635,46 @@ where f.x < f.y and exists(select x, y from functions where f.x = y and f.y = x)
    or f.x = f.y and (select count(x) from functions where x = f.x and x = y) > 1
 order by f.x;
 ```
+
+## 179. [hackerrank] Interviews
+
+### 링크
+https://www.hackerrank.com/challenges/interviews/problem?isFullScreen=true
+
+### 답
+```sql
+SELECT
+    con.contest_id,
+    con.hacker_id,
+    con.name,
+    SUM(s.total_submissions) total_submissions,
+    SUM(s.total_accepted_submissions) total_accepted_submissions,
+    SUM(vs.total_views) total_views,
+    SUM(vs.total_unique_views) total_unique_views
+FROM contests con
+    LEFT JOIN colleges col
+        ON con.contest_id = col.contest_id
+    LEFT JOIN challenges ch
+        ON ch.college_id = col.college_id
+    LEFT JOIN (
+        SELECT
+            challenge_id,
+            SUM(total_submissions) total_submissions,
+            SUM(total_accepted_submissions) total_accepted_submissions
+        FROM Submission_Stats
+        GROUP BY challenge_id
+    ) s
+        ON s.challenge_id = ch.challenge_id
+    LEFT JOIN (
+        SELECT
+            challenge_id,
+            SUM(total_views) total_views,
+            SUM(total_unique_views) total_unique_views
+        FROM view_stats
+        GROUP BY challenge_id
+    ) vs
+        ON vs.challenge_id = ch.challenge_id
+GROUP BY con.contest_id, con.hacker_id, con.name
+HAVING SUM(vs.total_views) + SUM(s.total_submissions) > 0
+ORDER BY con.contest_id;
+```
