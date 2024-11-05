@@ -2678,3 +2678,16 @@ GROUP BY con.contest_id, con.hacker_id, con.name
 HAVING SUM(vs.total_views) + SUM(s.total_submissions) > 0
 ORDER BY con.contest_id;
 ```
+
+## 180. [leetcode-175] Combine Two Tables
+
+### 링크
+https://leetcode.com/problems/combine-two-tables/description/
+
+### 답
+```sql
+SELECT P.firstName, P.lastName, A.city, A.state
+FROM Person P
+    LEFT JOIN Address A
+        on P.personId = A.personId
+```
