@@ -2691,3 +2691,16 @@ FROM Person P
     LEFT JOIN Address A
         on P.personId = A.personId
 ```
+
+## 181. [leetcode-178] Rank Scores
+
+### 링크
+https://leetcode.com/problems/rank-scores/description/
+
+### 답
+```sql
+SELECT
+    score,
+    DENSE_RANK() OVER (ORDER BY score DESC) AS 'rank'
+FROM Scores;
+```
