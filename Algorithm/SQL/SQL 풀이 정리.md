@@ -2705,7 +2705,7 @@ SELECT
 FROM Scores;
 ```
 
-## 182. [leetcode-18] Employees Earning More Than Their Managers
+## 182. [leetcode-181] Employees Earning More Than Their Managers
 
 ### 링크
 https://leetcode.com/problems/employees-earning-more-than-their-managers/description/
@@ -2717,4 +2717,17 @@ FROM employee e1
          INNER JOIN employee e2 ON e1.id = e2.managerID
 WHERE
     e1.salary < e2.salary
+```
+
+## 183. [leetcode-182] Duplicate Emails
+
+### 링크
+https://leetcode.com/problems/duplicate-emails/description/
+
+### 답
+```sql
+SELECT email as Email
+FROM Person
+GROUP BY email
+HAVING count(email) > 1;
 ```
