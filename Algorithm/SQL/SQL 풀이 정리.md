@@ -2731,3 +2731,18 @@ FROM Person
 GROUP BY email
 HAVING count(email) > 1;
 ```
+
+## 184. [leetcode-183] Customers Who Never Order
+
+### 링크
+https://leetcode.com/problems/customers-who-never-order/description/
+
+### 답
+```sql
+SELECT
+    name AS "Customers"
+FROM customers c
+         LEFT JOIN orders o
+                   ON c.id = o.customerId
+WHERE o.customerId IS NULL
+```
