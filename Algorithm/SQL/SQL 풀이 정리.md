@@ -2746,3 +2746,33 @@ FROM customers c
                    ON c.id = o.customerId
 WHERE o.customerId IS NULL
 ```
+
+## 184. [leetcode-184] Department Highest Salary
+
+### 링크
+https://leetcode.com/problems/department-highest-salary/description/
+
+### 답
+```sql
+WITH RankedSalaries AS (
+    SELECT
+        e.id,
+        e.name,
+        e.salary,
+        e.departmentId,
+        d.name AS departmentName,
+        RANK() OVER (PARTITION BY e.departmentId ORDER BY e.salary DESC) AS `rank`
+    FROM
+        Employee e
+            JOIN
+        Department d ON e.departmentId = d.id
+)
+SELECT
+    departmentName AS Department,
+    name AS Employee,
+    salary AS Salary
+FROM
+    RankedSalaries
+WHERE
+    `rank` = 1;
+```
