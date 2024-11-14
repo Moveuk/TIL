@@ -1,0 +1,33 @@
+package com.algorithm_proj.boj.p2752;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringJoiner;
+import java.util.StringTokenizer;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int[] arr = new int[3];
+
+        for (int i = 0; i < 3; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        Arrays.sort(arr);
+
+        StringJoiner sj = new StringJoiner(" ");
+
+        for (int i = 0; i < 3; i++) {
+            sj.add(String.valueOf(arr[i]));
+        }
+
+        System.out.print(sj);
+    }
+
+}
